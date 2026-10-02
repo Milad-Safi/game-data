@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Tuple
 from sqlalchemy import text
 
 from .db import engine
+from .season import query_season_year
 
 
 def _regular_season_condition(alias: str = "tg") -> str:
@@ -114,51 +115,17 @@ def get_last_n(team: str, as_of: str, n: int) -> List[Dict[str, Any]]:
         FROM team_games tg
         WHERE tg.team = :team
           AND tg.game_date < :as_of
+          AND CAST(tg.game_id / 1000000 AS INTEGER) = :season_year
           AND {_regular_season_condition("tg")}
         ORDER BY tg.game_date DESC, tg.game_id DESC
         LIMIT :n
         """
     )
     with engine.connect() as conn:
-        rows = conn.execute(q, {"team": team, "as_of": as_of, "n": n}).mappings().all()
+        rows = conn.execute(q, {"team": team, "as_of": as_of, "n": n, "season_year": query_season_year(as_of)}).mappings().all()
     return [dict(r) for r in rows]
 
 
-def get_next_k(team: str, as_of: str, k: int) -> List[Dict[str, Any]]:
-    """
-    Next K games on or after as_of
-    Returned in ASC order (oldest first) to preserve timeline direction
-    Regular season only
-    Used during training to build the "future window" for labeling
-    """
-    q = text(
-        f"""
-        SELECT
-            tg.game_id,
-            tg.game_date,
-            tg.is_home,
-            tg.opponent,
-            tg.goals_for,
-            tg.goals_against,
-            tg.shots_for,
-            tg.shots_against,
-            tg.pp_goals,
-            tg.pp_opps,
-            tg.pk_goals_against,
-            tg.pk_opps,
-            tg.goalie_sv_pct,
-            tg.win
-        FROM team_games tg
-        WHERE tg.team = :team
-          AND tg.game_date >= :as_of
-          AND {_regular_season_condition("tg")}
-        ORDER BY tg.game_date ASC, tg.game_id ASC
-        LIMIT :k
-        """
-    )
-    with engine.connect() as conn:
-        rows = conn.execute(q, {"team": team, "as_of": as_of, "k": k}).mappings().all()
-    return [dict(r) for r in rows]
 
 
 # -------------------------------------------------------------------

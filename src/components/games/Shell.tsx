@@ -7,7 +7,6 @@ import { useHistoricalGamesSearch } from "@/hooks/useHistoricalGamesSearch";
 import { NHL_TEAM_OPTIONS } from "@/lib/compare";
 import {
     HISTORICAL_GAMES_PAGE_SIZE,
-    HISTORICAL_SEASON_OPTIONS,
 } from "@/lib/games";
 import type { HistoricalSeasonOption } from "@/types/games";
 
@@ -17,14 +16,12 @@ type SearchFilters = {
     opponent: string | null;
 };
 
-const DEFAULT_FILTERS: SearchFilters = {
-    team: "",
-    season: "2025-2026",
-    opponent: null,
-};
-
-export default function HistoricalGamesShell() {
-    const [filters, setFilters] = useState<SearchFilters>(DEFAULT_FILTERS);
+export default function HistoricalGamesShell({ seasonOptions }: { seasonOptions: HistoricalSeasonOption[] }) {
+    const [filters, setFilters] = useState<SearchFilters>(() => ({
+        team: "",
+        season: seasonOptions[0],
+        opponent: null,
+    }));
     const [submittedFilters, setSubmittedFilters] = useState<SearchFilters | null>(null);
     const resultsRef = useRef<HTMLElement | null>(null);
 
@@ -140,7 +137,7 @@ export default function HistoricalGamesShell() {
                                     }))
                                 }
                             >
-                                {HISTORICAL_SEASON_OPTIONS.map((season) => (
+                                {seasonOptions.map((season) => (
                                     <option key={season} value={season}>
                                         {season}
                                     </option>

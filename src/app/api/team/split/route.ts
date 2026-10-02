@@ -1,3 +1,5 @@
+import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason";
+import { getSeasonStartYear } from "@/lib/nhl/season";
 import { NextResponse } from "next/server";
 import { query } from "@/lib/db";
 
@@ -26,7 +28,6 @@ function todayISO_UTC(): string {
   return new Date().toISOString().slice(0, 10);
 }
 
-const SEASON_START = "2025-10-05";
 const ALLOWED_WINDOWS = new Set([1, 2, 3, 4, 5, 10]);
 
 type BoxscoreOutcome = {
@@ -83,7 +84,10 @@ export async function GET(req: Request) {
   }
 
   try {
-    const params: Array<string | number> = [team, SEASON_START, asOf, window];
+    const seasonYear = isISODate(asOfParam)
+      ? getSeasonStartYear(new Date(`${asOf}T12:00:00Z`))
+      : Math.floor(await getCurrentSeasonId() / 10000);
+    const params: Array<string | number> = [team, seasonYear, asOf, window];
     const sql = `
       SELECT
         tg.game_id,
@@ -99,7 +103,7 @@ export async function GET(req: Request) {
         tg.win
       FROM team_games tg
       WHERE tg.team = $1
-        AND tg.game_date >= $2
+        AND LEFT(tg.game_id::text, 4)::int = $2
         AND tg.game_date <= $3
         AND SUBSTRING(tg.game_id::text, 5, 2) = '02'
       ORDER BY tg.game_date DESC, tg.game_id DESC
@@ -228,7 +232,7 @@ export async function GET(req: Request) {
   } catch (err: any) {
     return NextResponse.json(
       { error: "DB split error", detail: String(err?.message ?? err) },
-      { status: 500 }
+      { status: err instanceof CurrentSeasonError ? 503 : 500 }
     );
   }
 }

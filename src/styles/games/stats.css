@@ -194,33 +194,6 @@
     color: rgba(215, 224, 238, 0.62);
 }
 
-.historicalGameHeroFeature {
-    margin-top: 18px;
-    padding: 18px 20px 16px;
-    border-radius: 22px;
-    background: rgba(255, 255, 255, 0.026);
-    box-shadow:
-        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
-        0 12px 28px rgba(0, 0, 0, 0.14);
-}
-
-.historicalGameHeroFeatureHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-align: center;
-    margin-bottom: 12px;
-}
-
-.historicalGameHeroFeatureTitle {
-    margin: 0;
-    font-size: clamp(1.15rem, 2vw, 1.42rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    color: #ffffff;
-}
-
 .historicalGameDetailSubtitleHero {
     margin-top: 16px;
     text-align: center;
@@ -263,10 +236,6 @@
         text-align: left;
     }
 
-    .historicalGameHeroMetaStatsHome {
-        justify-content: flex-start;
-    }
-
     .historicalGameHeroLogo {
         width: 76px;
         height: 76px;
@@ -283,11 +252,6 @@
 
     .historicalGameHeroMiddleMeta {
         min-width: 62px;
-    }
-
-    .historicalGameHeroFeature {
-        padding: 16px 14px 14px;
-        border-radius: 18px;
     }
 }
 
@@ -378,13 +342,5 @@
     .historicalGameHeroSubline {
         font-size: 0.56rem;
         gap: 3px;
-    }
-
-    .historicalGameHeroFeature {
-        padding: 14px 12px 12px;
-    }
-
-    .historicalGameHeroFeatureTitle {
-        font-size: 1.04rem;
     }
 }

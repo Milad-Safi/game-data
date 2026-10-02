@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { fetchJson } from "@/lib/fetchJson";
+import { fetchCompareJson } from "@/lib/compareRequest";
 import { type CompareFilter, type CompareMode } from "@/lib/compare";
 
 type PositionGroup = "all" | "forwards" | "defenders";
@@ -68,7 +68,7 @@ export default function useSkaterCompare(
     (async () => {
       try {
         const [left, right] = await Promise.all([
-          fetchJson<SkaterComparePayload>(
+          fetchCompareJson<SkaterComparePayload>(
             `/api/compare/skaters?team=${encodeURIComponent(
               team1
             )}&filterBy=${encodeURIComponent(
@@ -79,7 +79,7 @@ export default function useSkaterCompare(
               cache: "no-store",
             }
           ),
-          fetchJson<SkaterComparePayload>(
+          fetchCompareJson<SkaterComparePayload>(
             `/api/compare/skaters?team=${encodeURIComponent(
               team2
             )}&filterBy=${encodeURIComponent(
@@ -92,25 +92,26 @@ export default function useSkaterCompare(
           ),
         ]);
 
-        if (requestSeq.current !== seq) return;
+        if (controller.signal.aborted || requestSeq.current !== seq || !left || !right) return;
 
         setLeftData(left);
         setRightData(right);
       } catch (error: any) {
         if (error?.name === "AbortError") return;
-        if (requestSeq.current !== seq) return;
+        if (controller.signal.aborted || requestSeq.current !== seq) return;
 
         setLeftData(null);
         setRightData(null);
         setError(error?.message ?? "Failed to load skater compare data");
       } finally {
-        if (requestSeq.current === seq) {
+        if (!controller.signal.aborted && requestSeq.current === seq) {
           setLoading(false);
         }
       }
     })();
 
     return () => {
+      if (requestSeq.current === seq) requestSeq.current += 1;
       controller.abort();
     };
   }, [team1, team2, compareBy, filterBy]);

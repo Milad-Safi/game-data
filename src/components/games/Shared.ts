@@ -2,10 +2,7 @@ import type { CSSProperties } from "react";
 
 import { getTeamColor } from "@/lib/teamColours";
 import type {
-    GameDetailPeriodKey,
     HistoricalGameDetailResponse,
-    HistoricalGameGoalieRow,
-    HistoricalGamePositionFilter,
     HistoricalGameSkaterRow,
 } from "@/types/games";
 
@@ -19,58 +16,7 @@ export type SkaterSortKey =
     | "hits"
     | "blocks";
 
-export type GoalieSortKey =
-    | "name"
-    | "shotsAgainst"
-    | "saves"
-    | "savePct"
-    | "goalsAgainst"
-    | "toiSeconds";
-
 export type SortDirection = "asc" | "desc";
-
-export const PERIOD_OPTIONS: Array<{
-    value: GameDetailPeriodKey;
-    label: string;
-}> = [
-    { value: "ALL", label: "All" },
-    { value: "1", label: "P1" },
-    { value: "2", label: "P2" },
-    { value: "3", label: "P3" },
-    { value: "OT", label: "OT" },
-];
-
-export const POSITION_OPTIONS: Array<{
-    value: HistoricalGamePositionFilter;
-    label: string;
-}> = [
-    { value: "skaters", label: "Skaters" },
-    { value: "forwards", label: "Forwards" },
-    { value: "defencemen", label: "Defencemen" },
-    { value: "goalies", label: "Goalies" },
-];
-
-export const TEAM_STAT_ROWS: Array<{
-    key:
-        | "estimatedXGoals"
-        | "shotAttempts"
-        | "shotsOnGoal"
-        | "goals"
-        | "hits"
-        | "blockedShots"
-        | "penaltyMinutes"
-        | "powerPlayGoals";
-    label: string;
-    decimals?: number;
-}> = [
-    { key: "shotAttempts", label: "Shot attempts" },
-    { key: "shotsOnGoal", label: "Shots on goal" },
-    { key: "goals", label: "Goals" },
-    { key: "hits", label: "Hits" },
-    { key: "blockedShots", label: "Blocked shots" },
-    { key: "penaltyMinutes", label: "Penalty minutes" },
-    { key: "powerPlayGoals", label: "PP goals" },
-];
 
 export function formatGameDate(date?: string) {
     if (!date) return "Historical game";
@@ -152,51 +98,11 @@ export function compareSkaters(
     return direction === "asc" ? base : -base;
 }
 
-export function compareGoalies(
-    left: HistoricalGameGoalieRow,
-    right: HistoricalGameGoalieRow,
-    sortKey: GoalieSortKey,
-    direction: SortDirection
-) {
-    let base = 0;
-
-    if (sortKey === "name") {
-        base = left.name.localeCompare(right.name);
-    } else {
-        base = left[sortKey] - right[sortKey];
-    }
-
-    if (base === 0) {
-        base =
-            Number(right.starter) - Number(left.starter) ||
-            right.toiSeconds - left.toiSeconds ||
-            left.name.localeCompare(right.name);
-    }
-
-    return direction === "asc" ? base : -base;
-}
-
 export function teamSideKey(
     data: HistoricalGameDetailResponse,
     teamAbbrev: string
 ): "home" | "away" {
     return teamAbbrev === data.homeTeam.abbrev ? "home" : "away";
-}
-
-export function getStatWidths(leftValue: number, rightValue: number) {
-    const total = leftValue + rightValue;
-
-    if (total <= 0) {
-        return {
-            left: 50,
-            right: 50,
-        };
-    }
-
-    return {
-        left: (leftValue / total) * 100,
-        right: (rightValue / total) * 100,
-    };
 }
 
 function withAlpha(colour: string, alpha: number) {

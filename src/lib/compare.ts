@@ -103,40 +103,6 @@ export const filterLabelMap: Record<CompareFilter, string> = {
     last10: "Last 10 games",
 };
 
-const teamRows = [
-    "W / L / OTL",
-    "Current streak",
-    "Goals for",
-    "Goals against",
-    "Power play %",
-    "Penalty kill %",
-    "Shots for",
-    "Shots against",
-];
-
-const skaterLeaderRows = [
-    "Leader in Goals",
-    "Leader in Assists",
-    "Leader in Points",
-    "Leader in SOG",
-    "Leader in Blocks",
-    "Leader in Hits",
-];
-
-const goalieRows = [
-    "GP",
-    "Wins",
-    "SV%",
-    "GAA",
-    "Shutouts",
-];
-
-const matchupSummaryRows = [
-    "Head to head record",
-    "GF vs GA average",
-    "SOG average head to head",
-];
-
 const matchupGroups: MatchupGroup[] = [
     {
         title: "Top 3 in goals",
@@ -163,30 +129,6 @@ const matchupGroups: MatchupGroup[] = [
         rows: ["Leader 1", "Leader 2"],
     },
 ];
-
-export function getCompareRows(compareBy: CompareMode): string[] {
-    if (compareBy === "team") {
-        return teamRows;
-    }
-
-    if (compareBy === "skaters") {
-        return skaterLeaderRows;
-    }
-
-    if (compareBy === "forwards") {
-        return skaterLeaderRows;
-    }
-
-    if (compareBy === "defenders") {
-        return skaterLeaderRows;
-    }
-
-    if (compareBy === "goalies") {
-        return goalieRows;
-    }
-
-    return matchupSummaryRows;
-}
 
 export function getMatchupGroups(): MatchupGroup[] {
     return matchupGroups;

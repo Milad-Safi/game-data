@@ -1,18 +1,20 @@
 import type { HistoricalSeasonOption } from "@/types/games";
+import { getSeasonLabel } from "@/lib/nhl/season";
 
-const VALID_SEASONS: HistoricalSeasonOption[] = [
-    "2025-2026",
-    "2024-2025",
-    "2023-2024",
-];
+// First season supported by the historical archive, not the current season.
+export const FIRST_HISTORICAL_SEASON_YEAR = 2023;
+export const HISTORICAL_GAMES_PAGE_SIZE = 12;
 
-const DEFAULT_PAGE_SIZE = 12;
-
-export function isHistoricalSeasonOption(
-    value: string | null | undefined
-): value is HistoricalSeasonOption {
-    return VALID_SEASONS.includes(value as HistoricalSeasonOption);
+export function getHistoricalSeasonOptions(current: number): HistoricalSeasonOption[] {
+    return Array.from(
+        { length: Math.max(0, current - FIRST_HISTORICAL_SEASON_YEAR + 1) },
+        (_, index) => getSeasonLabel(current - index),
+    );
 }
 
-export const HISTORICAL_SEASON_OPTIONS = VALID_SEASONS;
-export const HISTORICAL_GAMES_PAGE_SIZE = DEFAULT_PAGE_SIZE;
+export function isHistoricalSeasonOption(
+    value: string | null | undefined,
+    current: number,
+): value is HistoricalSeasonOption {
+    return getHistoricalSeasonOptions(current).some((season) => season === value);
+}

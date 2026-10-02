@@ -1,4 +1,4 @@
-export type HistoricalSeasonOption = "2025-2026" | "2024-2025" | "2023-2024";
+export type HistoricalSeasonOption = `${number}-${number}`;
 
 export type HistoricalVenue = "home" | "away";
 export type HistoricalDecision = "reg" | "ot" | "so";
@@ -125,7 +125,6 @@ export type HistoricalGameTeamStatsRow = {
     blockedShots: number;
     penaltyMinutes: number;
     powerPlayGoals: number;
-    estimatedXGoals: number;
 };
 
 export type HistoricalGameDetailResponse = {

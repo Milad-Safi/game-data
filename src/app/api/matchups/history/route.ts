@@ -1,3 +1,5 @@
+import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason";
+import { getSeasonId } from "@/lib/nhl/season";
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/db";
@@ -112,10 +114,6 @@ type ValueLeader = {
   value: number;
 };
 
-const CURRENT_SEASON = 20252026;
-const PREVIOUS_SEASON = 20242025;
-const CURRENT_SEASON_START_YEAR = 2025;
-const PREVIOUS_SEASON_START_YEAR = 2024;
 const REVALIDATE = 86400;
 const BOX_RETRY_COUNT = 5;
 const FETCH_RETRY_BASE_MS = 900;
@@ -268,7 +266,7 @@ async function fetchRosterIds(team: string) {
   return { skaters, goalies };
 }
 
-async function fetchMatchupGames(team: string, opp: string): Promise<MatchupGameMeta[]> {
+async function fetchMatchupGames(team: string, opp: string, startYear: number): Promise<MatchupGameMeta[]> {
   const result = await query<{
     game_id: string | number;
     game_date: string;
@@ -283,7 +281,7 @@ async function fetchMatchupGames(team: string, opp: string): Promise<MatchupGame
         AND LEFT(tg.game_id::text, 4)::int IN ($3, $4)
       ORDER BY tg.game_date DESC, tg.game_id DESC
     `,
-    [team, opp, CURRENT_SEASON_START_YEAR, PREVIOUS_SEASON_START_YEAR]
+    [team, opp, startYear, startYear - 1]
   );
 
   return result.rows
@@ -295,7 +293,7 @@ async function fetchMatchupGames(team: string, opp: string): Promise<MatchupGame
       const season = Number(`${startYear}${startYear + 1}`);
 
       return {
-        season: Number.isFinite(season) ? season : CURRENT_SEASON,
+        season: Number.isFinite(season) ? season : getSeasonId(startYear),
         gameId,
         gameDate: String(row.game_date ?? ""),
         isTeamHome: !!row.is_home,
@@ -523,8 +521,10 @@ export async function GET(req: Request) {
       return NextResponse.json({ error: "Need ?team=TOR&opp=BOS" }, { status: 400 });
     }
 
-    const seasons = [CURRENT_SEASON, PREVIOUS_SEASON];
-    const allGames = await fetchMatchupGames(team, opp);
+    const currentSeason = await getCurrentSeasonId();
+    const startYear = Math.floor(currentSeason / 10000);
+    const seasons = [currentSeason, getSeasonId(startYear - 1)];
+    const allGames = await fetchMatchupGames(team, opp, startYear);
 
     const perSeason = seasons.map((season) => ({
       season,
@@ -583,7 +583,7 @@ export async function GET(req: Request) {
 
     let selectedGames =
       filterBy === "season"
-        ? playedGames.filter((game) => game.meta.season === CURRENT_SEASON)
+        ? playedGames.filter((game) => game.meta.season === currentSeason)
         : [...playedGames];
 
     const window = filterWindow(filterBy);
@@ -754,6 +754,6 @@ export async function GET(req: Request) {
       },
     });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message ?? "Unknown error" }, { status: 500 });
+    return NextResponse.json({ error: e?.message ?? "Unknown error" }, { status: e instanceof CurrentSeasonError ? 503 : 500 });
   }
 }

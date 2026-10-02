@@ -1,3 +1,4 @@
+import { CurrentSeasonError } from "@/lib/nhl/currentSeason";
 import { cleanStr, toNum } from "@/lib/nhl/parse";
 import {
     type CompareFilter,
@@ -266,7 +267,7 @@ export async function GET(req: Request) {
             return jsonNoStore({ error: "Invalid last-X filter" }, { status: 400 });
         }
 
-        const gameIds = await fetchRecentRegularSeasonGameIds(team, window, asOf);
+        const gameIds = await fetchRecentRegularSeasonGameIds(team, window, asOf, isISODate(asOfParam));
         const boxes = await fetchSequentialBoxscores(gameIds);
         const agg = new Map<number, SkaterAgg>();
 
@@ -283,7 +284,7 @@ export async function GET(req: Request) {
         console.error("/api/compare/skaters failed", error);
         return jsonNoStore(
             { error: "Failed to build skater compare data" },
-            { status: 500 }
+            { status: error instanceof CurrentSeasonError ? 503 : 500 }
         );
     }
 }

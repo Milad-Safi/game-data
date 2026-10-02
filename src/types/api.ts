@@ -83,14 +83,16 @@ export type TeamTrendResponse = {
   range: {
     newest: string;
     oldest: string;
-  };
-  trend: "UP" | "FLAT" | "DOWN";
-  confidence: number;
+  } | null;
+  trend: "UP" | "FLAT" | "DOWN" | null;
+  confidence: number | null;
   probs: {
     DOWN: number;
     FLAT: number;
     UP: number;
-  };
+  } | null;
+  note?: string;
+  model_info?: { n?: number; k?: number; eps?: number; trained_at?: string };
 };
 
 export type HistoryLeader = {
@@ -149,100 +151,6 @@ export type MatchupHistoryPayload = {
   >;
 };
 
-// Goalie record defined
-export type GoalieRecord = { wins: number; losses: number; ot: number };
-
-// Last 5 splits for a goalie, ( last 5 starts for that goalie not the team)
-// Can become weird when goalies are pulled due to the way NHL records starts
-export type Last5GoalieSplits = {
-  games: number;
-  record: { w: number; l: number; ot: number };
-  svPct: number | null;
-  gaa: number | null;
-};
-
-// projected starter data for goalie card
-export type ProjectedStarter = {
-  playerId: number;
-  name: string;
-  headshot: string | null;
-  record: GoalieRecord;
-  gamesPlayed: number;
-  savePct: number | null;
-  gaa: number | null;
-
-  last5Starts?: number;
-
-  last5Splits: Last5GoalieSplits;
-};
-
-// goalies endpoint payload
-export type GoalieApiPayload = {
-  team: string;
-  projectedStarter: ProjectedStarter | null;
-};
-
-// Edge stats:
-
-// Fastest Skater row
-export type EdgeFastestSkater = {
-  playerId: number;
-  name: string;
-  mph: number;
-  kph: number;
-  gameDate: string;
-};
-
-// Hardest Shooter row
-export type EdgeHardestShooter = {
-  playerId: number;
-  name: string;
-  mph: number;
-  kph: number;
-  gameDate: string;
-};
-
-// Shot location, grouped by ice area/zone
-export type EdgeAreaRow = {
-  area: string;
-  sog: number;
-  goals: number;
-  shootingPctg: number;
-};
-
-// team skating speed response
-export type TeamSkatingSpeedResponse = {
-  ok: boolean;
-  team: string;
-  season: string | null;
-  fastestSkaters: EdgeFastestSkater[];
-};
-
-// team shot speed response
-export type TeamShotSpeedResponse = {
-  ok: boolean;
-  team: string;
-  season: string | null;
-  hardestShooters: EdgeHardestShooter[];
-};
-
-// team shot location response
-export type TeamShotLocationResponse = {
-  ok: boolean;
-  team: string;
-  season: string | null;
-  areas: EdgeAreaRow[];
-};
-
-export type TeamEdgeBundle = {
-    team: string;
-    season: string | null;
-    skating: TeamSkatingSpeedResponse;
-    shotSpeed: TeamShotSpeedResponse;
-    shotLocation: TeamShotLocationResponse;
-};
-
-
 export type VisualizerMetricId =
     | "ppOpportunities"
     | "overallPowerPlayPct"
@@ -277,11 +185,4 @@ export type TeamScatterApiResponse = {
     gameTypeId: number;
     generatedAt: string;
     teams: TeamScatterTeam[];
-};
-
-export type GameExpectedGoalsResponse = {
-    game_id: number;
-    team_xg: Record<string, number>;
-    total_xg: number;
-    total_shots_modelled: number;
 };

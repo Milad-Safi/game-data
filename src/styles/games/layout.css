@@ -35,14 +35,6 @@
     min-height: 0;
 }
 
-.historicalGameDetailRightRail {
-    min-height: 0;
-}
-
-.historicalGameTeamStatsCardSide {
-    display: none;
-}
-
 .historicalGameRinkCard,
 .historicalGameBoxscoreCard {
     position: relative;
@@ -73,10 +65,6 @@
     min-width: 146px;
 }
 
-.historicalGameInlineFieldBoxscore {
-    min-width: 176px;
-}
-
 .historicalGameInlineSelect {
     min-height: 42px;
     padding-top: 8px;
@@ -95,18 +83,6 @@
     align-items: flex-start;
 }
 
-.historicalGameSectionHeaderStatsSide {
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 12px;
-    padding-bottom: 2px;
-}
-
-.historicalGameToggleGroupPeriodsSide {
-    justify-content: flex-end;
-    gap: 6px;
-}
-
 .historicalGameSegmentButtonTeam.historicalGameSegmentButtonActive:nth-child(1) {
     background: var(--historical-away-colour-soft);
     color: #ffffff;
@@ -115,31 +91,6 @@
 .historicalGameSegmentButtonTeam.historicalGameSegmentButtonActive:nth-child(2) {
     background: var(--historical-home-colour-soft);
     color: #ffffff;
-}
-
-.historicalGameDetailBottomSection {
-    display: none;
-}
-
-.historicalGameTeamStatsCardCentered {
-    padding: 0;
-    max-width: none;
-    margin: 0 auto;
-    background: transparent;
-    box-shadow: none;
-}
-
-.historicalGameSectionHeaderBottom {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    text-align: center;
-    padding-bottom: 8px;
-}
-
-.historicalGameToggleGroupPeriods {
-    justify-content: center;
 }
 
 @media (max-width: 1180px) {
@@ -156,19 +107,9 @@
     }
 
     .historicalGameRinkCard,
-    .historicalGameBoxscoreCard,
-    .historicalGameDetailRightRail {
+    .historicalGameBoxscoreCard {
         grid-column: auto;
         grid-row: auto;
-    }
-
-    .historicalGameSectionHeaderStatsSide {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .historicalGameToggleGroupPeriodsSide {
-        justify-content: flex-start;
     }
 }
 
@@ -187,16 +128,11 @@
         align-items: stretch;
     }
 
-    .historicalGameInlineField,
-    .historicalGameInlineFieldBoxscore {
+    .historicalGameInlineField {
         min-width: 0;
     }
 
     .historicalGameSegmentButtonTeam {
         flex: 1 1 auto;
-    }
-
-    .historicalGameSectionHeaderStatsSide {
-        gap: 10px;
     }
 }

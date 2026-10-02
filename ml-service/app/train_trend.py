@@ -105,9 +105,6 @@ def _clamp(x: float, lo: float, hi: float) -> float:
     return lo if x < lo else hi if x > hi else x
 
 
-# Signed square root used to soften large magnitudes while preserving direction
-def _signed_sqrt(x: float) -> float:
-    return math.sqrt(abs(x)) if x >= 0 else -math.sqrt(abs(x))
 
 
 # Extra nonlinear term for extreme shot differential values

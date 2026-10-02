@@ -46,26 +46,10 @@
     margin-top: 8px;
 }
 
-.compareSectionHeaderSplit {
-    width: min(1080px, 100%);
-    margin: 0 auto;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-}
-
 .compareSectionTitle {
     margin: 0;
     font-size: 1.08rem;
     line-height: 1.2;
-}
-
-.compareSectionText {
-    margin: 0;
-    color: rgba(208, 219, 237, 0.72);
-    font-size: 0.94rem;
-    line-height: 1.5;
 }
 
 .compareRows {
@@ -74,30 +58,6 @@
     align-items: center;
     gap: 12px;
     width: 100%;
-}
-
-.compareMatchupMeta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.compareMetaPill {
-    display: inline-flex;
-    align-items: center;
-    min-height: 38px;
-    padding: 0 14px;
-    border: 1px solid rgba(145, 167, 208, 0.16);
-    border-radius: 999px;
-    background: #0b1423;
-    color: rgba(240, 245, 255, 0.88);
-    font-size: 0.84rem;
-    font-weight: 700;
-}
-
-.compareMatchupMetaCompact {
-    justify-content: flex-end;
-    margin-left: auto;
 }
 
 .compareMatchupGroup {

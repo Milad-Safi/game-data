@@ -25,15 +25,6 @@
         height: 48px;
         margin: auto 0;
     }
-
-    .compareSectionHeaderSplit {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .compareMatchupMetaCompact {
-        justify-content: flex-start;
-    }
 }
 
 @media (max-width: 640px) {
@@ -163,8 +154,7 @@
     .compareMatchupGroup,
     .compareGoalieHeadToHead,
     .compareGoalieSectionHeader,
-    .compareSectionHeader,
-    .compareSectionHeaderSplit {
+    .compareSectionHeader {
         width: 100%;
     }
 
@@ -200,16 +190,6 @@
 
     .compareSectionTitle {
         font-size: 0.98rem;
-    }
-
-    .compareSectionText {
-        font-size: 0.82rem;
-    }
-
-    .compareMetaPill {
-        min-height: 30px;
-        padding: 0 10px;
-        font-size: 0.7rem;
     }
 
     .compareGoalieHead {

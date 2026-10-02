@@ -52,7 +52,7 @@ export default function HomePage() {
             <section className="heroSection">
                 <div className="heroStack">
                     <div className="heroCopy" data-reveal>
-                        <p className="sectionLabel">NHL analytics platform</p>
+                        <p className="sectionLabel">Game Data · NHL analytics</p>
 
                         <h1 className="heroTitle">Go beyond the box score</h1>
 
@@ -85,8 +85,7 @@ export default function HomePage() {
                         <p className="featuresIntroText">
                             Each page focuses on a different part of the game,
                             from team comparisons to game breakdowns, league
-                            metrics, injuries, and advanced NHL EDGE tracking
-                            data.
+                            metrics and team trends.
                         </p>
                     </div>
 
@@ -113,8 +112,7 @@ export default function HomePage() {
                                 <p className="cardText">
                                     Browse past games and search previous games
                                     since 2023 and view detailed boxscores for
-                                    each game, including a custom Expected Goals
-                                    model
+                                    each game, including player stats and shot maps
                                 </p>
 
                                 <Link href="/games" className="cardButton">
@@ -139,22 +137,6 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        <div className="bentoCard">
-                            <div className="cardBody">
-                                <span className="cardTag">Injuries</span>
-                                <h3 className="cardTitle">Team Injury Reports</h3>
-                                <p className="cardText">
-                                    Check current injury reports and
-                                    availability updates for every NHL team,
-                                    updated automatically based on the latest
-                                    news and transactions.
-                                </p>
-
-                                <Link href="/injuries" className="cardButton">
-                                    Open Injuries
-                                </Link>
-                            </div>
-                        </div>
 
                         <div className="bentoCard">
                             <div className="cardBody">
@@ -170,21 +152,6 @@ export default function HomePage() {
                             </div>
                         </div>
 
-                        <div className="bentoCard">
-                            <div className="cardBody">
-                                <span className="cardTag">Stats</span>
-                                <h3 className="cardTitle">Advanced Stats</h3>
-                                <p className="cardText">
-                                    Explore miscellaneous statistics and data
-                                    insights, including advanced NHL EDGE
-                                    tracking data, player usage stats, and more.
-                                </p>
-
-                                <Link href="/edge" className="cardButton">
-                                    Open Stats
-                                </Link>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </section>

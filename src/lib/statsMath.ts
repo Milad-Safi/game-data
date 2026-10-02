@@ -5,30 +5,6 @@ export const TEAM_COMPARE_WEIGHTING = {
     winPoints: 2,
     otLossPoints: 1,
   },
-  goalsForPerGame: {
-    baseline: 3,
-    k: 0.75,
-  },
-  goalsAgainstPerGame: {
-    baseline: 3,
-    k: 0.9,
-  },
-  powerPlayPct: {
-    baseline: 20,
-    k: 0.08,
-  },
-  penaltyKillPct: {
-    baseline: 80,
-    k: 0.2,
-  },
-  shotsForPerGame: {
-    baseline: 30,
-    k: 0.2,
-  },
-  shotsAgainstPerGame: {
-    baseline: 30,
-    k: 0.12,
-  },
   streak: {
     k: 0.45,
     otLossFactor: 0.5,
@@ -90,22 +66,6 @@ export function pairwiseHigherBetterStrength(
       : fallbackBaseline;
 
   return Math.exp(k * (value - baseline));
-}
-
-export function pairwiseLowerBetterStrength(
-  value: number | null | undefined,
-  otherValue: number | null | undefined,
-  k: number,
-  fallbackBaseline = 0
-) {
-  if (value == null || !Number.isFinite(value)) return null;
-
-  const baseline =
-    otherValue != null && Number.isFinite(otherValue)
-      ? (value + otherValue) / 2
-      : fallbackBaseline;
-
-  return Math.exp(k * (baseline - value));
 }
 
 export function pointsFromWinsOtl(

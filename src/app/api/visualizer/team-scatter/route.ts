@@ -1,3 +1,4 @@
+import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 import { getTeamLogoSrc } from "@/lib/teamAssets";
 import type {
@@ -48,13 +49,7 @@ function pct01ToPct100(value: number | null) {
     return round2(value <= 1 ? value * 100 : value);
 }
 
-function inferCurrentSeasonIdFromToday() {
-    const now = new Date();
-    const year = now.getUTCFullYear();
-    const month = now.getUTCMonth() + 1;
-    const startYear = month >= 7 ? year : year - 1;
-    return Number(`${startYear}${startYear + 1}`);
-}
+
 
 type TeamMetaRow = {
     id: number;
@@ -64,7 +59,7 @@ type TeamMetaRow = {
 async function getTeamMetaRows() {
     const response = await fetch("https://api.nhle.com/stats/rest/en/team", {
         next: { revalidate: 60 * 60 },
-        headers: { "User-Agent": "leafs-edge" },
+        headers: { "User-Agent": "game-data" },
     });
 
     if (!response.ok) {
@@ -107,7 +102,7 @@ async function getLeagueReportRows(path: string, seasonId: number) {
 
     const response = await fetch(endpoint, {
         next: { revalidate: 300 },
-        headers: { "User-Agent": "leafs-edge" },
+        headers: { "User-Agent": "game-data" },
     });
 
     if (!response.ok) {
@@ -154,11 +149,8 @@ function buildMetricMap(
 
 export async function GET(request: Request) {
     const url = new URL(request.url);
-    const seasonId =
-        toNumber(url.searchParams.get("season")) ??
-        inferCurrentSeasonIdFromToday();
-
     try {
+        const seasonId = toNumber(url.searchParams.get("season")) ?? await getCurrentSeasonId();
         const [metaRows, summaryRows, powerPlayRows, penaltyKillRows] =
             await Promise.all([
                 getTeamMetaRows(),
@@ -242,7 +234,7 @@ export async function GET(request: Request) {
                 error: "Failed to build visualizer team scatter payload",
                 detail: String(error?.message ?? error),
             },
-            { status: 500 },
+            { status: error instanceof CurrentSeasonError ? 503 : 500 },
         );
     }
 }

@@ -1,3 +1,4 @@
+import { CurrentSeasonError } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 
 import { cleanStr, toNum } from "@/lib/nhl/parse";
@@ -183,7 +184,7 @@ export async function GET(req: Request) {
             return NextResponse.json({ error: "Invalid last-X filter" }, { status: 400 });
         }
 
-        const gameIds = await fetchRecentRegularSeasonGameIds(team, window, asOf);
+        const gameIds = await fetchRecentRegularSeasonGameIds(team, window, asOf, isISODate(asOfParam));
         const boxes = await fetchSequentialBoxscores(gameIds);
         const agg = new Map<number, GoalieAgg>();
 
@@ -207,7 +208,7 @@ export async function GET(req: Request) {
         console.error("/api/compare/goalies failed", error);
         return NextResponse.json(
             { error: "Failed to build goalie compare data" },
-            { status: 500 }
+            { status: error instanceof CurrentSeasonError ? 503 : 500 }
         );
     }
 }

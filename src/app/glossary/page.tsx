@@ -51,21 +51,6 @@ const glossaryItems = [
             "Blue-line skaters, separated from forwards in the game detail filters",
     },
     {
-        term: "EDGE Data",
-        description:
-            "NHL puck and player tracking data, including skating speed, shot speed, and location-based events",
-    },
-    {
-        term: "Expected Goals",
-        description:
-            "A chance-quality estimate of how many goals a team would be expected to score based on its shot volume, location, and shot type",
-    },
-    {
-        term: "Fastest Recorded Skating Speeds",
-        description:
-            "The top recorded burst skating speeds for players on the selected team",
-    },
-    {
         term: "Forwards",
         description:
             "Attack-focused skaters, separated from defencemen and goalies in the game detail view",
@@ -101,11 +86,6 @@ const glossaryItems = [
             "Goals scored minus goals allowed over the selected sample",
     },
     {
-        term: "Goal Heat Map",
-        description:
-            "A zone map showing where a team’s goals are coming from in the offensive zone",
-    },
-    {
         term: "Goalies",
         description:
             "Players listed in net, shown separately from skaters in compare and game detail views",
@@ -116,19 +96,9 @@ const glossaryItems = [
             "Hits credited to a skater in the boxscore",
     },
     {
-        term: "Hardest Shooters",
-        description:
-            "The players on a team with the highest recorded shot speeds in EDGE tracking data",
-    },
-    {
         term: "Head-to-Head",
         description:
             "Direct results and comparisons between two specific teams",
-    },
-    {
-        term: "Heat Map",
-        description:
-            "A zone-based visual showing where shots or goals are concentrated",
     },
     {
         term: "Hits",
@@ -329,11 +299,6 @@ const glossaryItems = [
         term: "W / L / OTL",
         description:
             "Wins, losses, and overtime or shootout losses in a team record",
-    },
-    {
-        term: "Expected Goals (xG)",
-        description:
-            "A common shorthand for expected goals",
     },
 ];
 

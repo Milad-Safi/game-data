@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 
-import { fetchJson } from "@/lib/fetchJson";
+import { fetchCompareJson } from "@/lib/compareRequest";
 import type { CompareFilter } from "@/lib/compare";
 import type { MatchupHistoryPayload } from "@/types/api";
 
@@ -36,29 +36,30 @@ export function useMatchupHistory(
 
     (async () => {
       try {
-        const json = await fetchJson<MatchupHistoryPayload>(
+        const json = await fetchCompareJson<MatchupHistoryPayload>(
           `/api/matchups/history?team=${encodeURIComponent(team)}&opp=${encodeURIComponent(
             opp
           )}&filterBy=${encodeURIComponent(filterBy)}`,
           { signal: controller.signal }
         );
 
-        if (requestSeq.current !== seq) return;
+        if (controller.signal.aborted || requestSeq.current !== seq) return;
         setData(json);
       } catch (e: any) {
         if (e?.name === "AbortError") return;
-        if (requestSeq.current !== seq) return;
+        if (controller.signal.aborted || requestSeq.current !== seq) return;
 
         setData(null);
         setError(e?.message ?? "Failed to load matchup history");
       } finally {
-        if (requestSeq.current === seq) {
+        if (!controller.signal.aborted && requestSeq.current === seq) {
           setLoading(false);
         }
       }
     })();
 
     return () => {
+      if (requestSeq.current === seq) requestSeq.current += 1;
       controller.abort();
     };
   }, [team, opp, filterBy]);

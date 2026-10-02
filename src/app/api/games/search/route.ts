@@ -1,3 +1,4 @@
+import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/db";
@@ -6,6 +7,7 @@ import { getTeamLogoSrc } from "@/lib/teamAssets";
 import {
     HISTORICAL_GAMES_PAGE_SIZE,
     isHistoricalSeasonOption,
+    getHistoricalSeasonOptions,
 } from "@/lib/games";
 import type {
     HistoricalDecision,
@@ -91,7 +93,7 @@ async function fetchDecisionForGame(gameId: number): Promise<HistoricalDecision>
             `https://api-web.nhle.com/v1/gamecenter/${gameId}/boxscore`,
             {
                 next: { revalidate: 86400 },
-                headers: { "User-Agent": "leafs-edge" },
+                headers: { "User-Agent": "game-data" },
             }
         );
 
@@ -131,9 +133,16 @@ export async function GET(request: Request) {
         );
     }
 
-    if (!isHistoricalSeasonOption(season)) {
+    let current: number;
+    try {
+        current = Math.floor(await getCurrentSeasonId() / 10000);
+    } catch (error) {
+        return NextResponse.json({ error: error instanceof CurrentSeasonError ? error.message : "Current NHL season unavailable" }, { status: 503 });
+    }
+
+    if (!isHistoricalSeasonOption(season, current)) {
         return NextResponse.json(
-            { error: "Season must be 2025-2026 or 2024-2025" },
+            { error: `Season must be one of: ${getHistoricalSeasonOptions(current).join(", ")}` },
             { status: 400 }
         );
     }

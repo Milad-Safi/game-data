@@ -15,8 +15,6 @@ const navLabelMap: Record<string, string> = {
     "/trends": "Trends",
     "/visualizer": "Visuals",
     "/games": "Boxscores",
-    "/injuries": "Injuries",
-    "/edge": "Stats",
 };
 
 export default function SiteHeader({
@@ -25,8 +23,8 @@ export default function SiteHeader({
 }: SiteHeaderProps) {
     const pathname = usePathname();
 
-    const leftLinks = useMemo(() => navLinks.slice(0, 3), [navLinks]);
-    const rightLinks = useMemo(() => navLinks.slice(3), [navLinks]);
+    const leftLinks = useMemo(() => navLinks.slice(0, 2), [navLinks]);
+    const rightLinks = useMemo(() => navLinks.slice(2), [navLinks]);
 
     const handleWordmarkClick = useCallback(
         (event: MouseEvent<HTMLAnchorElement>) => {
@@ -64,6 +62,8 @@ export default function SiteHeader({
                 <Link
                     href="/"
                     className="siteWordmark"
+                    aria-label="Game Data home"
+                    title="Game Data — Home"
                     onClick={handleWordmarkClick}
                 >
                     HOME

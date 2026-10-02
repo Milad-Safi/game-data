@@ -1,3 +1,4 @@
+import { getCurrentSeasonId } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 
 type RanksForMetric = Record<string, number | null>;
@@ -27,20 +28,13 @@ function toNumber(val: unknown): number | null {
   return null;
 }
 
-// Guess the current NHL seasonId based on today in UTC
-function inferCurrentSeasonIdFromToday(): number {
-  const now = new Date();
-  const y = now.getUTCFullYear();
-  const m = now.getUTCMonth() + 1;
-  const startYear = m >= 7 ? y : y - 1;
-  return Number(`${startYear}${startYear + 1}`);
-}
+
 
 // Fetch team metadata so numeric teamId values can be mapped to triCode
 async function getTeamMeta() {
   const res = await fetch("https://api.nhle.com/stats/rest/en/team", {
     next: { revalidate: 60 * 60 },
-    headers: { "User-Agent": "leafs-edge" },
+    headers: { "User-Agent": "game-data" },
   });
   if (!res.ok) return [];
 
@@ -75,7 +69,7 @@ async function getLeagueTeamSummary(seasonId: number, gameTypeId: number): Promi
 
   const res = await fetch(url, {
     next: { revalidate: 60 * 60 },
-    headers: { "User-Agent": "leafs-edge" },
+    headers: { "User-Agent": "game-data" },
   });
 
   if (!res.ok) return [];
@@ -125,7 +119,7 @@ function computeRanks(
   return out;
 }
 
-// GET /api/team/ranks?teamA=TOR&teamB=MTL&seasonId=20252026&gameTypeId=2
+// GET /api/team/ranks?teamA=TOR&teamB=MTL&gameTypeId=2
 // Returns league rank maps so the UI can display where each team sits for each stat
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
@@ -133,7 +127,12 @@ export async function GET(req: Request) {
   // Default teams allow the route to be hit directly during dev
   const teamA = String(searchParams.get("teamA") || "TOR").toUpperCase();
   const teamB = String(searchParams.get("teamB") || "MTL").toUpperCase();
-  const seasonId = toNumber(searchParams.get("seasonId")) ?? inferCurrentSeasonIdFromToday();
+  let seasonId: number;
+  try {
+    seasonId = toNumber(searchParams.get("seasonId")) ?? await getCurrentSeasonId();
+  } catch (error) {
+    return NextResponse.json({ error: error instanceof Error ? error.message : "Current NHL season unavailable" }, { status: 503 });
+  }
   const gameTypeId = toNumber(searchParams.get("gameTypeId")) ?? 2;
 
   // Fetch meta and league summary data needed to build triCode keyed rows

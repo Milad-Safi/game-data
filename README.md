@@ -1,13 +1,13 @@
-# Leafs Edge
+# Game Data
 
 **Live site:**  
 https://leafs-edge.vercel.app/
 
 ## Overview
 
-Leafs Edge is a full-stack NHL analytics web application focused on analyzing Toronto Maple Leafs matchups and team performance using both traditional hockey statistics and advanced NHL EDGE tracking data. The application stays continuously updated throughout the NHL season by pulling live schedules, game results, roster information, and tracking data from public NHL APIs and a custom backend pipeline.
+Game Data is a full-stack NHL analytics web application for league-wide team comparisons, historical boxscores, visualizations, and team trends. The application stays continuously updated throughout the NHL season by pulling live schedules, game results, roster information from public NHL APIs and a custom backend pipeline.
 
-The application centers around comparing the Maple Leafs against their next opponent, providing a clear matchup overview while also offering deeper team-specific analysis. In addition to standard metrics, Leafs Edge integrates a custom machine learning model to predict short-term team momentum. Users are also able to preview future matchups by clicking them on the schedule bar. 
+Users can select any two teams for comparisons or explore individual team analytics. A custom trend model estimates short-term team momentum.
 
 ---
 
@@ -18,32 +18,27 @@ The application centers around comparing the Maple Leafs against their next oppo
 - Side-by-side team comparisons across core and advanced metrics  
 - Last-5-games performance splits for recent form analysis  
 - Previous matchup data between teams  
-- Projected starting goaltenders for upcoming games  
-- Current injury reports for both teams  
-- Team-specific advanced analytics pages using NHL EDGE tracking data  
+- Goalie comparisons across season and recent-game samples
 
 ---
 
 ## System Architecture
 
-Leafs Edge is implemented as a two-tier architecture consisting of a modern frontend and a Python-based backend that communicate through a shared API layer.
+Game Data is implemented as a two-tier architecture consisting of a modern frontend and a Python-based backend that communicate through a shared API layer.
 
 ### Frontend
 
 The frontend is built using **Next.js (App Router)** and **TypeScript**.
 
-- Displays matchup dashboard, schedule bar, and team analytics pages  
+- Displays team comparisons, game breakdowns, visualizations, and team analytics pages
 - Fetches live NHL data through public NHL APIs and Next.js API routes  
-- Communicates with a custom backend for NHL EDGE analytics and ML inference  
 - Normalizes inconsistent upstream data into predictable frontend payloads  
-- Predicts a team’s next starting goaltender using recent starts and back-to-back logic  
 
 ### Backend
 
 The backend is a **FastAPI** service deployed on **Render**.
 
 - Exposes machine learning trend inference endpoints for NHL teams  
-- Provides normalized NHL EDGE analytics (shot locations, shot speed, skating speed)  
 - Handles ingestion and transformation of raw NHL data  
 - Interfaces with a PostgreSQL database hosted on Supabase  
 - Uses lightweight TTL caching to reduce repeated external requests  
@@ -52,19 +47,19 @@ The backend is a **FastAPI** service deployed on **Render**.
 
 ## Data Pipeline and Storage
 
-Leafs Edge combines real-time NHL data with persisted backend data to balance freshness, performance, and analytical depth.
+Game Data combines real-time NHL data with persisted backend data to balance freshness, performance, and analytical depth.
 
 - Live data includes NHL schedules, rosters, standings, and game information  
 - Persisted data includes historical games, derived team metrics, and machine learning training inputs  
 - Data is stored in a PostgreSQL database hosted on Supabase  
-- All database reads and writes are handled by the backend  
+- Python handles ingestion and trend queries; server-side Next.js routes also read PostgreSQL
 - The frontend accesses data exclusively through API endpoints  
 
 ---
 
 ## Machine Learning
 
-Leafs Edge includes a custom team trend classification model that predicts short-term team momentum as one of three classes:
+Game Data includes a custom team trend classification model that predicts short-term team momentum as one of three classes:
 
 - **DOWN**  
 - **FLAT**  
@@ -97,8 +92,6 @@ This allows the frontend to display both predictions and their analytical contex
 
 - NHL schedule and game data from `api-web.nhle.com`  
 - NHL statistics endpoints from `api.nhle.com/stats/rest`  
-- Injury data from Sportsnet JSON feeds  
-- NHL EDGE tracking data fetched and normalized by backend services  
 
 ---
 
@@ -149,3 +142,10 @@ Once the service is warm, subsequent requests load normally.
 
 Example trend endpoint:  
 http://localhost:8000/v1/trend/team?team=TOR
+
+## Automatic seasons
+
+Current-season views read `seasonId` exclusively from NHL `/v1/standings/now`, with a one-hour successful-result cache. Unavailable or invalid standings produce a controlled error; no calendar fallback is used. Calendar conversion is retained only for explicit historical/as-of dates.
+Recent comparison and trend windows are restricted to that season. Head-to-head comparisons use the current and previous seasons. Historical search generates options from the archive's first supported season (2023–24) through the current season, and still lets users explicitly select older seasons. Before games begin, current-season views may have no results; they do not substitute the previous season. Historical availability depends on ingested database rows.
+
+Game pages use NHL scores, player boxscores, and play-by-play shot maps. Daily ingestion skips games that are not final.

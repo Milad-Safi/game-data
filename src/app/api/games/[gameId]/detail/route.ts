@@ -168,7 +168,7 @@ async function fetchJsonWithRetry<T>(url: string): Promise<T> {
     for (let attempt = 1; attempt <= RETRY_COUNT; attempt += 1) {
         const response = await fetch(url, {
             next: { revalidate: REVALIDATE_SECONDS },
-            headers: { "User-Agent": "leafs-edge" },
+            headers: { "User-Agent": "game-data" },
         });
 
         if (response.ok) {
@@ -245,10 +245,6 @@ function toTeamPayload(team: ApiTeam | undefined): HistoricalGameDetailTeam {
         score: asNumber(team?.score),
         sog: asNumber(team?.sog),
     };
-}
-
-function positionOf(player: ApiSkater) {
-    return asString(player.positionCode) || asString(player.position) || "—";
 }
 
 function toiToSeconds(toi: string) {
@@ -435,7 +431,6 @@ function emptyStatsRow(): HistoricalGameTeamStatsRow {
         blockedShots: 0,
         penaltyMinutes: 0,
         powerPlayGoals: 0,
-        estimatedXGoals: 0,
     };
 }
 

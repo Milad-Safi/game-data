@@ -27,7 +27,7 @@ function collectRosterPlayers(rosterJson: any): RosterPlayer[] {
 }
 
 // Hook that fetches roster data and builds a playerId to headshot map
-export default function useRosterHeadshots(team: string, season: string) {
+export default function useRosterHeadshots(team: string, season?: string) {
   const [headshotById, setHeadshotById] = React.useState<Map<number, string>>(
     () => new Map()
   );
@@ -39,7 +39,7 @@ export default function useRosterHeadshots(team: string, season: string) {
 
     async function load() {
       // Reset state if required params are missing
-      if (!team || !season) {
+      if (!team) {
         setHeadshotById(new Map());
         setLoading(false);
         setError(null);
@@ -52,7 +52,7 @@ export default function useRosterHeadshots(team: string, season: string) {
       try {
         // Fetch roster from internal API 
         const json = await fetchJson<any>(
-          `/api/team/roster?team=${encodeURIComponent(team)}&season=${encodeURIComponent(season)}`,
+          `/api/team/roster?team=${encodeURIComponent(team)}${season ? `&season=${encodeURIComponent(season)}` : ""}`,
           { cache: "no-store" }
         );
 

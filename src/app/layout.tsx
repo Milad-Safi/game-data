@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Leafs Edge",
+    title: "Game Data",
     description: "A data-driven NHL stats and analytics site, with visualizations and insights to help you understand the game better.",
 };
 

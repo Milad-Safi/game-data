@@ -55,10 +55,6 @@ html {
     transform: translateY(0);
 }
 
-.revealDelayOne {
-    transition-delay: 0.12s;
-}
-
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -71,9 +67,7 @@ html {
     }
 
     .primaryButton,
-    .secondaryButton,
-    .siteNavLink,
-    .headerPrimaryAction {
+    .siteNavLink {
         transition: none;
     }
 }

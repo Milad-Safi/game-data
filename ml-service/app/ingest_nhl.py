@@ -7,7 +7,6 @@ from __future__ import annotations
 import datetime as dt
 import random
 import time
-from typing import Any
 
 import requests
 from sqlalchemy import text
@@ -503,6 +502,9 @@ def ingest_date(date: dt.date, debug: bool = False) -> int:
 
     for gid in game_ids:
         box = fetch_boxscore(int(gid))
+        if str(box.get("gameState") or "").upper() not in {"FINAL", "OFF"}:
+            print(f"Skipping unfinished game {gid}")
+            continue
 
         home = box.get("homeTeam", {}) or {}
         away = box.get("awayTeam", {}) or {}

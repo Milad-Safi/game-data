@@ -43,7 +43,6 @@
 .historicalGamesFieldLabel,
 .historicalGamesOptionalLabel,
 .historicalGameTeamAbbrev,
-.historicalGameDetailAbbrev,
 .historicalGameHeroTeamLabel {
     margin: 0;
     color: rgba(163, 187, 228, 0.78);
@@ -56,7 +55,6 @@
 .historicalGamesTitle,
 .historicalGamesResultsTitle,
 .historicalGamesStateTitle,
-.historicalGameDetailTitle,
 .historicalGameDetailCardTitle {
     margin: 0;
     letter-spacing: -0.035em;
@@ -73,10 +71,7 @@
 .historicalGamesStateText,
 .historicalGameDate,
 .historicalGameTeamName,
-.historicalGameDetailSubtitle,
-.historicalGameDetailName,
-.historicalGameDetailCardText,
-.historicalGameDetailMiddleValue {
+.historicalGameDetailSubtitle {
     margin: 0;
     color: rgba(224, 233, 250, 0.74);
 }

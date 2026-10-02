@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useEffect, useState } from "react";
 import CompareState from "@/components/compare/CompareState";
 import useGoalieCompare from "@/hooks/useGoalieCompare";
@@ -29,7 +30,6 @@ type GoalieCompareSectionProps = {
     selectedTeam2Label: string;
 };
 
-const ROSTER_SEASON = "20252026";
 
 const GOALIE_ROWS = [
     { key: "gp", label: "Games Played" },
@@ -139,7 +139,7 @@ function GoalieProfileCard({
             className={`compareGoalieProfileCard ${
                 align === "right" ? "compareGoalieProfileCardRight" : ""
             }`}
-            style={{ borderColor: `${color}55` }}
+            style={{ borderColor: color.replace(/,\s*[\d.]+\s*\)$/, ", 0.333333)") }}
         >
             <span className="compareGoalieProfileBadge">{badge}</span>
 
@@ -297,8 +297,8 @@ export default function GoalieCompareSection({
         filterBy
     );
 
-    const { headshotById: leftHeadshots } = useRosterHeadshots(team1, ROSTER_SEASON);
-    const { headshotById: rightHeadshots } = useRosterHeadshots(team2, ROSTER_SEASON);
+    const { headshotById: leftHeadshots } = useRosterHeadshots(team1);
+    const { headshotById: rightHeadshots } = useRosterHeadshots(team2);
 
     const leftStarterHeadshot =
         leftData?.starter?.playerId != null

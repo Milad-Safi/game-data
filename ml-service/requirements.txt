@@ -7,8 +7,3 @@ requests
 numpy
 nhl-api-py
 scikit-learn
-pandas
-xgboost
-optuna
-mlflow
-pyarrow

@@ -13,7 +13,6 @@ import {
     type SkaterSortKey,
     type SortDirection,
 } from "@/components/games/Shared";
-import useGameExpectedGoals from "@/hooks/useGameExpectedGoals";
 import { fetchJson } from "@/lib/fetchJson";
 import type {
     GameDetailChartMode,
@@ -25,12 +24,6 @@ type HistoricalGameDetailClientProps = {
     gameId: string;
     focusTeamAbbrev?: string | null;
 };
-
-const XG_LOADING_MESSAGES = [
-    "Waking up the xG model",
-    "Scoring every shot attempt",
-    "Still cooking expected goals",
-];
 
 function chartEventMatchesMode(
     event: HistoricalGameShotEvent,
@@ -56,9 +49,6 @@ export default function HistoricalGameDetailClient({
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    const [xgRequestKey, setXgRequestKey] = useState(0);
-    const [xgLoadingMessageIndex, setXgLoadingMessageIndex] = useState(0);
-
     const [chartTeam, setChartTeam] = useState<string>(
         focusTeamAbbrev?.toUpperCase() ?? ""
     );
@@ -71,12 +61,6 @@ export default function HistoricalGameDetailClient({
 
     const [skaterSortKey, setSkaterSortKey] = useState<SkaterSortKey>("points");
     const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
-
-    const {
-        data: expectedGoalsData,
-        loading: expectedGoalsLoading,
-        error: expectedGoalsError,
-    } = useGameExpectedGoals(data ? gameId : null, xgRequestKey);
 
     useEffect(() => {
         let cancelled = false;
@@ -122,21 +106,6 @@ export default function HistoricalGameDetailClient({
             cancelled = true;
         };
     }, [focusTeamAbbrev, gameId]);
-
-    useEffect(() => {
-        if (!expectedGoalsLoading) {
-            setXgLoadingMessageIndex(0);
-            return;
-        }
-
-        const timer = window.setInterval(() => {
-            setXgLoadingMessageIndex((current) => {
-                return (current + 1) % XG_LOADING_MESSAGES.length;
-            });
-        }, 4200);
-
-        return () => window.clearInterval(timer);
-    }, [expectedGoalsLoading]);
 
     const teamOptions = useMemo(() => {
         if (!data) return [];
@@ -283,19 +252,7 @@ export default function HistoricalGameDetailClient({
                     ← Back to Games
                 </Link>
 
-                <HistoricalGameDetailHero
-                    data={data}
-                    expectedGoalsData={expectedGoalsData}
-                    expectedGoalsLoading={expectedGoalsLoading}
-                    expectedGoalsError={expectedGoalsError}
-                    expectedGoalsLoadingMessage={
-                        XG_LOADING_MESSAGES[xgLoadingMessageIndex]
-                    }
-                    onRetryExpectedGoals={() => {
-                        setXgRequestKey((current) => current + 1);
-                        setXgLoadingMessageIndex(0);
-                    }}
-                />
+                <HistoricalGameDetailHero data={data} />
 
                 <section className="historicalGameDetailTopGrid">
                     <HistoricalGameDetailShotMapPanel

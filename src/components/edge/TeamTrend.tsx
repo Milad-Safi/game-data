@@ -61,6 +61,17 @@ export default function TeamTrend({
     teamLabel,
     teamLogoSrc,
 }: TeamTrendProps) {
+    if (!data.trend || data.confidence == null || !data.probs) {
+        return (
+            <section className="trendCard">
+                <h2 className="trendCardTitle">{teamLabel}</h2>
+                <p className="trendExplainerText">
+                    No current-season games are available to calculate a trend yet.
+                </p>
+            </section>
+        );
+    }
+
     const trendDisplay = getTrendDisplay(data.trend);
     const confidence = toPercent(data.confidence);
 
@@ -123,7 +134,7 @@ export default function TeamTrend({
                 <span className={`trendHeadlineWord ${trendDisplay.wordClass}`}>
                     {trendDisplay.verb}
                 </span>
-                <span>over their next {data.n_requested} games</span>
+                <span>over their next {data.model_info?.k ?? 5} games</span>
             </div>
 
             <div className="trendProbabilitySection">

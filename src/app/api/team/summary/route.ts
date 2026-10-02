@@ -1,3 +1,4 @@
+import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 
 type TeamSummary = {
@@ -23,6 +24,7 @@ type TeamSummary = {
 };
 
 type StandingsRow = {
+  seasonId?: number;
   teamAbbrev?: { default?: string } | string;
   teamName?: { default?: string } | string;
   wins?: unknown;
@@ -53,14 +55,7 @@ function pctFromDecimal01(n: number | null): number | null {
   return round2(n * 100);
 }
 
-function inferCurrentSeasonIdFromToday(): number {
-  const now = new Date();
-  const y = now.getUTCFullYear();
-  const m = now.getUTCMonth() + 1;
-  const startYear = m >= 7 ? y : y - 1;
-  const endYear = startYear + 1;
-  return Number(`${startYear}${endYear}`);
-}
+
 
 function standingsAbbrev(row: StandingsRow | null | undefined) {
   return String(
@@ -82,7 +77,7 @@ function standingsTeamName(row: StandingsRow | null | undefined) {
 async function getTeamIdByAbbrev(teamAbbrev: string): Promise<number | null> {
   const res = await fetch("https://api.nhle.com/stats/rest/en/team", {
     next: { revalidate: 60 * 60 },
-    headers: { "User-Agent": "leafs-edge" },
+    headers: { "User-Agent": "game-data" },
   });
   if (!res.ok) return null;
 
@@ -101,13 +96,10 @@ async function getCurrentStandingsRow(
   teamAbbrev: string,
   seasonId: number
 ): Promise<StandingsRow | null> {
-  if (seasonId !== inferCurrentSeasonIdFromToday()) {
-    return null;
-  }
-
+  try {
   const res = await fetch("https://api-web.nhle.com/v1/standings/now", {
     next: { revalidate: 60 },
-    headers: { "User-Agent": "leafs-edge" },
+    headers: { "User-Agent": "game-data" },
   });
 
   if (!res.ok) return null;
@@ -116,23 +108,27 @@ async function getCurrentStandingsRow(
   const rows: StandingsRow[] = Array.isArray(json?.standings) ? json.standings : [];
 
   return (
-    rows.find((row) => standingsAbbrev(row) === teamAbbrev) ?? null
+    rows.find((row) => standingsAbbrev(row) === teamAbbrev && row.seasonId === seasonId) ?? null
   );
+  } catch {
+    // Current standings are optional enrichment for an explicit historical season.
+    return null;
+  }
 }
 
-// GET /api/team/summary?team=TOR&season=20252026
+// GET /api/team/summary?team=TOR
 export async function GET(req: Request) {
   const url = new URL(req.url);
   const teamAbbrev = (url.searchParams.get("team") || "").trim().toUpperCase();
   const seasonOverride = toNumber(url.searchParams.get("season"));
   const gameTypeId = 2;
-  const seasonId = seasonOverride ?? inferCurrentSeasonIdFromToday();
 
   if (!teamAbbrev) {
     return NextResponse.json({ error: "Missing query param ?team=TOR" }, { status: 400 });
   }
 
   try {
+    const seasonId = seasonOverride ?? (await getCurrentSeasonId());
     const teamId = await getTeamIdByAbbrev(teamAbbrev);
     if (!teamId) {
       return NextResponse.json({ error: `Unknown team abbrev: ${teamAbbrev}` }, { status: 404 });
@@ -146,7 +142,7 @@ export async function GET(req: Request) {
     const [summaryRes, standingsRow] = await Promise.all([
       fetch(endpoint, {
         next: { revalidate: 60 },
-        headers: { "User-Agent": "leafs-edge" },
+        headers: { "User-Agent": "game-data" },
       }),
       getCurrentStandingsRow(teamAbbrev, seasonId),
     ]);
@@ -206,7 +202,7 @@ export async function GET(req: Request) {
   } catch (err: any) {
     return NextResponse.json(
       { error: "Server error", detail: String(err?.message ?? err) },
-      { status: 500 }
+      { status: err instanceof CurrentSeasonError ? 503 : 500 }
     );
   }
 }

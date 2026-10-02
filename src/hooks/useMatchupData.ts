@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { TeamRanks, TeamSplit, TeamSummary } from "@/types/api";
-import { fetchJson } from "@/lib/fetchJson";
+import { fetchCompareJson } from "@/lib/compareRequest";
 import type { CompareFilter } from "@/lib/compare";
 
 type MatchupData = {
@@ -80,65 +80,69 @@ export default function useMatchupData({
       if (needsSeasonSummary) {
         try {
           const [left, right] = await Promise.all([
-            fetchJson<TeamSummary>(`/api/team/summary?team=${leftTeamAbbrev}`, {
+            fetchCompareJson<TeamSummary>(`/api/team/summary?team=${leftTeamAbbrev}`, {
               signal: ctrl.signal,
             }),
-            fetchJson<TeamSummary>(`/api/team/summary?team=${rightTeamAbbrev}`, {
+            fetchCompareJson<TeamSummary>(`/api/team/summary?team=${rightTeamAbbrev}`, {
               signal: ctrl.signal,
             }),
           ]);
 
-          if (requestSeq.current !== seq) return;
+          if (ctrl.signal.aborted || requestSeq.current !== seq) return;
           setLeftSummary(left?.teamAbbrev ? left : null);
           setRightSummary(right?.teamAbbrev ? right : null);
         } catch {
-          if (requestSeq.current !== seq) return;
+          if (ctrl.signal.aborted || requestSeq.current !== seq) return;
           setLeftSummary(null);
           setRightSummary(null);
         } finally {
-          if (requestSeq.current === seq) {
+          if (!ctrl.signal.aborted && requestSeq.current === seq) {
             setLoadingSummary(false);
           }
         }
       }
 
+      if (ctrl.signal.aborted || requestSeq.current !== seq) return;
+
       if (needsSplit && splitQuery) {
         try {
           const [left, right] = await Promise.all([
-            fetchJson<TeamSplit>(
+            fetchCompareJson<TeamSplit>(
               `/api/team/split?team=${leftTeamAbbrev}&${splitQuery}`,
               { signal: ctrl.signal }
             ),
-            fetchJson<TeamSplit>(
+            fetchCompareJson<TeamSplit>(
               `/api/team/split?team=${rightTeamAbbrev}&${splitQuery}`,
               { signal: ctrl.signal }
             ),
           ]);
 
-          if (requestSeq.current !== seq) return;
+          if (ctrl.signal.aborted || requestSeq.current !== seq) return;
           setLeftSplit(left?.team ? left : null);
           setRightSplit(right?.team ? right : null);
         } catch {
-          if (requestSeq.current !== seq) return;
+          if (ctrl.signal.aborted || requestSeq.current !== seq) return;
           setLeftSplit(null);
           setRightSplit(null);
         } finally {
-          if (requestSeq.current === seq) {
+          if (!ctrl.signal.aborted && requestSeq.current === seq) {
             setLoadingSplit(false);
           }
         }
       }
 
+      if (ctrl.signal.aborted || requestSeq.current !== seq) return;
+
       try {
-        const j = await fetchJson<TeamRanks>(
+        const j = await fetchCompareJson<TeamRanks>(
           `/api/team/ranks?teamA=${leftTeamAbbrev}&teamB=${rightTeamAbbrev}`,
           { signal: ctrl.signal }
         );
 
-        if (requestSeq.current !== seq) return;
+        if (ctrl.signal.aborted || requestSeq.current !== seq) return;
         setTeamRanks(j?.ranks ? j : null);
       } catch {
-        if (requestSeq.current !== seq) return;
+        if (ctrl.signal.aborted || requestSeq.current !== seq) return;
         setTeamRanks(null);
       }
     }
@@ -146,6 +150,7 @@ export default function useMatchupData({
     run();
 
     return () => {
+      if (requestSeq.current === seq) requestSeq.current += 1;
       ctrl.abort();
     };
   }, [leftTeamAbbrev, rightTeamAbbrev, filterBy, enabled]);

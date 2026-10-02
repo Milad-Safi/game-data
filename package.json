@@ -1,5 +1,5 @@
 {
-  "name": "leafs-edge",
+  "name": "game-data",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "cheerio": "^1.1.2",
     "next": "16.1.0",
     "pg": "^8.16.3",
     "react": "19.2.3",

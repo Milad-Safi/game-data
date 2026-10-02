@@ -6,7 +6,6 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
-import math
 
 
 def _safe_div(a: float, b: float) -> Optional[float]:
@@ -275,17 +274,3 @@ def window_features(
     # Meta is used for debugging and for tracking the effective window range
     meta = {"range": {"newest": newest, "oldest": oldest}, "n_used": n}
     return feats, meta
-
-
-def window_goal_diff_avg(rows: List[Dict[str, Any]]) -> Optional[float]:
-    """
-    Small helper kept for compatibility with older imports
-    Computes average goal differential for a given list of rows
-    """
-    if not rows:
-        return None
-    vals = [
-        float(r.get("goals_for") or 0) - float(r.get("goals_against") or 0)
-        for r in rows
-    ]
-    return sum(vals) / len(vals)

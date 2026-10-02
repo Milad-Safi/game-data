@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 
 import type { CompareFilter } from "@/lib/compare";
-import { fetchJson } from "@/lib/fetchJson";
+import { fetchCompareJson } from "@/lib/compareRequest";
 
 type GoalieCompareValue = {
   playerId: number;
@@ -55,13 +55,13 @@ export default function useGoalieCompare(
     (async () => {
       try {
         const [left, right] = await Promise.all([
-          fetchJson<GoalieComparePayload>(
+          fetchCompareJson<GoalieComparePayload>(
             `/api/compare/goalies?team=${encodeURIComponent(
               team1
             )}&filterBy=${encodeURIComponent(filterBy)}`,
             { signal: controller.signal }
           ),
-          fetchJson<GoalieComparePayload>(
+          fetchCompareJson<GoalieComparePayload>(
             `/api/compare/goalies?team=${encodeURIComponent(
               team2
             )}&filterBy=${encodeURIComponent(filterBy)}`,
@@ -69,25 +69,30 @@ export default function useGoalieCompare(
           ),
         ]);
 
-        if (requestSeq.current !== seq) return;
+        if (controller.signal.aborted || requestSeq.current !== seq || !left || !right) return;
 
         setLeftData(left);
         setRightData(right);
-      } catch (error: any) {
-        if (error?.name === "AbortError") return;
-        if (requestSeq.current !== seq) return;
+      } catch (error: unknown) {
+        if (
+          controller.signal.aborted ||
+          (error instanceof Error && error.name === "AbortError")
+        ) return;
+        if (controller.signal.aborted || requestSeq.current !== seq) return;
 
         setLeftData(null);
         setRightData(null);
-        setError(error?.message ?? "Failed to load goalie compare data");
+        setError(error instanceof Error ? error.message : "Failed to load goalie compare data");
       } finally {
-        if (requestSeq.current === seq) {
+        if (!controller.signal.aborted && requestSeq.current === seq) {
           setLoading(false);
         }
       }
     })();
 
     return () => {
+      // Invalidate this request before aborting so cleanup cannot update state.
+      if (requestSeq.current === seq) requestSeq.current += 1;
       controller.abort();
     };
   }, [team1, team2, filterBy]);

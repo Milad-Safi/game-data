@@ -1,11 +1,11 @@
+import { getSeasonStartYear } from "@/lib/nhl/season";
+import { getCurrentSeasonId } from "@/lib/nhl/currentSeason";
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/db";
 import { cleanStr } from "@/lib/nhl/parse";
 
-export const COMPARE_SEASON = "20252026";
 export const COMPARE_REGULAR_SEASON_GAME_TYPE = 2;
-export const COMPARE_SEASON_START = "2025-10-05";
 export const DEFAULT_BOX_RETRY_COUNT = 5;
 export const DEFAULT_RETRY_BASE_MS = 900;
 
@@ -157,7 +157,7 @@ export async function fetchClubStats(
     }
 ): Promise<any | null> {
     const response = await fetch(
-        `https://api-web.nhle.com/v1/club-stats/${team}/${COMPARE_SEASON}/${COMPARE_REGULAR_SEASON_GAME_TYPE}`,
+        `https://api-web.nhle.com/v1/club-stats/${team}/${await getCurrentSeasonId()}/${COMPARE_REGULAR_SEASON_GAME_TYPE}`,
         {
             ...(options?.cache ? { cache: options.cache } : {}),
             ...(options?.revalidate != null
@@ -174,20 +174,23 @@ export async function fetchRecentRegularSeasonGameIds(
     team: string,
     window: number,
     asOf: string,
-    seasonStart = COMPARE_SEASON_START
+    explicitAsOf = true
 ): Promise<number[]> {
+    const seasonYear = explicitAsOf
+        ? getSeasonStartYear(new Date(`${asOf}T12:00:00Z`))
+        : Math.floor(await getCurrentSeasonId() / 10000);
     const result = await query<{ game_id: string | number }>(
         `
       SELECT tg.game_id
       FROM team_games tg
       WHERE tg.team = $1
-        AND tg.game_date >= $2
+        AND LEFT(tg.game_id::text, 4)::int = $2
         AND tg.game_date <= $3
         AND SUBSTRING(tg.game_id::text, 5, 2) = '02'
       ORDER BY tg.game_date DESC, tg.game_id DESC
       LIMIT $4
     `,
-        [team, seasonStart, asOf, window]
+        [team, seasonYear, asOf, window]
     );
 
     return result.rows
