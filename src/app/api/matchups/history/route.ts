@@ -63,6 +63,7 @@ type PlayByPlayEvent = {
   typeDescKey?: string;
   details?: {
     shootingPlayerId?: number;
+    scoringPlayerId?: number;
     blockingPlayerId?: number;
     eventOwnerTeamId?: number;
   };
@@ -364,6 +365,7 @@ function addShotAttemptsFromPbp(
     const type = (play.typeDescKey ?? "").toLowerCase();
 
     if (
+      type !== "goal" &&
       type !== "shot-on-goal" &&
       type !== "missed-shot" &&
       type !== "blocked-shot"
@@ -371,7 +373,11 @@ function addShotAttemptsFromPbp(
       continue;
     }
 
-    const shooterId = num(play.details?.shootingPlayerId);
+    const shooterId = num(
+      type === "goal"
+        ? play.details?.scoringPlayerId
+        : play.details?.shootingPlayerId
+    );
     if (!shooterId || !allowedSkaterIds.has(shooterId)) continue;
 
     const row = skaterAgg.get(shooterId);

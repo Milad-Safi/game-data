@@ -33,16 +33,19 @@
 }
 
 .trendsSelectionCard {
-    padding: 24px 24px 26px;
+    --selection-padding: 24px;
+    padding: 18px var(--selection-padding) 26px;
 }
 
 .trendsSelectionHeader {
-    margin-bottom: 18px;
+    margin: 0 0 18px;
+    padding: 0 0 24px;
+    border-bottom: 1px solid rgba(120, 150, 200, 0.16);
 }
 
 .trendsSelectionTitle {
-    margin: 8px 0 8px;
-    font-size: clamp(1.8rem, 3.2vw, 2.45rem);
+    margin: 0;
+    font-size: clamp(1.45rem, 2.5vw, 1.85rem);
     line-height: 1.04;
     letter-spacing: -0.04em;
 }
@@ -453,6 +456,10 @@
         padding: 26px 0 72px;
     }
 
+    .trendsSelectionCard {
+        --selection-padding: 18px;
+    }
+
     .trendsSelectionCard,
     .trendsStateCard,
     .trendCard {
@@ -473,7 +480,7 @@
     }
 
     .trendsSelectionTitle {
-        font-size: clamp(1.55rem, 7vw, 2.05rem);
+        font-size: 1.45rem;
     }
 }
 

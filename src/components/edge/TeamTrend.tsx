@@ -179,11 +179,17 @@ export default function TeamTrend({
             </div>
 
             <div className="trendExplainer">
-                <p className="trendExplainerText">
-                    Machine-learning model trained on 1k+ NHL games, comparing
-                    recent performance patterns (goals, shots, special teams,
-                    venue effects, opponent strength) against similar past
-                    situations to estimate short-term performance direction.
+                <p className="trendExplainerText" style={{ textIndent: "1.5em" }}>
+                    Using {teamLabel}’s {data.n_used} recent current-season games,
+                    the model weighs goals, shots, special teams, home/away
+                    context, and opponent strength to estimate the next
+                    {" "}{data.model_info?.k ?? 5} games. It learns from historical
+                    patterns; improvement means a stronger combined goals,
+                    shots, and special-teams score. {trendDisplay.label} is its
+                    leading estimate at {confidence}%, not a guarantee.
+                    {data.n_used < data.n_requested
+                        ? " The limited recent sample makes this forecast less reliable."
+                        : ""}
                 </p>
             </div>
         </section>

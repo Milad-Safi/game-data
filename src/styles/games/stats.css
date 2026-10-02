@@ -21,7 +21,7 @@
 
 .historicalGameHeroBoard {
     display: grid;
-    grid-template-columns: minmax(300px, 1fr) auto minmax(300px, 1fr);
+    grid-template-columns: minmax(0, 1fr) 130px minmax(0, 1fr);
     gap: 22px;
     align-items: stretch;
 }
@@ -129,7 +129,7 @@
 }
 
 .historicalGameHeroMiddle {
-    min-width: 236px;
+    min-width: 0;
     padding: 20px 18px;
     display: flex;
     flex-direction: column;
@@ -342,5 +342,73 @@
     .historicalGameHeroSubline {
         font-size: 0.56rem;
         gap: 3px;
+    }
+}
+
+/* Keep each score beside its own team, towards the center of the board. */
+.historicalGameHeroTeam {
+    display: flex;
+    align-items: center;
+}
+.historicalGameHeroTeamInner {
+    flex: 1;
+    min-width: 0;
+    padding: 22px 18px;
+    gap: 14px;
+}
+.historicalGameHeroTeamScore {
+    flex-shrink: 0;
+    padding: 0 20px;
+}
+.historicalGameHeroLogo {
+    width: 76px;
+    height: 76px;
+}
+.historicalGameHeroFinal {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+}
+@media (max-width: 1120px) and (min-width: 761px) {
+    .historicalGameHeroBoard {
+        grid-template-columns: minmax(0, 1fr) 100px minmax(0, 1fr);
+        gap: 12px;
+    }
+    .historicalGameHeroMiddle { order: 0; padding: 16px 8px; }
+    .historicalGameHeroLogo { width: 54px; height: 54px; }
+    .historicalGameHeroTeamInner { gap: 10px; padding: 18px 12px; }
+    .historicalGameHeroTeamScore { padding: 0 12px; }
+    .historicalGameHeroTeamName { font-size: 1.1rem; }
+}
+@media (max-width: 760px) {
+    .historicalGameHeroTeamHome .historicalGameHeroTeamScore { order: 1; }
+    .historicalGameHeroTeamInnerHome { flex-direction: row-reverse; }
+    .historicalGameHeroTeamScore { margin-left: auto; }
+}
+
+/* A single connected scoreboard, rather than three floating cards. */
+.historicalGameHeroBoard {
+    gap: 0;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #0d131a;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.historicalGameHeroTeam,
+.historicalGameHeroMiddle {
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+}
+.historicalGameHeroMiddle {
+    border: 0;
+}
+@media (max-width: 760px) {
+    .historicalGameHeroBoard { border-radius: 18px; }
+    .historicalGameHeroMiddle {
+        border: 0;
+    }
+    .historicalGameHeroTeamHome {
+        border-top: 0;
     }
 }

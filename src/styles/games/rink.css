@@ -134,3 +134,30 @@
         font-size: 0.72rem;
     }
 }
+.historicalGameRinkDot { cursor: pointer; }
+.historicalGameRinkDotActive {
+    stroke: #2563eb;
+    stroke-width: 3;
+    filter: drop-shadow(0 0 3px rgba(37, 99, 235, 0.6));
+}
+.historicalGameRinkEventTip {
+    position: fixed;
+    z-index: 60;
+    width: 190px;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid rgba(157, 192, 255, 0.35);
+    border-radius: 12px;
+    background: #0c1626;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    color: #f5f7fb;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    pointer-events: none;
+}
+.historicalGameRinkEventTip strong,
+.historicalGameRinkEventTip span,
+.historicalGameRinkEventTip small { display: block; }
+.historicalGameRinkEventTip span,
+.historicalGameRinkEventTip small { margin-top: 5px; color: #aebed5; }
+.historicalGameRinkEventTip p { margin: 8px 0; }

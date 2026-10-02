@@ -100,10 +100,6 @@ export default function HistoricalGamesShell({ seasonOptions }: { seasonOptions:
             </section>
 
             <section className="historicalGamesFilterPanel">
-                <p className="historicalGamesFilterHint">
-                    Choose a team and season, then narrow it with an optional opponent
-                </p>
-
                 <form
                     className="historicalGamesFilterForm"
                     onSubmit={handleSearchSubmit}
@@ -147,8 +143,6 @@ export default function HistoricalGamesShell({ seasonOptions }: { seasonOptions:
                     </div>
 
                     <div className="historicalGamesOptionalRow">
-                        <p className="historicalGamesOptionalLabel">Optional filters</p>
-
                         <label className="historicalGamesField historicalGamesFieldOptional">
                             <span className="historicalGamesFieldLabel">Opponent</span>
                             <select

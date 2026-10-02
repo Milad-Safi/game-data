@@ -45,14 +45,9 @@ export default function TeamComparisonShell() {
                 <div className="compareShellCard">
                     <div className="compareShellTop">
                         <div className="compareShellHeader">
-                            <div>
-                                <p className="compareShellEyebrow">
-                                    Team comparison
-                                </p>
-                                <h1 className="compareShellTitle">
-                                    Build the matchup view
-                                </h1>
-                            </div>
+                            <h1 className="compareShellTitle">
+                                Select teams to compare
+                            </h1>
                         </div>
 
                         <CompareControls

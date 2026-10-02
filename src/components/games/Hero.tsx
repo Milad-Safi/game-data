@@ -1,7 +1,6 @@
 import type { HistoricalGameDetailResponse } from "@/types/games";
 
 import {
-    formatCompactGameDate,
     formatDecisionLabel,
     formatGameDate,
     formatNumber,
@@ -49,36 +48,22 @@ export default function Hero({
                             </p>
                         </div>
                     </div>
+                    <p className="historicalGameHeroScore historicalGameHeroTeamScore">{data.awayTeam.score}</p>
                 </div>
 
                 <div className="historicalGameHeroMiddle">
-                    <div className="historicalGameHeroScoreRow">
-                        <p className="historicalGameHeroScore">
-                            {data.awayTeam.score}
-                        </p>
-
-                        <div className="historicalGameHeroMiddleMeta">
-                            <p className="historicalGameHeroDate">
-                                {formatCompactGameDate(data.gameDate)}
-                            </p>
-                            <p className="historicalGameHeroFinal">Final</p>
-                        </div>
-
-                        <p className="historicalGameHeroScore">
-                            {data.homeTeam.score}
-                        </p>
-                    </div>
+                    <p className="historicalGameHeroFinal">FINAL</p>
 
                     <div className="historicalGameHeroSubline">
                         <span>{data.awayTeam.abbrev}</span>
                         <span>@</span>
                         <span>{data.homeTeam.abbrev}</span>
-                        <span>•</span>
-                        <span>{formatDecisionLabel(data.decision)}</span>
+
                     </div>
                 </div>
 
                 <div className="historicalGameHeroTeam historicalGameHeroTeamHome">
+                    <p className="historicalGameHeroScore historicalGameHeroTeamScore">{data.homeTeam.score}</p>
                     <div className="historicalGameHeroTeamInner historicalGameHeroTeamInnerHome">
                         <div className="historicalGameHeroTeamCopy historicalGameHeroTeamCopyHome">
                             <p className="historicalGameHeroTeamLabel">Home</p>
@@ -106,7 +91,7 @@ export default function Hero({
             </div>
 
             <p className="historicalGameDetailSubtitle historicalGameDetailSubtitleHero">
-                {formatGameDate(data.gameDate)}
+                {formatGameDate(data.gameDate)} · {formatDecisionLabel(data.decision)}
             </p>
         </section>
     );

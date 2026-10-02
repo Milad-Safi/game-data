@@ -1,3 +1,7 @@
+"use client";
+
+import { useState, type PointerEvent } from "react";
+
 import type { GameDetailChartMode, HistoricalGameShotEvent } from "@/types/games";
 
 type GameEventRinkProps = {
@@ -38,6 +42,26 @@ function radiusForEvent(
 }
 
 export default function GameEventRink({ events, mode }: GameEventRinkProps) {
+    const [hover, setHover] = useState<{ id: string; left: number; top: number } | null>(null);
+    const activeEvent = events.find(event => event.eventId === hover?.id);
+
+    function inspectEvent(event: PointerEvent<SVGSVGElement>, cycle = false) {
+        const svg = event.currentTarget;
+        const matrix = svg.getScreenCTM();
+        if (!matrix) return;
+        const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(matrix.inverse());
+        const nearby = events.map(item => ({ item, distance: Math.hypot(item.rinkX - point.x, item.rinkY - point.y) }))
+            .filter(item => item.distance <= 4)
+            .sort((a, b) => a.distance - b.distance);
+        if (!nearby.length) { setHover(null); return; }
+        const nearest = nearby[0];
+        // Identical coordinates stay accurate; clicking cycles their events.
+        const overlapping = nearby.filter(item => Math.hypot(item.item.rinkX - nearest.item.rinkX, item.item.rinkY - nearest.item.rinkY) < 0.1);
+        const index = cycle ? (overlapping.findIndex(item => item.item.eventId === hover?.id) + 1) % overlapping.length : 0;
+        const rect = svg.getBoundingClientRect();
+        setHover({ id: overlapping[index].item.eventId, left: Math.max(12, rect.left - 212), top: Math.max(12, Math.min(event.clientY - 35, window.innerHeight - 180)) });
+    }
+
     const legendItems =
         mode === "goals"
             ? [
@@ -76,7 +100,10 @@ export default function GameEventRink({ events, mode }: GameEventRinkProps) {
                     className="historicalGameRinkSvg"
                     viewBox="0 0 85 100"
                     xmlns="http://www.w3.org/2000/svg"
-                    role="img"
+                    onPointerMove={event => inspectEvent(event)}
+                    onPointerDown={event => inspectEvent(event, true)}
+                    onPointerLeave={() => setHover(null)}
+                    role="group"
                     aria-label="Offensive zone event map"
                 >
                     <defs>
@@ -195,13 +222,34 @@ export default function GameEventRink({ events, mode }: GameEventRinkProps) {
                             cx={event.rinkX}
                             cy={event.rinkY}
                             r={radiusForEvent(event, mode)}
-                            className={dotClassForEvent(event, mode)}
+                            className={`${dotClassForEvent(event, mode)}${activeEvent?.eventId === event.eventId ? " historicalGameRinkDotActive" : ""}`}
+                            tabIndex={0}
+                            role="button"
+                            aria-label={event.description}
+                            onFocus={focus => {
+                                const rect = focus.currentTarget.ownerSVGElement!.getBoundingClientRect();
+                                setHover({ id: event.eventId, left: Math.max(12, rect.left - 212), top: Math.max(12, Math.min(focus.currentTarget.getBoundingClientRect().top, window.innerHeight - 180)) });
+                            }}
+                            onBlur={() => setHover(null)}
+                            onKeyDown={key => {
+                                if (key.key === "Escape") { setHover(null); key.currentTarget.blur(); }
+                            }}
                         >
-                            <title>{event.description}</title>
+
                         </circle>
                     ))}
                 </svg>
             </div>
+
+            {activeEvent && hover ? (
+                <aside className="historicalGameRinkEventTip" style={{ left: hover.left, top: hover.top }}>
+                    <strong>{activeEvent.playerName}</strong>
+                    <span>{activeEvent.teamAbbrev} · Period {activeEvent.periodNumber} · {activeEvent.timeInPeriod}</span>
+                    <p>{activeEvent.description}</p>
+                    {activeEvent.shotType ? <span>{activeEvent.shotType.replaceAll("-", " ")}{activeEvent.strength ? ` · ${activeEvent.strength}` : ""}</span> : null}
+                    {events.some(event => event.eventId !== activeEvent.eventId && Math.hypot(event.rinkX - activeEvent.rinkX, event.rinkY - activeEvent.rinkY) < 0.1) ? <small>Overlapping events · click to cycle</small> : null}
+                </aside>
+            ) : null}
 
             <div className="historicalGameRinkFooter">
                 <div className="historicalGameRinkLegend">

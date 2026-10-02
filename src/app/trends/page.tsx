@@ -80,13 +80,7 @@ export default function TrendsPage() {
             <section className="trendsWorkspace">
                 <section className="trendsSelectionCard">
                     <div className="trendsSelectionHeader">
-                        <p className="trendsSectionEyebrow">Select a team</p>
-                        <h1 className="trendsSelectionTitle">
-                            Click a logo to run the trend view
-                        </h1>
-                        <p className="trendsSelectionHint">
-                            The first request can take some time while the worker wakes up
-                        </p>
+                        <h1 className="trendsSelectionTitle" style={{ textAlign: "center" }}>Select a Team</h1>
                     </div>
 
                     <div className="trendsLogoGrid">
