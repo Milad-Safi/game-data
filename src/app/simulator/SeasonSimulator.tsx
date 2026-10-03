@@ -5,7 +5,7 @@ import { fetchJson } from "@/lib/fetchJson";
 import type { SeasonSimulationResponse, SimulatedTeam } from "@/types/api";
 
 const API_BASE = process.env.NEXT_PUBLIC_EDGE_API_BASE ?? "https://leafs-edge-api.onrender.com";
-const FILTERS = ["All", "East", "West", "Atlantic", "Metropolitan", "Central", "Pacific"] as const;
+const FILTERS = ["League", "East", "West"] as const;
 const SORTS = [
     ["make_playoffs_probability", "Playoffs %"],
     ["mean_projected_final_points", "Projected PTS"],
@@ -51,8 +51,8 @@ export default function SeasonSimulator() {
     const [data, setData] = useState<SeasonSimulationResponse | null>(null);
     const [error, setError] = useState(false);
     const [attempt, setAttempt] = useState(0);
-    const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
-    const [sort, setSort] = useState<SortKey>("make_playoffs_probability");
+    const [filter, setFilter] = useState<(typeof FILTERS)[number]>("League");
+    const [sort, setSort] = useState<SortKey>("mean_projected_final_points");
     const [ascending, setAscending] = useState(false);
     const [expanded, setExpanded] = useState<string | null>(null);
     const request = useRef<Promise<SeasonSimulationResponse> | null>(null);
@@ -84,15 +84,24 @@ export default function SeasonSimulator() {
         setAscending(key === sort ? !ascending : false);
         setSort(key);
     }
-    const teams = (data?.teams ?? []).filter((team) => filter === "All"
+    const teams = (data?.teams ?? []).filter((team) => filter === "League"
         || (filter === "East" && team.conference === "Eastern")
         || (filter === "West" && team.conference === "Western")
-        || team.division === filter)
+        )
         .sort((a, b) => (ascending ? a[sort] - b[sort] : b[sort] - a[sort]) || a.team.localeCompare(b.team));
     const timestamp = data?.metadata.standings_snapshot_time_utc ?? data?.metadata.standings_fetched_at;
     const updated = timestamp && Number.isFinite(Date.parse(timestamp)) ? new Date(timestamp) : null;
     const season = String(data?.metadata.season_id ?? "");
+    const projectedOrder = [...teams].sort((a, b) => b.mean_projected_final_points - a.mean_projected_final_points || a.team.localeCompare(b.team));
+    const divisions = filter === "East" ? ["Atlantic", "Metropolitan"] : ["Central", "Pacific"];
+    const divisionGroups = divisions.map((division) => ({ label: division, rows: projectedOrder.filter((team) => team.division === division).slice(0, 3) }));
+    const divisionQualifiers = new Set(divisionGroups.flatMap((group) => group.rows.map((team) => team.team)));
+    const groups = filter === "League" ? [{ label: "League", rows: teams }] : [
+        ...divisionGroups,
+        { label: "Wild Card", rows: projectedOrder.filter((team) => !divisionQualifiers.has(team.team)) },
+    ];
     function heading(key: SortKey, label: string, className = "") {
+        if (filter !== "League") return <th scope="col" className={className}>{label}</th>;
         return <th scope="col" className={className} aria-sort={sort === key ? (ascending ? "ascending" : "descending") : "none"}>
             <button onClick={() => changeSort(key)}>{label}<span aria-hidden="true">{sort === key ? (ascending ? " ↑" : " ↓") : " ↕"}</span></button>
         </th>;
@@ -101,59 +110,62 @@ export default function SeasonSimulator() {
     return <main className="simulatorPage">
         <header className="simulatorHeading">
             <h1>Season Simulator</h1>
-            <p>10,000 simulations of the remaining NHL regular season using current standings, schedule, team strength and home ice.</p>
-            {data && <ul className="simulatorMetadata">
-                <li>{season.slice(0, 4)}–{season.slice(6)} season</li>
-                <li>{data.metadata.simulations.toLocaleString("en")} simulations</li>
-                <li>{data.metadata.remaining_games.toLocaleString("en")} remaining games</li>
-                {updated && <li>Last updated <time dateTime={updated.toISOString()}>{updated.toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}</time></li>}
-            </ul>}
+            <p>A Monte Carlo forecasting tool that simulates the remainder of the NHL season to project playoff positions and team point totals.</p>
+            {data && <div className="simulatorMetadata">
+                <span className="simulatorSeason">{season.slice(0, 4)}–{season.slice(4)} Season</span>
+                <span>Average results over {data.metadata.simulations.toLocaleString("en")} simulations</span>
+                {updated && <span className="simulatorAsOf">As of <time dateTime={updated.toISOString()}>{updated.toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}</time></span>}
+            </div>}
         </header>
         {!data && !error && <p className="simulatorState" role="status">Loading season simulations…</p>}
         {error && <div className="simulatorState" role="alert"><p>Season simulations could not be loaded. Please try again.</p><button onClick={retry}>Retry</button></div>}
         {data && <>
             <div className="simulatorToolbar">
-                <div className="simulatorFilters" role="group" aria-label="Filter teams">
-                    {FILTERS.map((value) => <button key={value} aria-pressed={filter === value} onClick={() => setFilter(value)}>{value}</button>)}
+                <div className="simulatorScope">
+                    <div className="simulatorFilters" role="group" aria-label="Conference filter">
+                        {FILTERS.map((value) => <button key={value} aria-pressed={filter === value} onClick={() => setFilter(value)}>{value}</button>)}
+                    </div>
                 </div>
-                <div className="simulatorSort">
+                {filter === "League" && <div className="simulatorSort">
                     <label htmlFor="simulator-sort">Sort by</label>
                     <select id="simulator-sort" value={sort} onChange={(event) => { setSort(event.target.value as SortKey); setAscending(false); }}>
                         {SORTS.map(([key, label]) => <option value={key} key={key}>{label}</option>)}
                     </select>
                     <button aria-label={`Sort ${ascending ? "descending" : "ascending"}`} onClick={() => setAscending(!ascending)}>{ascending ? "↑" : "↓"}</button>
-                </div>
+                </div>}
             </div>
-            <p className="simulatorTableNote">{teams.length} teams · Select a team for details. Division % is the chance of winning its division.</p>
+            <p className="simulatorTableNote">{filter === "League" ? `${teams.length} teams · Select a team for details.` : "Projected positions based on mean points, not guaranteed playoff berths. Select a team for details."}</p>
+            {filter !== "League" && <h2 className="simulatorConferenceTitle">{filter === "East" ? "Eastern" : "Western"} Conference</h2>}
+            {groups.map((group) => <section className="simulatorStandingsGroup" key={group.label} aria-label={`${group.label} projections`}>
+                {filter !== "League" && <h3>{group.label}<span>{group.label === "Wild Card" ? "2 projected spots" : "Top 3 projected"}</span></h3>}
             <table className="simulatorTable">
-                <caption className="simulatorSrOnly">Projected NHL standings, {filter}. Percentages represent simulated qualification frequency.</caption>
+                <caption className="simulatorSrOnly">Projected NHL standings, {group.label}. Percentages represent simulated qualification frequency.</caption>
                 <thead><tr>
                     <th scope="col">Team</th><th scope="col" className="simulatorSecondary">Current PTS</th>
                     {heading("mean_projected_final_points", "Projected PTS")}
-                    <th scope="col" className="simulatorSecondary">P10–P90</th>
                     {heading("make_playoffs_probability", "Playoffs %")}
                     {heading("division_winner_probability", "Division %", "simulatorSecondary")}
                     {heading("top_3_division_probability", "Top 3 %", "simulatorSecondary")}
                     {heading("wildcard_probability", "Wild Card %", "simulatorSecondary")}
                 </tr></thead>
-                <tbody>{teams.map((team) => {
+                <tbody>{group.rows.map((team, index) => {
                     const open = expanded === team.team;
                     const toggle = () => setExpanded(open ? null : team.team);
                     return <Fragment key={team.team}>
-                        <tr className={`simulatorTeamRow${open ? " simulatorTeamRowOpen" : ""}`} onClick={toggle}>
-                            <th scope="row"><button aria-label={`${team.team} details`} aria-expanded={open} aria-controls={open ? `simulator-details-${team.team}` : undefined} onClick={(event) => { event.stopPropagation(); toggle(); }}><span aria-hidden="true">{open ? "−" : "+"}</span> {team.team}</button></th>
+                        <tr className={`simulatorTeamRow${group.label === "Wild Card" && index === 2 ? " simulatorWildcardCutoff" : ""}${index % 2 ? " simulatorTeamRowAlternate" : ""}${open ? " simulatorTeamRowOpen" : ""}`} onClick={toggle}>
+                            <th scope="row"><button aria-label={`${team.team} details`} aria-expanded={open} aria-controls={open ? `simulator-details-${team.team}` : undefined} onClick={(event) => { event.stopPropagation(); toggle(); }}><span className="simulatorRank">{index + 1})</span> {team.team}</button></th>
                             <td className="simulatorSecondary">{team.current_points}</td>
                             <td>{team.mean_projected_final_points.toFixed(1)}</td>
-                            <td className="simulatorSecondary">{range(team)}</td>
                             <td><span className="simulatorProbability">{percent(team.make_playoffs_probability)}<span className="simulatorBar" aria-hidden="true"><span style={{ width: percent(team.make_playoffs_probability) }} /></span></span></td>
                             <td className="simulatorSecondary">{percent(team.division_winner_probability)}</td>
                             <td className="simulatorSecondary">{percent(team.top_3_division_probability)}</td>
                             <td className="simulatorSecondary">{percent(team.wildcard_probability)}</td>
                         </tr>
-                        {open && <tr><td colSpan={mobile ? 3 : 8} className="simulatorDetailCell"><TeamDetails team={team} /></td></tr>}
+                        {open && <tr><td colSpan={mobile ? 3 : 7} className="simulatorDetailCell"><TeamDetails team={team} /></td></tr>}
                     </Fragment>;
                 })}</tbody>
             </table>
+            </section>)}
         </>}
         <details className="simulatorMethodology">
             <summary>Methodology</summary>
