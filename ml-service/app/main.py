@@ -8,11 +8,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from .trend_model import predict_team_trend
 from .season import CurrentSeasonError, current_season_query
 from .nhlpy_proxy import nhl_client, capabilities as nhlpy_capabilities
+from .elo import router as elo_router
+from .season_simulator import router as season_simulator_router
 
 # Use shared helper cache file
 from .cache import cached
 
 app = FastAPI(title="Game Data API", version="1.0")
+app.include_router(elo_router)
+app.include_router(season_simulator_router)
 
 app.add_middleware(
     CORSMiddleware,

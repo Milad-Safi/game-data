@@ -151,38 +151,32 @@ export type MatchupHistoryPayload = {
   >;
 };
 
-export type VisualizerMetricId =
-    | "ppOpportunities"
-    | "overallPowerPlayPct"
-    | "opportunities5v4"
-    | "powerPlayPct5v4"
-    | "opportunities5v3"
-    | "powerPlayPct5v3"
-    | "timesShorthanded"
-    | "penaltyKillPct"
-    | "penaltyKillNetPct"
-    | "powerPlayGoalsFor"
-    | "ppGoalsAgainstPerGame"
-    | "shotsAgainstPerGame"
-    | "shotsForPerGame"
-    | "goalsAgainstPerGame"
-    | "goalsForPerGame"
-    | "points"
-    | "pointsPct";
-
-export type TeamScatterMetricMap = Record<VisualizerMetricId, number | null>;
-
-export type TeamScatterTeam = {
-    teamAbbrev: string;
-    teamFullName: string;
-    logoSrc: string;
-    gamesPlayed: number | null;
-    metrics: TeamScatterMetricMap;
+export type SimulatedTeam = {
+    team: string;
+    conference: string;
+    division: string;
+    current_points: number;
+    mean_projected_final_points: number;
+    median_projected_final_points: number;
+    p10_projected_final_points: number;
+    p90_projected_final_points: number;
+    make_playoffs_probability: number;
+    miss_playoffs_probability: number;
+    division_winner_probability: number;
+    top_3_division_probability: number;
+    wildcard_probability: number;
+    current_effective_elo: number;
+    current_turnover_adjustment?: number;
+    roster_score?: number;
 };
 
-export type TeamScatterApiResponse = {
-    seasonId: number;
-    gameTypeId: number;
-    generatedAt: string;
-    teams: TeamScatterTeam[];
+export type SeasonSimulationResponse = {
+    teams: SimulatedTeam[];
+    metadata: {
+        season_id: number;
+        simulations: number;
+        remaining_games: number;
+        standings_snapshot_time_utc?: string | null;
+        standings_fetched_at?: string;
+    };
 };

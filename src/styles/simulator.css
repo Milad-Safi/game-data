@@ -1,0 +1,43 @@
+.simulatorPage { width: min(1180px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 64px; color: #e3eaf5; }
+.simulatorHeading h1 { font-size: 1.65rem; margin: 0 0 10px; letter-spacing: -.025em; }
+.simulatorHeading p { max-width: 820px; margin: 0; color: #aab8cc; font-size: .9rem; line-height: 1.6; }
+.simulatorMetadata { display: flex; flex-wrap: wrap; gap: 8px 20px; list-style: none; padding: 0; margin: 18px 0 24px; font-size: .75rem; color: #aab8cc; }
+.simulatorToolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-top: 24px; }
+.simulatorFilters { display: flex; flex-wrap: wrap; gap: 6px; }
+.simulatorPage button, .simulatorPage select { font: inherit; color: inherit; }
+.simulatorFilters button, .simulatorSort button, .simulatorSort select, .simulatorState button { border: 1px solid #2a384d; border-radius: 4px; background: #0d1623; padding: 8px 10px; cursor: pointer; font-size: .75rem; }
+.simulatorFilters button[aria-pressed="true"] { background: #203b64; border-color: #719ce0; color: #fff; }
+.simulatorPage button:focus-visible, .simulatorPage select:focus-visible, .simulatorPage summary:focus-visible { outline: 2px solid #90b8ff; outline-offset: 3px; }
+.simulatorSort { display: flex; align-items: center; gap: 8px; font-size: .75rem; }
+.simulatorTableNote { font-size: .72rem; color: #9babc2; margin: 16px 0 10px; line-height: 1.5; }
+.simulatorTable { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .82rem; font-variant-numeric: tabular-nums; }
+.simulatorTable th, .simulatorTable td { padding: 11px 9px; text-align: right; border-bottom: 1px solid #202c3d; }
+.simulatorTable th:first-child { text-align: left; }
+.simulatorTable thead th { color: #9babc2; font-size: .7rem; font-weight: 600; background: #0d1623; vertical-align: middle; }
+.simulatorTable th button { border: 0; background: transparent; cursor: pointer; padding: 4px 0; text-align: inherit; font-weight: inherit; }
+.simulatorTable thead th[aria-sort="descending"], .simulatorTable thead th[aria-sort="ascending"] { color: #bad3ff; }
+.simulatorTeamRow { cursor: pointer; }
+.simulatorTeamRow:hover, .simulatorTeamRowOpen { background: #101b2a; }
+.simulatorTeamRow th span { color: #90a7c8; display: inline-block; width: 12px; }
+.simulatorProbability { display: inline-flex; flex-direction: column; gap: 5px; width: 58px; }
+.simulatorBar { height: 3px; background: #233045; display: block; }
+.simulatorBar > span { display: block; height: 100%; background: #719ce0; }
+.simulatorTable .simulatorDetailCell { padding: 0; text-align: left; }
+.simulatorDetails { padding: 16px; background: #0c1420; }
+.simulatorDetails p { margin: 0 0 14px; font-size: .78rem; color: #aebfd7; }
+.simulatorDetails dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin: 0; }
+.simulatorDetails dt { color: #9babc2; font-size: .72rem; line-height: 1.5; }
+.simulatorDetails dd { margin: 4px 0 0; font-size: .9rem; font-weight: 600; }
+.simulatorMethodology { margin-top: 28px; border-top: 1px solid #28354a; padding-top: 16px; font-size: .8rem; color: #aab8cc; line-height: 1.7; }
+.simulatorMethodology summary { cursor: pointer; color: #e3eaf5; font-weight: 600; }
+.simulatorMethodology p { max-width: 920px; }
+.simulatorState { padding: 32px 0; font-size: .9rem; color: #aab8cc; }
+.simulatorSrOnly { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (max-width: 760px) {
+    .simulatorTable .simulatorSecondary { display: none; }
+    .simulatorDetails dl { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+    .simulatorTable th, .simulatorTable td { padding: 12px 8px; }
+    .simulatorHeading h1 { font-size: 1.4rem; }
+    .simulatorPage { padding-top: 24px; }
+    .simulatorDetails { overflow-wrap: anywhere; }
+}

@@ -113,14 +113,13 @@ export default function HomePage() {
                             </div>
                         </Link>
 
-                        <Link href="/visualizer" className="bentoCard">
+                        <Link href="/simulator" className="bentoCard">
                             <div className="cardBody">
-                                <span className="cardTag">League Metrics</span>
-                                <h3 className="cardTitle">Teams Visualized</h3>
+                                <span className="cardTag">Season Projections</span>
+                                <h3 className="cardTitle">Season Simulator</h3>
                                 <p className="cardText">
-                                    Build custom visualizations. Plot any two
-                                    metrics to see exactly where every team
-                                    stands
+                                    Explore projected final points and playoff
+                                    probabilities from 10,000 simulated NHL seasons.
                                 </p>
                             </div>
                         </Link>
