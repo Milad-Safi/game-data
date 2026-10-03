@@ -30,7 +30,7 @@
             rgba(6, 11, 20, 0.48) 74%,
             rgba(6, 11, 20, 0.62) 100%
         ),
-        url("/aaa.png");
+        var(--home-hero-image, url("/aaa.png"));
     background-repeat: no-repeat;
     background-size: 100% auto;
     background-position: center 30%;

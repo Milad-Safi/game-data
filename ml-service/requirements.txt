@@ -7,3 +7,4 @@ requests
 numpy
 nhl-api-py
 scikit-learn
+nflreadpy==0.1.5

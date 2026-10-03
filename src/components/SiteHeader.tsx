@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MouseEvent, useCallback, useMemo } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { SiteHeaderLink } from "@/lib/siteNav";
 
 type SiteHeaderProps = {
@@ -22,6 +22,8 @@ export default function SiteHeader({
     navLinks,
 }: SiteHeaderProps) {
     const pathname = usePathname();
+    const router = useRouter();
+    const isNFL = pathname === "/nfl" || pathname.startsWith("/nfl/");
 
     const leftLinks = useMemo(() => navLinks.slice(0, 2), [navLinks]);
     const rightLinks = useMemo(() => navLinks.slice(2), [navLinks]);
@@ -55,12 +57,19 @@ export default function SiteHeader({
             <div className="siteHeaderInner">
                 {/* Left Group */}
                 <nav className="siteNav" aria-label="Primary Left">
+                    <label className="siteSportSelector">
+                        <span className="siteSportLabel">Sport</span>
+                        <select aria-label="Select sport" value={isNFL ? "NFL" : "NHL"} onChange={(event) => router.push(event.target.value === "NFL" ? "/nfl" : "/")}>
+                            <option value="NHL">NHL</option>
+                            <option value="NFL">NFL</option>
+                        </select>
+                    </label>
                     {leftLinks.map(renderLink)}
                 </nav>
 
                 {/* Boosted Home Button */}
                 <Link
-                    href="/"
+                    href={isNFL ? "/nfl" : "/"}
                     className="siteWordmark"
                     aria-label="Game Data home"
                     title="Game Data — Home"

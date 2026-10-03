@@ -13,6 +13,7 @@ export default function StatRow({
   rightText,
   leftColor,
   rightColor,
+  sensitivity = 1,
 }: {
   leftVal: number | null;
   rightVal: number | null;
@@ -21,6 +22,8 @@ export default function StatRow({
   rightText?: string;
   leftColor: string;
   rightColor: string;
+  /** Multiplies the bar split’s distance from 50/50; does not alter values. */
+  sensitivity?: number;
 }) {
   // Normalize inputs to finite numbers or null
   const l =
@@ -35,8 +38,10 @@ export default function StatRow({
   const total = lAbs != null && rAbs != null ? lAbs + rAbs : null;
 
   // Default to a 50/50 split when values are missing or zero
-  const leftPct = total && total > 0 ? (lAbs! / total) * 100 : 50;
-  const rightPct = total && total > 0 ? (rAbs! / total) * 100 : 50;
+  const baseLeftPct = total && total > 0 ? (lAbs! / total) * 100 : 50;
+  const boost = Number.isFinite(sensitivity) && sensitivity > 0 ? sensitivity : 1;
+  const leftPct = Math.max(0, Math.min(100, 50 + (baseLeftPct - 50) * boost));
+  const rightPct = 100 - leftPct;
 
   return (
     <div className="StatRow">

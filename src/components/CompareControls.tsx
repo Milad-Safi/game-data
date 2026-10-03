@@ -7,23 +7,23 @@ import type {
     TeamOption,
 } from "@/lib/compare";
 
-type CompareControlsProps = {
+type CompareControlsProps<T extends string> = {
     team1: string;
     team2: string;
-    compareBy: CompareMode;
+    compareBy: T;
     filterBy: CompareFilter;
     teamOptions: TeamOption[];
-    compareOptions: CompareOption<CompareMode>[];
+    compareOptions: CompareOption<T>[];
     filterOptions: CompareOption<CompareFilter>[];
     onTeam1Change: (value: string) => void;
     onTeam2Change: (value: string) => void;
-    onCompareByChange: (value: CompareMode) => void;
+    onCompareByChange: (value: T) => void;
     onFilterByChange: (value: CompareFilter) => void;
     onSwapTeams: () => void;
     onResetSelections: () => void;
 };
 
-export default function CompareControls({
+export default function CompareControls<T extends string = CompareMode>({
     team1,
     team2,
     compareBy,
@@ -35,7 +35,7 @@ export default function CompareControls({
     onTeam2Change,
     onCompareByChange,
     onFilterByChange,
-}: CompareControlsProps) {
+}: CompareControlsProps<T>) {
     return (
         <section className="compareControlsCard" aria-label="Comparison controls">
             <div className="compareControlsGrid">
@@ -80,7 +80,7 @@ export default function CompareControls({
                         className="compareSelect"
                         value={compareBy}
                         onChange={(event) =>
-                            onCompareByChange(event.target.value as CompareMode)
+                            onCompareByChange(event.target.value as T)
                         }
                     >
                         {compareOptions.map((option) => (

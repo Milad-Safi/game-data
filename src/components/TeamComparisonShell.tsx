@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import CompareControls from "@/components/CompareControls";
+import NFLCompareResults from "@/components/compare/NFLCompareResults";
+import { NFL_TEAM_OPTIONS } from "@/lib/nflTeams";
 import CompareResultsPanel from "@/components/CompareResultsPanel";
 import {
     COMPARE_BY_OPTIONS,
@@ -11,19 +13,21 @@ import {
     type CompareMode,
 } from "@/lib/compare";
 
-export default function TeamComparisonShell() {
+export default function TeamComparisonShell({ sport = "NHL" }: { sport?: "NHL" | "NFL" }) {
+    const teamOptions = sport === "NFL" ? NFL_TEAM_OPTIONS : NHL_TEAM_OPTIONS;
     const [team1, setTeam1] = useState("");
     const [team2, setTeam2] = useState("");
     const [compareBy, setCompareBy] = useState<CompareMode>("team");
+    const [nflCompareBy, setNFLCompareBy] = useState<"team" | "positions">("team");
     const [filterBy, setFilterBy] = useState<CompareFilter>("season");
 
     const selectedTeam1Label = useMemo(() => {
-        return NHL_TEAM_OPTIONS.find((team) => team.value === team1)?.label ?? "";
-    }, [team1]);
+        return teamOptions.find((team) => team.value === team1)?.label ?? "";
+    }, [team1, teamOptions]);
 
     const selectedTeam2Label = useMemo(() => {
-        return NHL_TEAM_OPTIONS.find((team) => team.value === team2)?.label ?? "";
-    }, [team2]);
+        return teamOptions.find((team) => team.value === team2)?.label ?? "";
+    }, [team2, teamOptions]);
 
     const canCompare = Boolean(team1 && team2 && team1 !== team2);
 
@@ -36,6 +40,7 @@ export default function TeamComparisonShell() {
         setTeam1("");
         setTeam2("");
         setCompareBy("team");
+        setNFLCompareBy("team");
         setFilterBy("season");
     }
 
@@ -50,17 +55,20 @@ export default function TeamComparisonShell() {
                             </h1>
                         </div>
 
-                        <CompareControls
+                        <CompareControls<CompareMode | "positions">
                             team1={team1}
                             team2={team2}
-                            compareBy={compareBy}
+                            compareBy={sport === "NFL" ? nflCompareBy : compareBy}
                             filterBy={filterBy}
-                            teamOptions={NHL_TEAM_OPTIONS}
-                            compareOptions={COMPARE_BY_OPTIONS}
+                            teamOptions={teamOptions}
+                            compareOptions={sport === "NFL" ? [{ value: "team", label: "Team" }, { value: "positions", label: "Position" }] : COMPARE_BY_OPTIONS}
                             filterOptions={FILTER_BY_OPTIONS}
                             onTeam1Change={setTeam1}
                             onTeam2Change={setTeam2}
-                            onCompareByChange={setCompareBy}
+                            onCompareByChange={(value) => {
+                                if (sport === "NFL" && (value === "team" || value === "positions")) setNFLCompareBy(value);
+                                else if (value !== "positions") setCompareBy(value);
+                            }}
                             onFilterByChange={setFilterBy}
                             onSwapTeams={handleSwapTeams}
                             onResetSelections={handleResetSelections}
@@ -70,7 +78,10 @@ export default function TeamComparisonShell() {
                     <div className="compareShellDivider" />
 
                     <div className="compareShellBottom">
-                        <CompareResultsPanel
+                        {sport === "NFL" ? <NFLCompareResults
+                            team1={team1} team2={team2} filterBy={filterBy} canCompare={canCompare} mode={nflCompareBy}
+                            selectedTeam1Label={selectedTeam1Label} selectedTeam2Label={selectedTeam2Label}
+                        /> : <CompareResultsPanel
                             team1={team1}
                             team2={team2}
                             compareBy={compareBy}
@@ -78,7 +89,7 @@ export default function TeamComparisonShell() {
                             canCompare={canCompare}
                             selectedTeam1Label={selectedTeam1Label}
                             selectedTeam2Label={selectedTeam2Label}
-                        />
+                        />}
                     </div>
                 </div>
             </div>

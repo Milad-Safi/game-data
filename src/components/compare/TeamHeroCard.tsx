@@ -7,16 +7,20 @@ import { getTeamColor } from "@/lib/teamColours";
 type TeamLogoProps = {
     teamAbbrev: string;
     teamLabel: string;
+    logoSrc?: string;
 };
 
 type TeamHeroCardProps = {
     teamAbbrev: string;
     teamLabel: string;
     align: "left" | "right";
+    placeholderLogo?: boolean;
+    accentColor?: string;
+    logoSrc?: string;
 };
 
-function TeamLogo({ teamAbbrev, teamLabel }: TeamLogoProps) {
-    const logoSrc = getTeamLogoSrc(teamLabel, teamAbbrev);
+function TeamLogo({ teamAbbrev, teamLabel, logoSrc: suppliedLogo }: TeamLogoProps) {
+    const logoSrc = suppliedLogo ?? getTeamLogoSrc(teamLabel, teamAbbrev);
     const [imageFailed, setImageFailed] = useState(false);
 
     useEffect(() => {
@@ -46,8 +50,11 @@ export default function TeamHeroCard({
     teamAbbrev,
     teamLabel,
     align,
+    placeholderLogo = false,
+    accentColor,
+    logoSrc,
 }: TeamHeroCardProps) {
-    const accent = getTeamColor(teamAbbrev);
+    const accent = accentColor ?? getTeamColor(teamAbbrev);
 
     return (
         <div
@@ -63,7 +70,7 @@ export default function TeamHeroCard({
             />
 
             <div className="compareHeroCardInner">
-                <TeamLogo teamAbbrev={teamAbbrev} teamLabel={teamLabel} />
+                {placeholderLogo ? <div className="compareHeroLogoShell"><span className="compareHeroLogoFallback" style={{ display: "grid" }}>{teamAbbrev}</span></div> : <TeamLogo teamAbbrev={teamAbbrev} teamLabel={teamLabel} logoSrc={logoSrc} />}
 
                 <div className="compareHeroContent">
                     <h3 className="compareHeroName">{teamLabel}</h3>

@@ -12,11 +12,12 @@ type SiteChromeProps = {
 
 export default function SiteChrome({ children }: SiteChromeProps) {
     const pathname = usePathname();
-    const isHome = pathname === "/";
+    const isNFL = pathname === "/nfl" || pathname.startsWith("/nfl/");
+    const isHome = pathname === "/" || pathname === "/nfl";
 
     return (
         <>
-            <SiteHeader isHome={isHome} navLinks={SITE_HEADER_LINKS} />
+            <SiteHeader isHome={isHome} navLinks={isNFL ? [{ label: "Compare", href: "/nfl/compare" }] : SITE_HEADER_LINKS} />
             {children}
             <SiteFooter />
         </>

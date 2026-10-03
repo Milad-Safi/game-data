@@ -6,9 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "refresh:nfl": "node scripts/refresh-nfl.mts"
   },
   "dependencies": {
+    "csv-parse": "^7.0.3",
     "next": "16.1.0",
     "pg": "^8.16.3",
     "react": "19.2.3",

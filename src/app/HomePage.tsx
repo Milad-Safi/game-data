@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, type CSSProperties } from "react";
 
-export default function HomePage() {
+export default function HomePage({ sport = "NHL" }: { sport?: "NHL" | "NFL" }) {
+    const isNFL = sport === "NFL";
     useEffect(() => {
         const revealNodes = Array.from(
             document.querySelectorAll<HTMLElement>("[data-reveal]")
@@ -48,18 +49,18 @@ export default function HomePage() {
     };
 
     return (
-        <main className="homePage">
+        <main className="homePage" style={isNFL ? { "--home-hero-image": 'url("/nfl.jpeg")' } as CSSProperties : undefined}>
             <section className="heroSection">
                 <div className="heroStack">
                     <div className="heroCopy" data-reveal>
-                        <p className="sectionLabel">Game Data · Sports analytics</p>
+                        <p className="sectionLabel">{isNFL ? "Game Data · NFL" : "Game Data · Sports analytics"}</p>
 
                         <h1 className="heroTitle">Go beyond the box score</h1>
 
                         <p className="heroText">
-                            Understand the game through team comparisons, performance
+                            {isNFL ? "A new home for NFL data. Explore the game beyond the box score as Game Data expands to football." : <>Understand the game through team comparisons, performance
                             trends, and clear visuals that turn sports data into
-                            a deeper view of every matchup.
+                            a deeper view of every matchup.</>}
                         </p>
 
                         <div className="heroActions">
@@ -68,7 +69,7 @@ export default function HomePage() {
                                 className="primaryButton"
                                 onClick={handleExploreFeaturesClick}
                             >
-                                Explore features
+                                {isNFL ? "Explore NFL" : "Explore features"}
                             </button>
                         </div>
                     </div>
@@ -79,17 +80,23 @@ export default function HomePage() {
                 <div className="featuresContent">
                     <div className="featuresIntro" data-reveal>
                         <h2 className="featuresIntroTitle">
-                            Explore the platform
+                            {isNFL ? "NFL on Game Data" : "Explore the platform"}
                         </h2>
 
                         <p className="featuresIntroText">
-                            Each page focuses on a different part of the game,
+                            {isNFL ? "Explore the NFL team comparison preview. Live football statistics are not connected yet." : <>Each page focuses on a different part of the game,
                             from team comparisons to game breakdowns, league
-                            metrics and team trends.
+                            metrics and team trends.</>}
                         </p>
                     </div>
 
-                    <div className="bentoGrid" data-reveal>
+                    {isNFL && <div className="bentoGrid" data-reveal>
+                        <Link href="/nfl/compare" className="bentoCard"><div className="cardBody">
+                            <span className="cardTag">NFL · UI preview</span><h3 className="cardTitle">Compare Teams</h3>
+                            <p className="cardText">Select two NFL teams and preview the comparison layout with placeholder statistics.</p>
+                        </div></Link>
+                    </div>}
+                    {!isNFL && <div className="bentoGrid" data-reveal>
                         <Link href="/compare" className="bentoCard">
                             <div className="cardBody">
                                 <span className="cardTag">Matchups</span>
@@ -135,7 +142,7 @@ export default function HomePage() {
                             </div>
                         </Link>
 
-                    </div>
+                    </div>}
                 </div>
             </section>
         </main>

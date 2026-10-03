@@ -1,4 +1,10 @@
 const glossaryItems = [
+    // NFL position abbreviations used in comparison.
+    { term: "QB", description: "Quarterback. NFL positional rows combine all players at that position per team game." },
+    { term: "WR", description: "Wide receiver." },
+    { term: "TE", description: "Tight end." },
+    { term: "RB / FB", description: "Running back / fullback. NFL comparison includes fullbacks in RB totals." },
+    { term: "TD", description: "Touchdown. Red-zone TD % counts offensive touchdowns per possession with a recorded down inside the opponent’s 20, including kneel-down possessions; this can differ from official box-score totals." },
     // Site terms and stat labels
     {
         term: "5v3 PP%",
