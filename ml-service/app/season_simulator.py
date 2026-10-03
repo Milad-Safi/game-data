@@ -243,16 +243,18 @@ def build_inputs() -> dict:
     completed = [g for g in full_schedule if g["game_state"] in COMPLETED_STATES]
     remaining = [g for g in full_schedule if g["game_state"] not in COMPLETED_STATES]
     real_games, warnings = elo.validated_games(elo.load_history(SEASON_ID), fetched_at.date())
+    # Elo may lag official results while ingestion catches up. It supplies matchup
+    # strength only; official standings supply points, tiebreakers and turnover GP.
     if {g["game_id"] for g in real_games} != {g["game_id"] for g in completed}:
-        raise SimulationDataError("Elo history and completed NHL schedule disagree; wait for ingestion/feed updates")
+        warnings.append({"action": "approximation", "reason": "Using latest available database Elo; its processed games differ from the completed official schedule"})
     ratings = elo.calculate_ratings(real_games, teams, SEASON_ID)
     elo_rows = {r["team"]: r for r in ratings["teams"]}
     completed_counts = Counter(t for g in completed for t in (g["home"], g["away"]))
     full_counts = Counter(t for g in full_schedule for t in (g["home"], g["away"]))
     for team in teams:
         gp = standings[team]["games_played"]
-        if gp != completed_counts[team] or gp != elo_rows[team]["games_played"]:
-            raise SimulationDataError(f"Standings, schedule and Elo games played disagree for {team}; retry after updates")
+        if gp != completed_counts[team]:
+            raise SimulationDataError(f"Official standings and schedule games played disagree for {team}; retry after updates")
     live = sum(g["game_state"] in {"LIVE", "CRIT"} for g in remaining)
     if live:
         warnings.append({"action": "approximation", "reason": f"{live} in-progress games are simulated from pregame strengths; live scores are not modeled"})
