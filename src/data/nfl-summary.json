@@ -1,7 +1,7 @@
 {
   "version": 1,
   "season": 2026,
-  "updatedAt": "2026-10-13T22:36:00.921Z",
+  "updatedAt": "2026-10-15T09:14:23.289Z",
   "latestGameDate": "2026-10-12",
   "scheduledCompletedGames": 79,
   "includedGames": 79,
@@ -8616,9 +8616,9 @@
       },
       "against": {
         "points": 12,
-        "passYards": 101,
+        "passYards": 102,
         "rushYards": 96,
-        "yards": 197,
+        "yards": 198,
         "turnovers": 2,
         "penalties": 6,
         "penaltyYards": 30,
@@ -8650,9 +8650,9 @@
       "opponent": "NYJ",
       "own": {
         "points": 12,
-        "passYards": 101,
+        "passYards": 102,
         "rushYards": 96,
-        "yards": 197,
+        "yards": 198,
         "turnovers": 2,
         "penalties": 6,
         "penaltyYards": 30,
