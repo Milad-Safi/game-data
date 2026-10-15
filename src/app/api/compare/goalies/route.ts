@@ -158,7 +158,7 @@ export async function GET(req: Request) {
 
     try {
         if (filterBy === "season") {
-            const clubStats = await fetchClubStats(team, { revalidate: 300 });
+            const clubStats = await fetchClubStats(team, { cache: "no-store" });
 
             const values: GoalieCompareValue[] = (clubStats?.goalies ?? [])
                 .map((row: any) => ({

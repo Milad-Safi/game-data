@@ -104,6 +104,7 @@ export const filterLabelMap: Record<CompareFilter, string> = {
 };
 
 const matchupGroups: MatchupGroup[] = [
+    { title: "Top 3 in points", rows: ["Leader 1", "Leader 2", "Leader 3"] },
     {
         title: "Top 3 in goals",
         rows: ["Leader 1", "Leader 2", "Leader 3"],

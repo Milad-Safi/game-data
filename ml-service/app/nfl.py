@@ -70,13 +70,13 @@ def summary(team: str, season: int | None = Query(None, ge=1999, le=2100)):
 
 
 @router.get("/td-predictor/games")
-def td_games(week: int | None = Query(None, ge=1, le=18), team: str | None = None):
-    """Picks for EVERY upcoming current-season regular-season game; optionally filter week/team.
+def td_games(team: str | None = None):
+    """Picks for every remaining game in the upcoming NFL week; optionally filter team.
 
     No probabilities or numerical ratings. Missing evidence produces partial/empty picks.
     Each result contains its expected QBs, selected players, supporting stats and reasons.
     """
-    return response(nfl_td.predict(week=week, team=team))
+    return response(nfl_td.predict(team=team))
 
 
 @router.get("/td-predictor/games/{game_id}")

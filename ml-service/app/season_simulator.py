@@ -1,11 +1,13 @@
 """Regular-season points and playoff qualification from frozen observed Elo."""
 from __future__ import annotations
 
-from collections import Counter, defaultdict
+from collections import Counter, OrderedDict, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import date, datetime, timezone
 from hashlib import sha256
+import json
 from threading import Lock
+from time import monotonic
 
 import numpy as np
 from fastapi import APIRouter, HTTPException, Query
@@ -20,11 +22,16 @@ DEFAULT_SIMULATIONS = 10_000
 DEFAULT_SEED = 2026
 INPUT_CACHE_SECONDS = 60
 OT_CACHE_SECONDS = 86400
+RESULT_CACHE_SECONDS = 8 * 60 * 60
+RESULT_CACHE_MAX_ENTRIES = 32
 COMPLETED_STATES = {"FINAL", "OFF"}
 REMAINING_STATES = {"FUT", "PRE", "LIVE", "CRIT"}
 router = APIRouter(prefix="/v1/simulator", tags=["Season projections"])
 _input_lock = Lock()
 _ot_lock = Lock()
+_input_cache: tuple[str, float, dict] | None = None
+_result_lock = Lock()
+_result_cache: OrderedDict[str, tuple[float, dict]] = OrderedDict()
 
 
 class SimulationDataError(ValueError):
@@ -87,7 +94,7 @@ def _game(raw: dict, season_id: int) -> dict | None:
 
 
 def parse_standings(payload: dict) -> tuple[dict, list[str]]:
-    # The single official standings response supplies season, identities and points.
+    # Official standings supply identities/alignment only; DB games supply totals.
     # This endpoint supports only the explicit roster-prior season; no calendar fallback.
     teams = elo.active_teams(SEASON_ID, payload)
     elo.roster_mean(teams)
@@ -96,22 +103,11 @@ def parse_standings(payload: dict) -> tuple[dict, list[str]]:
         if raw.get("gameTypeId") != 2:
             raise SimulationDataError("Standings must be regular season")
         team = _abbrev(raw.get("teamAbbrev"))
-        row = {key: _integer(raw.get(field), field) for key, field in (
-            ("games_played", "gamesPlayed"), ("wins", "wins"), ("losses", "losses"),
-            ("ot_losses", "otLosses"), ("points", "points"),
-            ("rw", "regulationWins"), ("row", "regulationPlusOtWins"))}
-        if row["games_played"] != row["wins"] + row["losses"] + row["ot_losses"]:
-            raise SimulationDataError(f"Inconsistent official games played for {team}")
-        if row["points"] != 2 * row["wins"] + row["ot_losses"]:
-            raise SimulationDataError(f"Inconsistent official points for {team}")
-        if not row["rw"] <= row["row"] <= row["wins"]:
-            raise SimulationDataError(f"Inconsistent official RW/ROW/wins for {team}")
+        row = dict.fromkeys(("games_played", "wins", "losses", "ot_losses", "points", "rw", "row"), 0)
         row.update(conference=raw.get("conferenceName"), division=raw.get("divisionName"))
         standings[team] = row
         if raw.get("date"):
             dates.add(date.fromisoformat(raw["date"]).isoformat())
-    if len(dates) > 1:
-        raise SimulationDataError("Official standings rows have different snapshot dates")
     playoff_groups(sorted(standings), standings)
     return standings, sorted(dates)
 
@@ -135,8 +131,21 @@ def load_current_schedule(teams: list[str]) -> list[dict]:
                 raise SimulationDataError("A cancelled game needs schedule reconciliation before projecting")
             if game["game_state"] not in COMPLETED_STATES | REMAINING_STATES:
                 raise SimulationDataError(f"Unknown state for scheduled game {gid}")
-            if gid in games and games[gid] != game:
-                raise SimulationDataError(f"Club schedules disagree for game {gid}; retry after NHL updates")
+            game["_ending_type"] = (
+                (raw.get("gameOutcome") or {}).get("lastPeriodType")
+                or (raw.get("periodDescriptor") or {}).get("periodType")
+            ) if game["game_state"] in COMPLETED_STATES else None
+            if gid in games:
+                previous = games[gid]
+                # Clubs can update a game's live/final status at different times.
+                # Fixture identity must still agree; DB membership decides completion.
+                stable = set(game) - {"game_state", "_ending_type"}
+                if any(previous[k] != game[k] for k in stable):
+                    raise SimulationDataError(f"Club schedules disagree for game {gid}; retry after NHL updates")
+                endings = {v for v in (previous["_ending_type"], game["_ending_type"]) if v in {"REG", "OT", "SO"}}
+                game["_ending_type"] = next(iter(endings)) if len(endings) == 1 else None
+                state_order = ["FUT", "PRE", "LIVE", "CRIT", "FINAL", "OFF"]
+                game["game_state"] = max((previous["game_state"], game["game_state"]), key=state_order.index)
             games[gid] = game
             sources[gid].add(team)
         if not count:
@@ -234,27 +243,74 @@ def historical_ot_rate() -> dict:
                       OT_CACHE_SECONDS, estimate_ot_rate)
 
 
-def build_inputs() -> dict:
+def _fingerprint(value) -> str:
+    return sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), default=str).encode()).hexdigest()
+
+
+def _model_settings() -> dict:
+    return {"season": SEASON_ID, "initial_elo": elo.INITIAL_ELO, "k": elo.K_FACTOR,
+            "home_advantage": elo.HOME_ADVANTAGE_ELO, "roster_priors": elo.ROSTER_PRIORS,
+            "roster_scale": elo.ROSTER_ELO_PER_POINT, "turnover_penalties": elo.TURNOVER_PENALTIES,
+            "goal_margin_multipliers": elo.GOAL_MARGIN_MULTIPLIERS,
+            "ot_so_update_multiplier": elo.OT_SO_UPDATE_MULTIPLIER,
+            "turnover_fade": elo.TURNOVER_FADE_GAMES}
+
+
+def _completed_ending(game: dict, scheduled: dict) -> str:
+    ending = scheduled.get("_ending_type")
+    if ending in {"REG", "OT", "SO"}:
+        return ending
+    # A stale schedule can lag a DB game. Verify its final outcome via boxscore;
+    # never infer OT/SO from scores or silently assume a regulation loss.
+    box = get_json(f"{API}/gamecenter/{game['game_id']}/boxscore")
+    official = _game(box, SEASON_ID)
+    if (official is None or official["game_state"] not in COMPLETED_STATES
+            or any(official[k] != scheduled[k] for k in ("game_id", "home", "away", "date"))):
+        raise SimulationDataError(f"Cannot verify final outcome for DB game {game['game_id']}")
+    ending = (box.get("gameOutcome") or {}).get("lastPeriodType") or (box.get("periodDescriptor") or {}).get("periodType")
+    if ending not in {"REG", "OT", "SO"}:
+        raise SimulationDataError(f"Missing final outcome for DB game {game['game_id']}")
+    return ending
+
+
+def build_inputs(db_rows: list[dict] | None = None) -> dict:
     payload = get_json(f"{API}/standings/now")
     fetched_at = datetime.now(timezone.utc)
-    standings, snapshot_dates = parse_standings(payload)
+    standings, _ = parse_standings(payload)
     teams = sorted(standings)
     full_schedule = load_current_schedule(teams)
-    completed = [g for g in full_schedule if g["game_state"] in COMPLETED_STATES]
-    remaining = [g for g in full_schedule if g["game_state"] not in COMPLETED_STATES]
-    real_games, warnings = elo.validated_games(elo.load_history(SEASON_ID), fetched_at.date())
-    # Elo may lag official results while ingestion catches up. It supplies matchup
-    # strength only; official standings supply points, tiebreakers and turnover GP.
-    if {g["game_id"] for g in real_games} != {g["game_id"] for g in completed}:
-        warnings.append({"action": "approximation", "reason": "Using latest available database Elo; its processed games differ from the completed official schedule"})
+    real_games, warnings = elo.validated_games(
+        elo.load_history(SEASON_ID) if db_rows is None else db_rows, fetched_at.date())
+    by_id = {g["game_id"]: g for g in full_schedule}
+    completed_ids = {g["game_id"] for g in real_games}
+    for game in real_games:
+        scheduled = by_id.get(game["game_id"])
+        if (scheduled is None or scheduled["home"] != game["home"]
+                or scheduled["away"] != game["away"] or scheduled["date"] != game["game_date"].isoformat()):
+            raise SimulationDataError(f"DB game does not match scheduled fixture {game['game_id']}")
+        ending = _completed_ending(game, scheduled)
+        game["ending_type"] = ending  # Reuse verified endings for actual Elo updates.
+        winner, loser = (game["home"], game["away"]) if game["home_score"] > game["away_score"] else (game["away"], game["home"])
+        for team in (winner, loser):
+            standings[team]["games_played"] += 1
+        standings[winner]["points"] += 2
+        standings[winner]["wins"] += 1
+        standings[winner]["rw"] += ending == "REG"
+        standings[winner]["row"] += ending != "SO"
+        standings[loser]["points"] += ending != "REG"
+        standings[loser]["ot_losses"] += ending != "REG"
+        standings[loser]["losses"] += ending == "REG"
+    # Ignore API-only results, not their fixtures: they are still unplayed from
+    # the DB snapshot's perspective and must remain in the full season projection.
+    remaining = [{k: v for k, v in g.items() if not k.startswith("_")}
+                 for g in full_schedule if g["game_id"] not in completed_ids]
+    pending = sum(g["game_state"] in COMPLETED_STATES for g in remaining)
+    if pending:
+        warnings.append({"action": "approximation", "reason": f"{pending} NHL-final games await DB ingestion; their results are ignored and their fixtures are simulated"})
     ratings = elo.calculate_ratings(real_games, teams, SEASON_ID)
+    warnings.extend(ratings.get("elo_update_warnings", []))
     elo_rows = {r["team"]: r for r in ratings["teams"]}
-    completed_counts = Counter(t for g in completed for t in (g["home"], g["away"]))
     full_counts = Counter(t for g in full_schedule for t in (g["home"], g["away"]))
-    for team in teams:
-        gp = standings[team]["games_played"]
-        if gp != completed_counts[team]:
-            raise SimulationDataError(f"Official standings and schedule games played disagree for {team}; retry after updates")
     live = sum(g["game_state"] in {"LIVE", "CRIT"} for g in remaining)
     if live:
         warnings.append({"action": "approximation", "reason": f"{live} in-progress games are simulated from pregame strengths; live scores are not modeled"})
@@ -263,8 +319,8 @@ def build_inputs() -> dict:
         warnings.append({"action": "assumption", "reason": f"{unknown_neutral} games lack neutral-site flags; treated as non-neutral"})
     return {
         "season_id": SEASON_ID, "standings_fetched_at": fetched_at.isoformat(),
-        "standings_snapshot_dates": snapshot_dates,
-        "standings_snapshot_time_utc": payload.get("standingsDateTimeUtc"),
+        "standings_snapshot_dates": [real_games[-1]["game_date"].isoformat()] if real_games else [],
+        "standings_snapshot_time_utc": None,
         "standings": standings,
         "elo": elo_rows, "remaining_schedule": remaining,
         "full_schedule_games": len(full_schedule), "schedule_lengths": dict(full_counts),
@@ -274,9 +330,18 @@ def build_inputs() -> dict:
     }
 
 
-def current_inputs() -> dict:
+def current_inputs(db_rows: list[dict] | None = None, db_state: str | None = None) -> dict:
+    global _input_cache
+    rows = elo.load_history(SEASON_ID) if db_rows is None else db_rows
+    state = db_state or _fingerprint(sorted(rows, key=lambda r: (r["game_id"], r["team"])))
+    key = f"{state}:{_fingerprint(_model_settings())}"
     with _input_lock:
-        return cached(f"season_playoff_inputs_v2:{SEASON_ID}", INPUT_CACHE_SECONDS, build_inputs)
+        if _input_cache is not None and _input_cache[0] == key and _input_cache[1] > monotonic():
+            return _input_cache[2]
+        inputs = build_inputs(rows)
+        # Retain only the latest input snapshot; old DB-state keys must not accumulate.
+        _input_cache = (key, monotonic() + INPUT_CACHE_SECONDS, inputs)
+        return inputs
 
 
 def playoff_groups(teams: list[str], standings: dict) -> tuple[dict, dict]:
@@ -519,9 +584,28 @@ def simulate_points(inputs: dict, ot: dict, simulations: int = DEFAULT_SIMULATIO
 def points_endpoint(simulations: int = Query(DEFAULT_SIMULATIONS, ge=1, le=100_000),
                     seed: int = Query(DEFAULT_SEED, ge=0, le=2**32 - 1)):
     try:
-        # Historical data can take longer on a cold start; fetch it before current inputs.
-        ot = historical_ot_rate()
-        return simulate_points(current_inputs(), ot, simulations, seed)
+        # The DB is checked on every request; feed snapshots stay fixed for the
+        # result's eight-hour lifetime. DB corrections/backfills invalidate too.
+        rows = elo.load_history(SEASON_ID)
+        db_state = _fingerprint(sorted(rows, key=lambda r: (r["game_id"], r["team"])))
+        key = _fingerprint({
+            "db_state": db_state, "simulations": simulations, "seed": seed,
+            "settings": _model_settings(), "history_seasons": OT_HISTORY_SEASONS,
+        })
+        with _result_lock:
+            now = monotonic()
+            for expired in [k for k, (expiry, _) in _result_cache.items() if expiry <= now]:
+                del _result_cache[expired]
+            if key in _result_cache:
+                _result_cache.move_to_end(key)
+                return _result_cache[key][1]
+            ot = historical_ot_rate()
+            inputs = current_inputs(rows, db_state)
+            result = simulate_points(inputs, ot, simulations, seed)
+            _result_cache[key] = (monotonic() + RESULT_CACHE_SECONDS, result)
+            while len(_result_cache) > RESULT_CACHE_MAX_ENTRIES:
+                _result_cache.popitem(last=False)
+            return result
     except SimulationDataError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except Exception as exc:

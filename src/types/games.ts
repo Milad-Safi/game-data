@@ -10,17 +10,17 @@ export type HistoricalGameCard = {
         abbrev: string;
         label: string;
         logoSrc: string;
-        score: number;
+        score: number | null;
     };
     opponent: {
         abbrev: string;
         label: string;
         logoSrc: string;
-        score: number;
+        score: number | null;
     };
     venue: HistoricalVenue;
-    decision: HistoricalDecision;
-    searchedTeamWon: boolean;
+    decision: HistoricalDecision | null;
+    searchedTeamWon: boolean | null;
 };
 
 export type HistoricalGamesSearchFilters = {
@@ -149,6 +149,7 @@ export type HistoricalGameDetailResponse = {
             goalies: HistoricalGameGoalieRow[];
         };
     };
+    powerPlays: { home: string | null; away: string | null };
     chartEvents: HistoricalGameShotEvent[];
     scoringEvents: HistoricalGameGoalEvent[];
     teamStats: Record<

@@ -14,7 +14,6 @@ from sklearn.utils.extmath import softmax
 from .trend_db import (
     get_last_n,
     get_team_baseline_asof_with_fallback,
-    get_league_baseline_asof,
 )
 from .trend_features import window_features
 
@@ -50,7 +49,7 @@ def load_trend_model(path: str = "app/models/trend_model.json") -> Dict[str, Any
 def predict_team_trend(
     team: str,
     as_of: str,
-    n: int = 10,
+    n: int = 5,
     model_path: str = "app/models/trend_model.json",
 ) -> Dict[str, Any]:
     # Predicts a trend label for a team "as of" a specific date
@@ -60,11 +59,6 @@ def predict_team_trend(
 
 
     rows = get_last_n(team, as_of, n=n)
-
-    as_of_date = as_of
-
-    # League baseline is used when opponent baselines are unstable early in season
-    league_baseline = get_league_baseline_asof(as_of_date)
 
     # window_features needs an opponent baseline provider for Option B features
 
@@ -79,7 +73,6 @@ def predict_team_trend(
     feats, meta = window_features(
         rows,
         opp_baseline_provider=opp_provider,
-        league_baseline=league_baseline,
     )
 
     # If there are not enough games, return a "no prediction" payload

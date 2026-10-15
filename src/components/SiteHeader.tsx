@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { MouseEvent, useCallback, useMemo } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import type { SiteHeaderLink } from "@/lib/siteNav";
 
 type SiteHeaderProps = {
@@ -22,11 +22,10 @@ export default function SiteHeader({
     navLinks,
 }: SiteHeaderProps) {
     const pathname = usePathname();
-    const router = useRouter();
     const isNFL = pathname === "/nfl" || pathname.startsWith("/nfl/");
 
-    const leftLinks = useMemo(() => navLinks.slice(0, 2), [navLinks]);
-    const rightLinks = useMemo(() => navLinks.slice(2), [navLinks]);
+    const leftLinks = useMemo(() => navLinks.slice(0, isNFL ? 1 : 2), [navLinks, isNFL]);
+    const rightLinks = useMemo(() => navLinks.slice(isNFL ? 1 : 2), [navLinks, isNFL]);
 
     const handleWordmarkClick = useCallback(
         (event: MouseEvent<HTMLAnchorElement>) => {
@@ -54,16 +53,23 @@ export default function SiteHeader({
 
     return (
         <header className="siteHeader">
+                    <details className="siteSportSelector"
+                        onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) event.currentTarget.open = false; }}
+                        onKeyDown={event => { if (event.key === "Escape") { event.currentTarget.open = false; event.currentTarget.querySelector("summary")?.focus({ preventScroll: true }); } }}>
+                        <summary aria-label={`Switch sport, current sport ${isNFL ? "NFL" : "NHL"}`}>{isNFL ? "NFL" : "NHL"}<span aria-hidden="true">⌄</span></summary>
+                        <div className="siteSportMenu">
+                            {[{ name: "NHL", href: "/" }, { name: "NFL", href: "/nfl" }].map(sport =>
+                                <Link key={sport.name} href={sport.href} scroll={false}
+                                    aria-current={(isNFL ? "NFL" : "NHL") === sport.name ? "true" : undefined}
+                                    onClick={event => { event.currentTarget.closest("details")?.removeAttribute("open"); }}>
+                                    {sport.name}
+                                </Link>)}
+                        </div>
+                    </details>
+
             <div className="siteHeaderInner">
                 {/* Left Group */}
                 <nav className="siteNav" aria-label="Primary Left">
-                    <label className="siteSportSelector">
-                        <span className="siteSportLabel">Sport</span>
-                        <select aria-label="Select sport" value={isNFL ? "NFL" : "NHL"} onChange={(event) => router.push(event.target.value === "NFL" ? "/nfl" : "/")}>
-                            <option value="NHL">NHL</option>
-                            <option value="NFL">NFL</option>
-                        </select>
-                    </label>
                     {leftLinks.map(renderLink)}
                 </nav>
 

@@ -4,6 +4,7 @@ import {
     type CompareFilter,
     buildPlayerName,
     fetchClubStats,
+    fetchBoxscoreWithRetry,
     fetchRecentRegularSeasonGameIds,
     fetchSequentialBoxscores,
     isCompareFilter,
@@ -56,6 +57,35 @@ type SkaterComparePayload = {
         hits: LeaderValue | null;
     };
 };
+
+function shotsAllowed(boxes: any[], team: string) {
+    let forwards = 0, defenders = 0;
+    for (const box of boxes) {
+        const home = box?.homeTeam?.abbrev === team;
+        if ((!home && box?.awayTeam?.abbrev !== team) || !["OFF", "FINAL"].includes(box?.gameState))
+            throw new Error("Positional SOG requires completed matching games");
+        const side = box?.playerByGameStats?.[home ? "awayTeam" : "homeTeam"];
+        for (const [group, rows] of [["F", side?.forwards], ["D", side?.defense]] as const) {
+            if (!Array.isArray(rows)) throw new Error("Missing opponent positional shots");
+            for (const row of rows) {
+                const shots = toNum(row.sog ?? row.shots);
+                if (shots == null || shots < 0) throw new Error("Missing opponent shots");
+                if (group === "F") forwards += shots; else defenders += shots;
+            }
+        }
+    }
+    return { games: boxes.length, forwards: boxes.length ? forwards / boxes.length : null,
+        defenders: boxes.length ? defenders / boxes.length : null };
+}
+
+// Bound concurrency for a full season; reuse the existing cached boxscore loader.
+async function positionalBoxes(ids: number[]) {
+    const unique = [...new Set(ids)];
+    const boxes: any[] = [];
+    for (let i = 0; i < unique.length; i += 4)
+        boxes.push(...await Promise.all(unique.slice(i, i + 4).map(id => fetchBoxscoreWithRetry(id))));
+    return boxes;
+}
 
 function normalizePositionGroup(value: string | null): PositionGroup {
     if (value === "forwards") return "forwards";
@@ -259,7 +289,9 @@ export async function GET(req: Request) {
                 });
             }
 
-            return jsonNoStore(buildPayload(team, filterBy, positionGroup, 0, agg));
+            const ids = await fetchRecentRegularSeasonGameIds(team, null, asOf, isISODate(asOfParam));
+            const boxes = await positionalBoxes(ids);
+            return jsonNoStore({ ...buildPayload(team, filterBy, positionGroup, 0, agg), shotsAllowed: shotsAllowed(boxes, team) });
         }
 
         const window = parseCompareWindow(filterBy);
@@ -278,7 +310,7 @@ export async function GET(req: Request) {
         }
 
         return jsonNoStore(
-            buildPayload(team, filterBy, positionGroup, gameIds.length, agg)
+            { ...buildPayload(team, filterBy, positionGroup, gameIds.length, agg), shotsAllowed: shotsAllowed(boxes, team) }
         );
     } catch (error) {
         console.error("/api/compare/skaters failed", error);

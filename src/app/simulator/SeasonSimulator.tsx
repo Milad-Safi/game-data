@@ -89,8 +89,8 @@ export default function SeasonSimulator() {
         || (filter === "West" && team.conference === "Western")
         )
         .sort((a, b) => (ascending ? a[sort] - b[sort] : b[sort] - a[sort]) || a.team.localeCompare(b.team));
-    const timestamp = data?.metadata.standings_snapshot_time_utc ?? data?.metadata.standings_fetched_at;
-    const updated = timestamp && Number.isFinite(Date.parse(timestamp)) ? new Date(timestamp) : null;
+    const timestamp = data?.metadata.last_real_game_processed_by_elo?.date;
+    const updated = timestamp && Number.isFinite(Date.parse(timestamp)) ? new Date(`${timestamp.slice(0, 10)}T12:00:00Z`) : null;
     const season = String(data?.metadata.season_id ?? "");
     const projectedOrder = [...teams].sort((a, b) => b.mean_projected_final_points - a.mean_projected_final_points || a.team.localeCompare(b.team));
     const divisions = filter === "East" ? ["Atlantic", "Metropolitan"] : ["Central", "Pacific"];
@@ -114,7 +114,7 @@ export default function SeasonSimulator() {
             {data && <div className="simulatorMetadata">
                 <span className="simulatorSeason">{season.slice(0, 4)}–{season.slice(4)} Season</span>
                 <span>Average results over {data.metadata.simulations.toLocaleString("en")} simulations</span>
-                {updated && <span className="simulatorAsOf">As of <time dateTime={updated.toISOString()}>{updated.toLocaleString("en-CA", { dateStyle: "medium", timeStyle: "short" })}</time></span>}
+                {updated && <span className="simulatorAsOf">Results through <time dateTime={updated.toISOString()}>{updated.toLocaleString("en-CA", { dateStyle: "medium", timeZone: "UTC" })}</time></span>}
             </div>}
         </header>
         {!data && !error && <p className="simulatorState" role="status">Loading season simulations…</p>}
@@ -167,13 +167,5 @@ export default function SeasonSimulator() {
             </table>
             </section>)}
         </>}
-        <details className="simulatorMethodology">
-            <summary>Methodology</summary>
-            <p>The simulator runs <strong>10,000 Monte Carlo simulations</strong> to estimate NHL regular-season point totals and playoff probabilities.</p>
-            <p>Each team starts with an <strong>Elo rating calibrated from manually assessed 2026–27 roster strength</strong>. Ratings update as regular-season results arrive, while temporary roster-turnover adjustments decay over the first 20 games.</p>
-            <p>Matchup probabilities combine current Elo, home-ice advantage, and remaining turnover adjustments. Official NHL standings and schedules define the starting state. Regulation, overtime, and shootout outcomes are sampled using verified historical rates from 2023–24 through 2025–26, independently of matchup strength and the winner. Underlying Elo remains fixed within each simulation.</p>
-            <p>Playoff qualification follows the NHL’s division and wild-card format. Standings are ranked by points, regulation wins, regulation plus overtime wins (ROW), and total wins, with seeded random resolution for remaining exact ties. Top 3 includes division winners. Wild cards exclude division qualifiers.</p>
-            <p><strong>P10–P90</strong> represents the middle 80% of simulated point totals. Projections depend on the model’s assumptions and manual roster assessments. In-progress games are treated as unplayed; a fixed random seed of <strong>2026</strong> makes results reproducible.</p>
-        </details>
     </main>;
 }

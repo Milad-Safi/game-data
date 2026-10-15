@@ -412,6 +412,10 @@ def compute_special_teams_from_pbp(pbp: dict) -> dict:
 
             end_earliest_releasable(penalized)
 
+    # Keep fallback-derived opportunities at least as large as goals.
+    pp_opps_home = max(pp_opps_home, pp_goals_home)
+    pp_opps_away = max(pp_opps_away, pp_goals_away)
+
     # Translate PP stats into PK stats
     home_pk_ga = pp_goals_away
     away_pk_ga = pp_goals_home

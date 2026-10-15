@@ -5,6 +5,9 @@ from __future__ import annotations
 # Also computes rolling opponent baselines and league fallback baselines
 # Uses simple in-process caches to avoid re-querying the same baselines
 
+from time import monotonic
+from threading import Lock
+
 from typing import Any, Dict, List, Optional, Tuple
 
 from sqlalchemy import text
@@ -136,11 +139,30 @@ def get_last_n(team: str, as_of: str, n: int) -> List[Dict[str, Any]]:
 # In-process caching avoids repeating identical queries during training
 # -------------------------------------------------------------------
 
-# Cache key is (team, as_of, m)
-_BASELINE_CACHE: Dict[Tuple[str, str, int], Dict[str, Any]] = {}
+# Expire baselines so nightly ingestion is reflected without a restart.
+BASELINE_CACHE_TTL_SECONDS = 15 * 60
+_BASELINE_CACHE: Dict[Tuple[str, str, int], Tuple[float, Dict[str, Any]]] = {}
+_LEAGUE_CACHE: Dict[str, Tuple[float, Dict[str, Any]]] = {}
+_CACHE_LOCK = Lock()
 
-# League cache key is as_of string
-_LEAGUE_CACHE: Dict[str, Dict[str, Any]] = {}
+
+def _cached_baseline(cache, key):
+    with _CACHE_LOCK:
+        entry = cache.get(key)
+        if entry is not None:
+            if monotonic() < entry[0]:
+                return entry[1]
+            del cache[key]
+    return None
+
+
+def _cache_baseline(cache, key, value):
+    with _CACHE_LOCK:
+        now = monotonic()
+        # Also discard expired keys that may never be requested again.
+        for old_key in [k for k, (expiry, _) in cache.items() if expiry <= now]:
+            del cache[old_key]
+        cache[key] = (now + BASELINE_CACHE_TTL_SECONDS, value)
 
 
 def _pct_or_none(numer: float, denom: float) -> Optional[float]:
@@ -206,8 +228,9 @@ def get_team_baseline_asof(team: str, as_of: str, m: int) -> Dict[str, Any]:
     Strictly-before prevents information leakage into features
     """
     key = (team, as_of, m)
-    if key in _BASELINE_CACHE:
-        return _BASELINE_CACHE[key]
+    cached = _cached_baseline(_BASELINE_CACHE, key)
+    if cached is not None:
+        return cached
 
     # Pull only the columns needed for baseline aggregation
     q = text(
@@ -234,7 +257,7 @@ def get_team_baseline_asof(team: str, as_of: str, m: int) -> Dict[str, Any]:
         rows = conn.execute(q, {"team": team, "as_of": as_of, "m": m}).mappings().all()
 
     baseline = _aggregate_baseline([dict(r) for r in rows])
-    _BASELINE_CACHE[key] = baseline
+    _cache_baseline(_BASELINE_CACHE, key, baseline)
     return baseline
 
 
@@ -244,8 +267,9 @@ def get_league_baseline_asof(as_of: str) -> Dict[str, Any]:
     Uses all regular-season rows strictly BEFORE as_of
     Returned numbers represent league average performance in the DB
     """
-    if as_of in _LEAGUE_CACHE:
-        return _LEAGUE_CACHE[as_of]
+    cached = _cached_baseline(_LEAGUE_CACHE, as_of)
+    if cached is not None:
+        return cached
 
     # AVG for per-row averages like goals_for
     # SUM for PP/PK components so the rate is computed over total opps, not avg of rates
@@ -301,7 +325,7 @@ def get_league_baseline_asof(as_of: str) -> Dict[str, Any]:
             "pk_pct": pk_pct,
         }
 
-    _LEAGUE_CACHE[as_of] = league
+    _cache_baseline(_LEAGUE_CACHE, as_of, league)
     return league
 
 
@@ -332,5 +356,6 @@ def get_team_baseline_asof_with_fallback(
 
 def clear_baseline_caches() -> None:
     # Manual cache reset for development or tests
-    _BASELINE_CACHE.clear()
-    _LEAGUE_CACHE.clear()
+    with _CACHE_LOCK:
+        _BASELINE_CACHE.clear()
+        _LEAGUE_CACHE.clear()

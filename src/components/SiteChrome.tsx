@@ -17,7 +17,7 @@ export default function SiteChrome({ children }: SiteChromeProps) {
 
     return (
         <>
-            <SiteHeader isHome={isHome} navLinks={isNFL ? [{ label: "Compare", href: "/nfl/compare" }] : SITE_HEADER_LINKS} />
+            <SiteHeader isHome={isHome} navLinks={isNFL ? [{ label: "Compare", href: "/nfl/compare" }, { label: "TD Predictor", href: "/nfl/td-predictor" }] : SITE_HEADER_LINKS} />
             {children}
             <SiteFooter />
         </>

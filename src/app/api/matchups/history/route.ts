@@ -24,6 +24,7 @@ type Skater = {
   sog?: number;
   shotAttempts?: number;
   shotsAttempted?: number;
+  shotAttemptsFor?: number;
   blockedShots?: number;
   blocks?: number;
 };
@@ -132,6 +133,7 @@ function num(x: unknown) {
 
 function firstFinite(...values: unknown[]) {
   for (const value of values) {
+    if (value == null || (typeof value === "string" && !value.trim())) continue;
     const n = Number(value);
     if (Number.isFinite(n)) return n;
   }
@@ -359,8 +361,13 @@ function addGoalieAgg(map: Map<number, GoalieAgg>, g: Goalie, allowedIds: Set<nu
 function addShotAttemptsFromPbp(
   plays: PlayByPlayEvent[],
   allowedSkaterIds: Set<number>,
-  skaterAgg: Map<number, SkaterAgg>
+  skaterAgg: Map<number, SkaterAgg>,
+  boxscoreSkaters: Skater[]
 ) {
+  const supplied = new Set(boxscoreSkaters.filter(p =>
+    [p.shotAttempts, p.shotsAttempted, p.shotAttemptsFor].some(v =>
+      v != null && String(v).trim() !== "" && Number.isFinite(Number(v))))
+    .map(p => num(p.playerId)));
   for (const play of plays) {
     const type = (play.typeDescKey ?? "").toLowerCase();
 
@@ -378,7 +385,7 @@ function addShotAttemptsFromPbp(
         ? play.details?.scoringPlayerId
         : play.details?.shootingPlayerId
     );
-    if (!shooterId || !allowedSkaterIds.has(shooterId)) continue;
+    if (!shooterId || !allowedSkaterIds.has(shooterId) || supplied.has(shooterId)) continue;
 
     const row = skaterAgg.get(shooterId);
     if (!row) continue;
@@ -414,7 +421,7 @@ function topSkaterBy(
 
 function topValueLeaders(
   list: SkaterAgg[],
-  key: keyof Pick<SkaterAgg, "goals" | "assists" | "sog" | "shotAttempts" | "blocks">,
+  key: keyof Pick<SkaterAgg, "goals" | "assists" | "points" | "sog" | "shotAttempts" | "blocks">,
   count: number
 ): ValueLeader[] {
   return [...list]
@@ -495,6 +502,7 @@ function buildEmptyResponse(
         topSog: null,
         goalsLeaders: [],
         assistLeaders: [],
+        pointsLeaders: [],
         sogLeaders: [],
         shotAttemptLeaders: [],
         blockLeaders: [],
@@ -506,6 +514,7 @@ function buildEmptyResponse(
         topSog: null,
         goalsLeaders: [],
         assistLeaders: [],
+        pointsLeaders: [],
         sogLeaders: [],
         shotAttemptLeaders: [],
         blockLeaders: [],
@@ -653,8 +662,8 @@ export async function GET(req: Request) {
       for (const g of teamGoalies) addGoalieAgg(teamGoaliesAgg, g, teamRoster.goalies);
       for (const g of oppGoalies) addGoalieAgg(oppGoaliesAgg, g, oppRoster.goalies);
 
-      addShotAttemptsFromPbp(pbp.plays ?? [], teamRoster.skaters, teamSkatersAgg);
-      addShotAttemptsFromPbp(pbp.plays ?? [], oppRoster.skaters, oppSkatersAgg);
+      addShotAttemptsFromPbp(pbp.plays ?? [], teamRoster.skaters, teamSkatersAgg, teamSkaters);
+      addShotAttemptsFromPbp(pbp.plays ?? [], oppRoster.skaters, oppSkatersAgg, oppSkaters);
 
       const homeScore = num((box as any)?.homeTeam?.score);
       const awayScore = num((box as any)?.awayTeam?.score);
@@ -740,6 +749,7 @@ export async function GET(req: Request) {
           topSog: toHistoryLeader(topSogTeam),
           goalsLeaders: topValueLeaders(teamSkaterList, "goals", 3),
           assistLeaders: topValueLeaders(teamSkaterList, "assists", 3),
+          pointsLeaders: topValueLeaders(teamSkaterList, "points", 3),
           sogLeaders: topValueLeaders(teamSkaterList, "sog", 3),
           shotAttemptLeaders: topValueLeaders(teamSkaterList, "shotAttempts", 2),
           blockLeaders: topValueLeaders(teamSkaterList, "blocks", 2),
@@ -752,6 +762,7 @@ export async function GET(req: Request) {
           topSog: toHistoryLeader(topSogOpp),
           goalsLeaders: topValueLeaders(oppSkaterList, "goals", 3),
           assistLeaders: topValueLeaders(oppSkaterList, "assists", 3),
+          pointsLeaders: topValueLeaders(oppSkaterList, "points", 3),
           sogLeaders: topValueLeaders(oppSkaterList, "sog", 3),
           shotAttemptLeaders: topValueLeaders(oppSkaterList, "shotAttempts", 2),
           blockLeaders: topValueLeaders(oppSkaterList, "blocks", 2),

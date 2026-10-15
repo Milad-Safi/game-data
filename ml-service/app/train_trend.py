@@ -20,7 +20,6 @@ from .trend_db import (
     get_games,
     list_teams,
     get_team_baseline_asof_with_fallback,
-    get_league_baseline_asof,
 )
 from .trend_features import window_features
 
@@ -37,6 +36,7 @@ class TrendDataset:
     y: List[int]
     feature_names: List[str]
     meta: Dict[str, Any]
+    windows: List[Dict[str, str]]
 
 
 # Train a multiclass softmax logistic regression model
@@ -48,6 +48,8 @@ def _train_softmax_lr(
     lr: float = 0.05,
     l2: float = 0.1,
     seed: int = 42,
+    X_eval: Optional[List[List[float]]] = None,
+    y_eval: Optional[List[int]] = None,
 ) -> Dict[str, Any]:
     """
     Multiclass softmax logistic regression trained via scikit-learn
@@ -90,7 +92,16 @@ def _train_softmax_lr(
     acc = float((pred == y).mean())
     nll = float(log_loss(y, P, labels=[0, 1, 2]))
 
+    evaluation = {}
+    if X_eval is not None and y_eval is not None:
+        X_holdout = scaler.transform(X_eval)
+        evaluation = {
+            "accuracy": float((clf.predict(X_holdout) == y_eval).mean()),
+            "log_loss": float(log_loss(y_eval, clf.predict_proba(X_holdout), labels=[0, 1, 2])),
+        }
+
     return {
+        "evaluation": evaluation,
         "W": W,
         "b": b,
         "mu": mu,
@@ -131,7 +142,8 @@ def window_score_from_features(feats: Dict[str, float]) -> float:
 
     pp = float(feats.get("pp_pct", 0.0))
     pk = float(feats.get("pk_pct", 0.0))
-    st_term = _clamp(((pp - 20.0) / 15.0) + ((pk - 80.0) / 15.0), -2.0, 2.0)
+    # Features are decimal rates; 0.15 represents a 15-percentage-point change.
+    st_term = _clamp(((pp - 0.20) / 0.15) + ((pk - 0.80) / 0.15), -2.0, 2.0)
 
     shots_extreme = _shots_extreme_term(shot_diff_pg)
 
@@ -148,29 +160,28 @@ def _build_windows_for_team(
     feature_names: Optional[List[str]] = None,
     *,
     opp_baseline_provider,
-    league_baseline,
-) -> Tuple[List[List[float]], List[int], List[str]]:
+) -> Tuple[List[List[float]], List[int], List[str], List[Dict[str, str]]]:
     X_list: List[List[float]] = []
     y_list: List[int] = []
     names: List[str] = feature_names or []
 
+    windows: List[Dict[str, str]] = []
     total = len(rows)
 
     # Slide a window across the season
-    for i in range(n, total - k):
+    for i in range(n, total - k + 1):
         past = rows[i - n : i]
         fut = rows[i : i + k]
 
-        # Compute aggregated features for past and future windows
+        # get_games returns oldest first; match live inference's newest-first
+        # input contract so window_features computes slopes chronologically.
         feats_p, meta_p = window_features(
-            past,
+            list(reversed(past)),
             opp_baseline_provider=opp_baseline_provider,
-            league_baseline=league_baseline,
         )
         feats_f, meta_f = window_features(
-            fut,
+            list(reversed(fut)),
             opp_baseline_provider=opp_baseline_provider,
-            league_baseline=league_baseline,
         )
 
         # Skip windows with insufficient usable games
@@ -198,13 +209,18 @@ def _build_windows_for_team(
         x = [float(feats_p.get(fn, 0.0)) for fn in names]
         X_list.append(x)
         y_list.append(int(label))
+        windows.append({
+            "input_start": str(past[0]["game_date"]),
+            "input_end": str(past[-1]["game_date"]),
+            "target_end": str(fut[-1]["game_date"]),
+        })
 
-    return X_list, y_list, names
+    return X_list, y_list, names, windows
 
 
 # Assemble the full training dataset across all teams
 def build_trend_dataset(
-    n: int = 10,
+    n: int = 5,
     k: int = 5,
     eps: float = 0.13,
     through: Optional[str] = None,
@@ -213,31 +229,30 @@ def build_trend_dataset(
     X_all: List[List[float]] = []
     y_all: List[int] = []
     feature_names: List[str] = []
+    windows: List[Dict[str, str]] = []
 
-    # League baseline used to normalize team context
-    league_baseline = get_league_baseline_asof(through or dt.date.today().isoformat())
 
     for t in teams:
         rows = get_games(t, end_date=through)
-        if len(rows) < (n + k + 2):
+        if len(rows) < (n + k):
             continue
 
         # Per-team opponent baseline lookup
         def _opp_baseline_provider(opp: str, as_of: str) -> Dict[str, Any]:
             return get_team_baseline_asof_with_fallback(opp, as_of, m=10)
 
-        X_t, y_t, feature_names = _build_windows_for_team(
+        X_t, y_t, feature_names, windows_t = _build_windows_for_team(
             rows,
             n=n,
             k=k,
             eps=eps,
             feature_names=feature_names if feature_names else None,
             opp_baseline_provider=_opp_baseline_provider,
-            league_baseline=league_baseline,
         )
 
         X_all.extend(X_t)
         y_all.extend(y_t)
+        windows.extend(windows_t)
 
     if not X_all or not feature_names:
         raise RuntimeError("No training rows created (not enough games or windows).")
@@ -257,13 +272,36 @@ def build_trend_dataset(
         "teams_used": len(teams),
     }
 
-    return TrendDataset(X=X_all, y=y_all, feature_names=feature_names, meta=meta)
+    return TrendDataset(X=X_all, y=y_all, feature_names=feature_names, meta=meta, windows=windows)
+
+
+def _chronological_split(ds: TrendDataset) -> Tuple[List[int], List[int], Dict[str, Any]]:
+    # Choose the last ~20% by input-start date, without examining labels.
+    # Purge earlier windows whose future label overlaps the holdout's games.
+    starts = sorted(w["input_start"] for w in ds.windows)
+    cutoff = starts[min(len(starts) - 1, int(len(starts) * 0.8))]
+    train = [i for i, w in enumerate(ds.windows) if w["target_end"] < cutoff]
+    holdout = [i for i, w in enumerate(ds.windows) if w["input_start"] >= cutoff]
+    if not train or not holdout:
+        raise RuntimeError("Not enough dated windows for a non-overlapping chronological holdout.")
+    return train, holdout, {
+        "method": "chronological_holdout_purged_windows",
+        "cutoff": cutoff,
+        "training_rows": len(train),
+        "holdout_rows": len(holdout),
+        "purged_rows": len(ds.X) - len(train) - len(holdout),
+        "training_first_input": min(ds.windows[i]["input_start"] for i in train),
+        "training_last_target": max(ds.windows[i]["target_end"] for i in train),
+        "holdout_first_input": min(ds.windows[i]["input_start"] for i in holdout),
+        "holdout_last_target": max(ds.windows[i]["target_end"] for i in holdout),
+        "artifact_fit": "training_partition_only",
+    }
 
 
 # High-level training entry point
 # Produces and saves the final JSON model artifact
 def train_trend(
-    n: int = 9,
+    n: int = 5,
     k: int = 5,
     eps: float = 0.11,
     through: Optional[str] = None,
@@ -272,7 +310,13 @@ def train_trend(
     l2: float = 0.2,
 ) -> Dict[str, Any]:
     ds = build_trend_dataset(n=n, k=k, eps=eps, through=through)
-    fit = _train_softmax_lr(ds.X, ds.y, steps=steps, lr=lr, l2=l2)
+    train, holdout, evaluation = _chronological_split(ds)
+    fit = _train_softmax_lr(
+        [ds.X[i] for i in train], [ds.y[i] for i in train],
+        steps=steps, lr=lr, l2=l2,
+        X_eval=[ds.X[i] for i in holdout], y_eval=[ds.y[i] for i in holdout],
+    )
+    evaluation.update(fit["evaluation"])
 
     model = {
         "kind": "softmax_logreg",
@@ -291,6 +335,7 @@ def train_trend(
             "train_acc": fit["train_acc"],
             "train_nll": fit["train_nll"],
         },
+        "evaluation": evaluation,
         "dataset": ds.meta,
         "trained_at": dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
     }

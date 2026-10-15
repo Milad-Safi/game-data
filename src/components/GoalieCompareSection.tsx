@@ -36,7 +36,6 @@ const GOALIE_ROWS = [
     { key: "wins", label: "Wins" },
     { key: "savePct", label: "SV%" },
     { key: "gaa", label: "GAA" },
-    { key: "shutouts", label: "Shutouts" },
 ] as const;
 
 type GoalieRowKey = (typeof GOALIE_ROWS)[number]["key"];
@@ -68,7 +67,7 @@ function getGoalieRowText(
         return goalie.gaa != null ? goalie.gaa.toFixed(2) : "—";
     }
 
-    return String(goalie.shutouts);
+    return "—";
 }
 
 function getGoalieRowBarValue(
@@ -82,7 +81,7 @@ function getGoalieRowBarValue(
     if (key === "savePct") return goalieSavePctStrength(goalie.savePct);
     if (key === "gaa") return goalieGaaStrength(goalie.gaa);
 
-    return goalie.shutouts;
+    return null;
 }
 
 function GoalieHeadshot({

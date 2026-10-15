@@ -40,7 +40,7 @@ function formatGameDate(date: string) {
 function getDecisionLabel(decision: HistoricalGameCardType["decision"]) {
     if (decision === "ot") return "OT";
     if (decision === "so") return "SO";
-    return "REG";
+    return decision === "reg" ? "REG" : "Unknown";
 }
 
 type HistoricalGameCardProps = {
@@ -53,12 +53,12 @@ export default function HistoricalGameCard({
     const searchedTeamPaneClass = game.searchedTeamWon
         ? " historicalGameTeamPaneWinner"
         : "";
-    const opponentPaneClass = !game.searchedTeamWon
+    const opponentPaneClass = game.searchedTeamWon === false
         ? " historicalGameTeamPaneWinner"
         : "";
     const resultClass = game.searchedTeamWon
         ? " historicalGameCardWin"
-        : " historicalGameCardLoss";
+        : game.searchedTeamWon === false ? " historicalGameCardLoss" : "";
     const matchupText = `${game.searchedTeam.abbrev} ${
         game.venue === "away" ? "@" : "vs"
     } ${game.opponent.abbrev}`;
@@ -74,13 +74,13 @@ export default function HistoricalGameCard({
                     date: game.gameDate,
                     team: game.searchedTeam.abbrev,
                     teamLabel: game.searchedTeam.label,
-                    teamScore: String(game.searchedTeam.score),
+                    teamScore: game.searchedTeam.score == null ? undefined : String(game.searchedTeam.score),
                     opponent: game.opponent.abbrev,
                     opponentLabel: game.opponent.label,
-                    opponentScore: String(game.opponent.score),
+                    opponentScore: game.opponent.score == null ? undefined : String(game.opponent.score),
                     venue: game.venue,
                     decision: game.decision,
-                    winner: game.searchedTeamWon ? "team" : "opponent",
+                    winner: game.searchedTeamWon === null ? undefined : game.searchedTeamWon ? "team" : "opponent",
                 },
             }}
             className={`historicalGameCard${resultClass}`}
@@ -119,13 +119,13 @@ export default function HistoricalGameCard({
                 <div className="historicalGameScorePanel">
                     <div className={`historicalGameScoreline${scorelineClass}`}>
                         <span className="historicalGameScoreValue">
-                            {game.searchedTeam.score}
+                            {game.searchedTeam.score ?? "—"}
                         </span>
 
                         <span className="historicalGameScoreDash">-</span>
 
                         <span className="historicalGameScoreValue">
-                            {game.opponent.score}
+                            {game.opponent.score ?? "—"}
                         </span>
                     </div>
 
@@ -133,7 +133,7 @@ export default function HistoricalGameCard({
                         className={`historicalGameMatchupNote${
                             game.searchedTeamWon
                                 ? " historicalGameMatchupNoteWin"
-                                : " historicalGameMatchupNoteLoss"
+                                : game.searchedTeamWon === false ? " historicalGameMatchupNoteLoss" : ""
                         }`}
                     >
                         {matchupText}

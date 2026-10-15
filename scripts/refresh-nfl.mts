@@ -66,29 +66,30 @@ for await (const r of csv(`stats_team/stats_team_week_${season}.csv`, ['game_id'
     totals.set(id,{points:num(game,t===home?'home_score':'away_score'),passYards:pass,rushYards:rush,yards:pass+rush,
         turnovers:num(r,'passing_interceptions')+num(r,'fumbles_lost_total'), penalties:num(r,'penalties'),penaltyYards:num(r,'penalty_yards'),
         firstDowns:0,thirdMade:0,thirdAttempts:0,fourthMade:0,fourthAttempts:0,redZoneMade:0,redZoneAttempts:0,
-        qbPass:0,qbRush:0,wrRec:0,teRec:0,rbRush:0,rbRec:0});
+        qbPass:0,qbRush:0,wrRec:0,teRec:0,rbRush:0,rbRec:0, qbRushTd:0,rbRushTd:0,wrRecTd:0,teRecTd:0,rbRecTd:0});
     teamRows.set(id,r);
 }
 }
 const playerKeys = new Set<string>();
 const production = new Map<string,{pass:number;rush:number;rec:number}>();
 if (completed.size) {
-for await (const r of csv(`stats_player/stats_player_week_${season}.csv`, ['game_id','team','player_id','position','season_type','passing_yards','rushing_yards','receiving_yards'])) {
+for await (const r of csv(`stats_player/stats_player_week_${season}.csv`, ['game_id','team','player_id','position','season_type','passing_yards','rushing_yards','receiving_yards','rushing_tds','receiving_tds'])) {
     const id=key(r.game_id,r.team), t=totals.get(id);
     if (!t || r.season_type !== 'REG') continue;
     const pass=num(r,'passing_yards'),rush=num(r,'rushing_yards'),rec=num(r,'receiving_yards');
+    const rushTd=num(r,'rushing_tds'),recTd=num(r,'receiving_tds');
     // nflverse includes unattributed non-offensive/team records. They do not
     // contribute positional yards; never discard an unattributed yardage row.
-    if (!r.player_id && pass===0 && rush===0 && rec===0) continue;
+    if (!r.player_id && pass===0 && rush===0 && rec===0 && rushTd===0 && recTd===0) continue;
     const pk=`${id}:${r.player_id}`;
     if (!r.player_id || playerKeys.has(pk)) throw Error(`Invalid/duplicate player ${pk}`);
     playerKeys.add(pk);
-    if (!r.position && (pass || rush || rec)) throw Error(`Unclassified player ${pk}`);
+    if (!r.position && (pass || rush || rec || rushTd || recTd)) throw Error(`Unclassified player ${pk}`);
     const sums=production.get(id)??{pass:0,rush:0,rec:0};sums.pass+=pass;sums.rush+=rush;sums.rec+=rec;production.set(id,sums);
-    if(r.position==='QB'){t.qbPass+=pass;t.qbRush+=rush;}
-    if(r.position==='WR')t.wrRec+=rec;
-    if(r.position==='TE')t.teRec+=rec;
-    if(['RB','FB','HB'].includes(r.position)){t.rbRush+=rush;t.rbRec+=rec;}
+    if(r.position==='QB'){t.qbPass+=pass;t.qbRush+=rush;t.qbRushTd+=rushTd;}
+    if(r.position==='WR'){t.wrRec+=rec;t.wrRecTd+=recTd;}
+    if(r.position==='TE'){t.teRec+=rec;t.teRecTd+=recTd;}
+    if(['RB','FB','HB'].includes(r.position)){t.rbRush+=rush;t.rbRec+=rec;t.rbRushTd+=rushTd;t.rbRecTd+=recTd;}
 }
 }
 const seenPlays=new Set<string>();

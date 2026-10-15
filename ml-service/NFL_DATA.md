@@ -1,7 +1,7 @@
 # NFL TD Predictor backend
 
 Python/FastAPI only, using the existing free nflverse/nflreadpy loaders. No API keys,
-NFL database, TypeScript comparison changes, frontend, probabilities or numerical
+NFL database, TypeScript comparison changes, probabilities or numerical
 player ratings. Only the current NFL season's completed regular-season games feed
 TD calculations. Current season comes from the existing nflreadpy resolver.
 
@@ -10,9 +10,9 @@ TD calculations. Current season comes from the existing nflreadpy resolver.
 Run from `ml-service`: `.venv/bin/python -m uvicorn app.main:app --reload --port 8000`.
 Open **http://localhost:8000/docs**, section **NFL · TD Predictor & data**.
 
-- `GET /v1/nfl/td-predictor/games`: EVERY upcoming regular-season game, expected QBs,
-  up to two main picks, one distinct sneaky pick when justified, stats and reasons.
-  Optional `week` (1–18) and `team` filters. No season parameter or historical fallback.
+- `GET /v1/nfl/td-predictor/games`: every upcoming regular-season game in the next NFL week, expected QBs,
+  1–5 total picks when eligible evidence exists, including a distinct lower-volume sneaky pick, stats and reasons.
+  Optional `team` filter. No season parameter or historical fallback.
 - `GET /v1/nfl/td-predictor/games/{game_id}`: additionally includes both teams'
   eligible/excluded candidates, QB connections, rushing shares, recent opportunities,
   offensive TD distribution and opponent TD allowance relative to the current league.
@@ -24,14 +24,13 @@ Open **http://localhost:8000/docs**, section **NFL · TD Predictor & data**.
 
 Useful requests:
 
-- `/v1/nfl/td-predictor/games?week=4`
+- `/v1/nfl/td-predictor/games`
 - `/v1/nfl/td-predictor/games?team=BUF`
-- `/v1/nfl/td-predictor/games/2026_04_NE_BUF`
+- `/v1/nfl/td-predictor/games/{game_id}`
 
 Game IDs should come from the list endpoint. Completed, already-started and non-REG
 games are not prediction targets. Schedule times are interpreted in America/New_York.
-Future matchups use today's evidence; this is not a projection of future roster moves,
-QB changes or injury recovery. Missing game-week injury reports are flagged per game.
+Upcoming-week matchups use today's evidence and availability. Missing game-week injury reports are flagged per game.
 
 ## Data reuse and cleanup
 
@@ -89,29 +88,47 @@ than silently disabling injury filtering. There is no live-inactives guarantee.
 Eligibility filters upcoming picks only. All verified past plays remain in totals even
 if the player is now unavailable. Vacated opportunities are not assigned to backups.
 
-## Selection rules (deliberately simple, not trained)
+## Selection rules (transparent heuristics, not trained)
 
-**Main eligibility:** current eligible roster player, supported position (QB/RB/WR/TE),
-at least one relevant opportunity in the last two verified team games, and either a
-red-zone opportunity or five season opportunities. Receiving opportunities must come
-from the expected QB; rushing opportunity is considered for RBs and the expected QB.
+Only the upcoming NFL week is generated. The response includes `upcoming_week`;
+there is no week selector. As games finish and source caches refresh, season evidence
+is recomputed. Once the current week's remaining kickoffs pass, the next week opens.
 
-Order eligible candidates lexicographically by inside-5 opportunities, inside-10,
-red-zone, recent opportunities, positional opponent allowance relative to league,
-then season opportunities. Stable player ID breaks remaining equality. Select up to
-TWO across BOTH teams, not two per team. No weighted composite score is calculated.
+Evaluate rushing and receiving as separate routes; receiving evidence uses only the
+expected QB. Recent route usage is required. Main eligibility requires two inside-10
+opportunities, one plus a TD, or TDs in at least two separate current-season team games.
+QB rushing additionally requires a rushing TD or three inside-5 carries. Stafford
+remains excluded as a rushing pick, not as a passer.
 
-**Sneaky eligibility is separate:** outside team top two in all-QB targets + carries,
-no more than 20% of those team opportunities, recent relevant opportunity, plus either
-at least two expected-QB red-zone targets OR at least two red-zone carries including
-an inside-10 carry. Exclude selected main picks. Order by relevant red-zone opportunity
-fraction, inside-10 opportunities, recent opportunity, then player ID. This emphasizes
-small but valuable roles, not simply the third overall candidate. No superstar fallback
-is forced when this pool is empty.
+Internal role evidence = `(0.5 * inside10 + route TDs + distinct scoring games) / team GP`.
+Defense uses `(opponent category TDs + 3 * league category TD/game) / (opponent GP + 3)`.
+The ratio to league adjusts evidence by `1 + clamp((ratio - 1)/2, -0.20, 0.20)`.
+Recent route usage breaks ties. These are explicit heuristics, not validated probabilities;
+no numerical ranking scores are returned. If no main candidate qualifies, the best
+available recent-role candidate can be selected with a limited-evidence label.
 
-Return `partial` and an explicit reason if there is no justified main/sneaky pick.
-Before the first completed game (or with no verified PBP), return upcoming games with
-`insufficient_data` and empty picks. Never borrow last season or invent player roles.
+Sneaky picks must be outside the top two team touch/target players AND top two TD scorers,
+with <=20% total opportunity share. Known WR1/WR2 and starting RB/TE are excluded.
+QBs with >=20% of inside-10 carries or TDs in >=2 games are main-role candidates, not sneaky.
+Prefer inside-10/TD evidence. Otherwise use positional defense among recent-role candidates.
+Reserve the sneaky slot before adding extra mains; never duplicate a player. No real-role
+candidate means no invented pick. No betting odds or prior-season reputation are used.
+
+Game pick limits use offense/opponent defensive TD rates, each stabilized with three
+league-average games. Relative combined rate below 0.90 / 1.10 / 1.30 sets caps of 2 / 3 / 4;
+1.30 or above caps at 5. The cap includes sneaky. Extra mains must retain at least half
+the leading main's adjusted evidence, so games can finish below the cap. Game context
+is descriptive, not a calibrated scoring forecast. No probabilities or 0–100 scores.
+
+Reasons describe scoring consistency, inside-10 usage and recent route volume. Favorable
+defense supports a pick; tougher defense appears as a short concern. Generic caveats
+stay at game level rather than repeating on every card. New responses expose
+`selection_version: role_first_v3`, `scoring_environment` and `scoring_evidence`.
+
+The cards display targets and carries on plays SNAPPED inside the 10. This is not an
+end-zone target count. PBP provides air yards but no explicit end-zone-target column;
+we do not substitute an estimate. Past red-zone stats remain available for inspection.
+Headshots come from current roster `headshot_url`; missing/broken images use team logos.
 
 ## Operations
 
@@ -132,3 +149,10 @@ starts still apply. No background scheduler or infrastructure was added.
 
 Data credit: nflverse and the original providers identified in each release. The
 predictor does not load FTN, historical participation, coverage, weather or snap counts.
+
+## Frontend
+
+`/nfl/td-predictor` fetches the Python games endpoint once per page mount (Retry makes
+one additional attempt). Matchups and reasons expand inline, and team filtering is local.
+It uses the same `NEXT_PUBLIC_EDGE_API_BASE` setting as the existing simulator.
+No per-game frontend routes or TypeScript predictor calculations were added.

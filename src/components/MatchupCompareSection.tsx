@@ -89,6 +89,7 @@ export default function MatchupCompareSection({
     const rightLeaders = data?.leaders?.[team2] ?? null;
 
     const groupDataMap = {
+        "Top 3 in points": { left: leftLeaders?.pointsLeaders ?? [], right: rightLeaders?.pointsLeaders ?? [], kind: "count" as const },
         "Top 3 in goals": {
             left: leftLeaders?.goalsLeaders ?? [],
             right: rightLeaders?.goalsLeaders ?? [],

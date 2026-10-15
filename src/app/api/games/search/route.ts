@@ -2,6 +2,7 @@ import { CurrentSeasonError, getCurrentSeasonId } from "@/lib/nhl/currentSeason"
 import { NextResponse } from "next/server";
 
 import { query } from "@/lib/db";
+import { resolveTeamGameResult } from "@/lib/nhl/gameResult";
 import { NHL_TEAM_OPTIONS } from "@/lib/compare";
 import { getTeamLogoSrc } from "@/lib/teamAssets";
 import {
@@ -10,7 +11,6 @@ import {
     getHistoricalSeasonOptions,
 } from "@/lib/games";
 import type {
-    HistoricalDecision,
     HistoricalGameCard,
     HistoricalGamesSearchResponse,
 } from "@/types/games";
@@ -76,45 +76,6 @@ type TeamGameRow = {
     goals_against: number | null;
 };
 
-type BoxscoreDecision = {
-    gameOutcome?: {
-        lastPeriodType?: string;
-    };
-    periodDescriptor?: {
-        periodType?: string;
-    };
-};
-
-async function fetchDecisionForGame(gameId: number): Promise<HistoricalDecision> {
-    if (!Number.isFinite(gameId)) return "reg";
-
-    try {
-        const response = await fetch(
-            `https://api-web.nhle.com/v1/gamecenter/${gameId}/boxscore`,
-            {
-                next: { revalidate: 86400 },
-                headers: { "User-Agent": "game-data" },
-            }
-        );
-
-        if (!response.ok) return "reg";
-
-        const box = (await response.json()) as BoxscoreDecision;
-        const lastPeriodType = String(
-            box?.gameOutcome?.lastPeriodType ?? ""
-        ).toUpperCase();
-        const periodType = String(
-            box?.periodDescriptor?.periodType ?? ""
-        ).toUpperCase();
-
-        if (lastPeriodType === "SO" || periodType === "SO") return "so";
-        if (lastPeriodType === "OT" || periodType === "OT") return "ot";
-        return "reg";
-    } catch {
-        return "reg";
-    }
-}
-
 // GET /api/games/search?team=TOR&season=2025-2026&opponent=ANA&page=1&pageSize=12
 export async function GET(request: Request) {
     const url = new URL(request.url);
@@ -163,8 +124,6 @@ export async function GET(request: Request) {
             "tg.team = $1",
             "LEFT(tg.game_id::text, 4)::int = $2",
             "SUBSTRING(tg.game_id::text, 5, 2) = '02'",
-            "tg.goals_for IS NOT NULL",
-            "tg.goals_against IS NOT NULL",
         ];
         const params: Array<string | number> = [team, startYear];
 
@@ -210,22 +169,13 @@ export async function GET(request: Request) {
 
         const rows = rowsResult.rows ?? [];
 
-        const decisions = await Promise.all(
-            rows.map(async (row) => {
-                const gameId = Number(row.game_id);
-                const decision = await fetchDecisionForGame(gameId);
-                return [String(row.game_id), decision] as const;
-            })
-        );
+        const results = await Promise.all(rows.map(row => resolveTeamGameResult({ ...row, team })));
 
-        const decisionByGameId = new Map<string, HistoricalDecision>(decisions);
-
-        const games: HistoricalGameCard[] = rows.map((row) => {
+        const games: HistoricalGameCard[] = rows.map((row, index) => {
             const opponentAbbrev = String(row.opponent ?? "").trim().toUpperCase();
             const opponentTeam = getTeamOption(opponentAbbrev);
             const isHome = row.is_home === true;
-            const teamScore = Number(row.goals_for ?? 0);
-            const opponentScore = Number(row.goals_against ?? 0);
+            const result = results[index];
 
             return {
                 gameId: String(row.game_id),
@@ -234,7 +184,7 @@ export async function GET(request: Request) {
                     abbrev: teamOption.value,
                     label: teamOption.label,
                     logoSrc: getTeamLogoSrc(teamOption.label, teamOption.value),
-                    score: teamScore,
+                    score: result.goalsFor,
                 },
                 opponent: {
                     abbrev: opponentAbbrev,
@@ -243,11 +193,11 @@ export async function GET(request: Request) {
                         opponentTeam?.label ?? opponentAbbrev,
                         opponentAbbrev
                     ),
-                    score: opponentScore,
+                    score: result.goalsAgainst,
                 },
                 venue: isHome ? "home" : "away",
-                decision: decisionByGameId.get(String(row.game_id)) ?? "reg",
-                searchedTeamWon: teamScore > opponentScore,
+                decision: result.decision,
+                searchedTeamWon: result.won,
             };
         });
 

@@ -17,6 +17,9 @@ from .season import CurrentSeasonError, current_season_id
 INITIAL_ELO = 1500.0
 K_FACTOR = 10.0
 HOME_ADVANTAGE_ELO = 30.0
+# Conservative result weights, applied only to actual roster-season updates.
+GOAL_MARGIN_MULTIPLIERS = (0.8, 1.0, 1.1, 1.2)  # 1, 2, 3, 4+ goals
+OT_SO_UPDATE_MULTIPLIER = 0.5
 # Fraction of the distance from 1500 removed at each season boundary.
 OFFSEASON_REGRESSION_FRACTION = 0.25
 ELO_CACHE_SECONDS = 60
@@ -172,6 +175,37 @@ def turnover_adjustment(initial_penalty: float, games_played: int) -> float:
     return initial_penalty * max(0.0, 1.0 - games_played / TURNOVER_FADE_GAMES)
 
 
+def result_update_multiplier(game: dict) -> float:
+    """Preserve win/loss direction and zero-sum updates; cap blowout weight."""
+    margin = abs(game["home_score"] - game["away_score"])
+    if margin == 0:
+        raise ValueError("Elo requires a resolved winner")
+    if game.get("ending_type") in {"OT", "SO"}:
+        return OT_SO_UPDATE_MULTIPLIER
+    return GOAL_MARGIN_MULTIPLIERS[min(margin, len(GOAL_MARGIN_MULTIPLIERS)) - 1]
+
+
+def _close_game_ending(game: dict) -> str:
+    """Only one-goal finals can be OT/SO; never infer their ending from score."""
+    def fetch():
+        box = fetch_boxscore(game["game_id"])
+        home, away = box.get("homeTeam", {}), box.get("awayTeam", {})
+        if (box.get("id") != game["game_id"] or box.get("gameType") != 2
+                or box.get("season") != ROSTER_PRIOR_SEASON_ID
+                or box.get("gameState") not in {"FINAL", "OFF"}
+                or box.get("gameDate") != game["game_date"].isoformat()
+                or home.get("abbrev") != game["home"] or away.get("abbrev") != game["away"]
+                or home.get("score") != game["home_score"]
+                or away.get("score") != game["away_score"]):
+            raise ValueError("Official final does not match validated game")
+        ending = (box.get("gameOutcome") or {}).get("lastPeriodType") or (box.get("periodDescriptor") or {}).get("periodType")
+        if ending not in {"REG", "OT", "SO"}:
+            raise ValueError("Official final ending unavailable")
+        return ending
+
+    return cached(f"elo_ending:{game['game_id']}:{game['home_score']}:{game['away_score']}", 86400, fetch)
+
+
 def roster_mean(teams: list[str]) -> float:
     if len(teams) != len(ROSTER_PRIORS) or set(teams) != set(ROSTER_PRIORS):
         raise ValueError("Active teams do not match the 2026-27 roster priors")
@@ -205,13 +239,22 @@ def calculate_roster_ratings(games: list[dict], teams: list[str]) -> dict:
             row["initial_turnover_adjustment"], row["games_played"]
         )
 
+    update_warnings = []
     for game in games:
         if game["home"] not in ratings or game["away"] not in ratings:
             raise ValueError("Game contains a team without a 2026-27 roster prior")
         home, away = ratings[game["home"]], ratings[game["away"]]
+        if (abs(game["home_score"] - game["away_score"]) == 1
+                and game.get("ending_type") not in {"REG", "OT", "SO"}):
+            game = dict(game)
+            try:
+                game["ending_type"] = _close_game_ending(game)
+            except Exception:
+                update_warnings.append({"game_id": game["game_id"], "action": "approximation",
+                                        "reason": "Ending unknown; using close-game weight without OT/SO discount"})
         expected = home_win_probability(effective(home), effective(away))
         actual = float(game["home_score"] > game["away_score"])
-        change = K_FACTOR * (actual - expected)
+        change = K_FACTOR * result_update_multiplier(game) * (actual - expected)
         home["elo"] += change
         away["elo"] -= change
         for row in (home, away):
@@ -227,6 +270,7 @@ def calculate_roster_ratings(games: list[dict], teams: list[str]) -> dict:
     return {
         "teams": [{"team": team, **ratings[team]} for team in sorted(teams)],
         "games_processed": len(games),
+        "elo_update_warnings": update_warnings,
         "last_processed_game_id": games[-1]["game_id"] if games else None,
         "last_processed_game_date": games[-1]["game_date"].isoformat() if games else None,
     }
@@ -295,9 +339,13 @@ def current_ratings() -> dict:
             warnings.append({"game_id": None, "action": "warning",
                              "reason": "No valid current-season games; using opening roster priors"
                              if use_roster_priors else "No valid historical games; all ratings start at 1500"})
+        ratings = calculate_ratings(games, teams, season_id)
+        warnings.extend(ratings.get("elo_update_warnings", []))
         return {
             "season_id": season_id, "computed_at": now.isoformat(),
             "config": {"initial_elo": INITIAL_ELO, "k_factor": K_FACTOR,
+                       "goal_margin_multipliers": list(GOAL_MARGIN_MULTIPLIERS) if use_roster_priors else None,
+                       "ot_so_update_multiplier": OT_SO_UPDATE_MULTIPLIER if use_roster_priors else None,
                        "home_ice_elo_advantage": HOME_ADVANTAGE_ELO,
                        "initialization": "roster_priors" if use_roster_priors else "historical_elo",
                        "offseason_regression_fraction": None if use_roster_priors else OFFSEASON_REGRESSION_FRACTION,
@@ -306,11 +354,11 @@ def current_ratings() -> dict:
                            "turnover_penalties": dict(TURNOVER_PENALTIES),
                            "turnover_fade_games": TURNOVER_FADE_GAMES}
                           if use_roster_priors else {})},
-            **calculate_ratings(games, teams, season_id), "warnings": warnings,
+            **ratings, "warnings": warnings,
         }
 
     with _snapshot_lock:
-        return cached(f"elo_roster_v1:{season_id}", ELO_CACHE_SECONDS, build)
+        return cached(f"elo_roster_v2:{season_id}", ELO_CACHE_SECONDS, build)
 
 
 def _snapshot() -> dict:

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import GameSummary from "@/components/games/GameSummary";
 import { useEffect, useMemo, useState } from "react";
 
 import HistoricalGameDetailBoxscorePanel from "@/components/games/BoxscorePanel";
@@ -280,6 +281,7 @@ export default function HistoricalGameDetailClient({
                         onSkaterSort={handleSkaterSort}
                     />
                 </section>
+                <GameSummary data={data} />
             </section>
         </main>
     );

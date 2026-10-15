@@ -59,13 +59,15 @@ export type TeamSplit = {
   games: number;
   window: number | null;
   venue?: "home" | "away" | null;
-  record: { w: number; l: number; otl: number };
+  record: { w: number; l: number; otl: number } | null;
+  unresolvedResultGameIds?: number[];
+  unknownOutcomeGameIds?: number[];
 
-  goalsFor: number;
-  goalsAgainst: number;
+  goalsFor: number | null;
+  goalsAgainst: number | null;
 
-  goalsForPerGame: number;
-  goalsAgainstPerGame: number;
+  goalsForPerGame: number | null;
+  goalsAgainstPerGame: number | null;
   shotsForPerGame: number;
   shotsAgainstPerGame: number;
   powerPlay: { goals: number; opps: number; pct: number | null };
@@ -143,6 +145,7 @@ export type MatchupHistoryPayload = {
       topSog: HistoryLeader | null;
       goalsLeaders: MatchupValueLeader[];
       assistLeaders: MatchupValueLeader[];
+      pointsLeaders: MatchupValueLeader[];
       sogLeaders: MatchupValueLeader[];
       shotAttemptLeaders: MatchupValueLeader[];
       blockLeaders: MatchupValueLeader[];
@@ -178,5 +181,6 @@ export type SeasonSimulationResponse = {
         remaining_games: number;
         standings_snapshot_time_utc?: string | null;
         standings_fetched_at?: string;
+        last_real_game_processed_by_elo?: { game_id: number | null; date: string | null };
     };
 };

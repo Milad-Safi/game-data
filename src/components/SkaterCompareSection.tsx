@@ -121,6 +121,13 @@ export default function SkaterCompareSection({
 
             {!loading && !error && (
                 <div className="compareRows">
+                    {(["forwards", "defenders"] as const).filter(group => compareBy === "skaters" || compareBy === group).map(group => {
+                        const left = leftData?.shotsAllowed?.[group] ?? null;
+                        const right = rightData?.shotsAllowed?.[group] ?? null;
+                        return <StatRow key={group} label={`SOG allowed to ${group === "forwards" ? "forwards" : "defensemen"} / game`}
+                            leftVal={right} rightVal={left} leftText={left == null ? "—" : left.toFixed(1)} rightText={right == null ? "—" : right.toFixed(1)}
+                            leftColor={leftColor} rightColor={rightColor} />;
+                    })}
                     {rows.map((row) => (
                         <StatRow
                             key={row.label}

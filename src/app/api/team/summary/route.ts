@@ -74,22 +74,22 @@ function standingsTeamName(row: StandingsRow | null | undefined) {
   return typeof raw === "string" && raw.trim() ? raw.trim() : null;
 }
 
-async function getTeamIdByAbbrev(teamAbbrev: string): Promise<number | null> {
+async function getTeamIdsByAbbrev(teamAbbrev: string): Promise<number[]> {
   const res = await fetch("https://api.nhle.com/stats/rest/en/team", {
     next: { revalidate: 60 * 60 },
     headers: { "User-Agent": "game-data" },
   });
-  if (!res.ok) return null;
+  if (!res.ok) return [];
 
   const json = await res.json();
   const rows: any[] = Array.isArray(json?.data) ? json.data : [];
 
-  const found =
-    rows.find((t) => String(t?.triCode || "").toUpperCase() === teamAbbrev) ||
-    rows.find((t) => String(t?.abbrev || "").toUpperCase() === teamAbbrev) ||
-    rows.find((t) => String(t?.abbreviation || "").toUpperCase() === teamAbbrev);
-
-  return toNumber(found?.id ?? found?.teamId) ?? null;
+  // Rebrands can retain a tricode but receive a new ID (UTA: 59 -> 68).
+  // Keep every matching identity; the requested season selects the valid row.
+  return [...new Set(rows.filter((t) =>
+    [t?.triCode, t?.abbrev, t?.abbreviation].some(value =>
+      String(value ?? "").toUpperCase() === teamAbbrev)
+  ).map(t => toNumber(t?.id ?? t?.teamId)).filter((id): id is number => id != null))];
 }
 
 async function getCurrentStandingsRow(
@@ -98,7 +98,7 @@ async function getCurrentStandingsRow(
 ): Promise<StandingsRow | null> {
   try {
   const res = await fetch("https://api-web.nhle.com/v1/standings/now", {
-    next: { revalidate: 60 },
+    cache: "no-store",
     headers: { "User-Agent": "game-data" },
   });
 
@@ -129,19 +129,20 @@ export async function GET(req: Request) {
 
   try {
     const seasonId = seasonOverride ?? (await getCurrentSeasonId());
-    const teamId = await getTeamIdByAbbrev(teamAbbrev);
-    if (!teamId) {
+    const teamIds = await getTeamIdsByAbbrev(teamAbbrev);
+    if (!teamIds.length) {
       return NextResponse.json({ error: `Unknown team abbrev: ${teamAbbrev}` }, { status: 404 });
     }
 
-    const cayenneExp = `seasonId=${seasonId} and gameTypeId=${gameTypeId} and teamId=${teamId}`;
+    const teamFilter = teamIds.map(id => `teamId=${id}`).join(" or ");
+    const cayenneExp = `seasonId=${seasonId} and gameTypeId=${gameTypeId} and (${teamFilter})`;
     const endpoint =
       "https://api.nhle.com/stats/rest/en/team/summary" +
       `?cayenneExp=${encodeURIComponent(cayenneExp)}`;
 
     const [summaryRes, standingsRow] = await Promise.all([
       fetch(endpoint, {
-        next: { revalidate: 60 },
+        cache: "no-store",
         headers: { "User-Agent": "game-data" },
       }),
       getCurrentStandingsRow(teamAbbrev, seasonId),
@@ -159,7 +160,7 @@ export async function GET(req: Request) {
 
     if (!row) {
       return NextResponse.json(
-        { error: "No team summary row returned", teamAbbrev, teamId, seasonId },
+        { error: "No team summary row returned", teamAbbrev, teamIds, seasonId },
         { status: 502 }
       );
     }
@@ -169,7 +170,7 @@ export async function GET(req: Request) {
       seasonId,
       gameTypeId,
 
-      teamId: toNumber(row?.teamId ?? teamId),
+      teamId: toNumber(row?.teamId),
       teamFullName:
         (typeof row?.teamFullName === "string" && row.teamFullName.trim()) ||
         standingsTeamName(standingsRow),

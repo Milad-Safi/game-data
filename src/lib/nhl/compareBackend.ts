@@ -172,7 +172,7 @@ export async function fetchClubStats(
 
 export async function fetchRecentRegularSeasonGameIds(
     team: string,
-    window: number,
+    window: number | null,
     asOf: string,
     explicitAsOf = true
 ): Promise<number[]> {

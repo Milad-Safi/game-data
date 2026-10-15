@@ -6,7 +6,7 @@ import TeamHeroCard from "./TeamHeroCard";
 import StatRow from "@/components/StatRow";
 import { type CompareFilter } from "@/lib/compare";
 import { getNFLLogo, getNFLMatchupColors } from "@/lib/nflAssets";
-import { SECTIONS, type CompareResponse } from "@/lib/nfl/summary";
+import { SECTIONS, lowerIsBetter, type CompareResponse } from "@/lib/nfl/summary";
 
 // Visual emphasis only; the underlying metrics and displayed numbers stay unchanged.
 const BAR_SENSITIVITY = { volume: 1.20, percentage: 1.08, turnovers: 1.03 } as const;
@@ -42,6 +42,7 @@ export default function NFLCompareResults({ team1, team2, selectedTeam1Label, se
         {canCompare && !data && !error && <p className="compareEmptyText" role="status">Loading NFL comparison…</p>}
         {canCompare && error && <div role="alert"><CompareState title="Stats unavailable" text={error} tone="warning" /><button type="button" className="compareResultsBadge" onClick={() => setAttempt(n => n + 1)}>Retry</button></div>}
         {canCompare && data && <div className="compareBuiltView">
+            {data.warnings.length > 0 && <p className="compareEmptyText" role="status">{data.warnings.join(" ")}</p>}
             <div className="compareHeroWrap">
                 <TeamHeroCard teamAbbrev={team1} teamLabel={selectedTeam1Label} align="left" logoSrc={getNFLLogo(team1)} accentColor={leftColor} />
                 <div className="compareHeroVsWrap"><span className="compareHeroVs">VS</span></div>
@@ -57,7 +58,7 @@ export default function NFLCompareResults({ team1, team2, selectedTeam1Label, se
                         const sensitivity = row.key === "turnovers" || row.key === "takeaways"
                             ? BAR_SENSITIVITY.turnovers
                             : row.percent ? BAR_SENSITIVITY.percentage : BAR_SENSITIVITY.volume;
-                        return <StatRow sensitivity={sensitivity} key={row.key} label={row.key === "passYards" ? "Passing Yards / Game" : row.key === "passYardsAllowed" ? "Passing Yards Allowed / Game" : row.label} leftVal={left} rightVal={right} leftText={format(left, data.left.ranks?.[row.key] ?? null)} rightText={format(right, data.right.ranks?.[row.key] ?? null)} leftColor={leftColor} rightColor={rightColor} />;
+                        return <StatRow sensitivity={sensitivity} key={row.key} label={row.key === "passYards" ? "Passing Yards / Game" : row.key === "passYardsAllowed" ? "Passing Yards Allowed / Game" : row.label} leftVal={lowerIsBetter(row.key) ? right : left} rightVal={lowerIsBetter(row.key) ? left : right} leftText={format(left, data.left.ranks?.[row.key] ?? null)} rightText={format(right, data.right.ranks?.[row.key] ?? null)} leftColor={leftColor} rightColor={rightColor} />;
                     })}
                 </div>
             </div>)}

@@ -109,6 +109,7 @@ type ApiBoxscore = {
 };
 
 type ApiPlay = {
+    situationCode?: string;
     eventId?: number | string;
     typeDescKey?: string;
     timeInPeriod?: string;
@@ -472,37 +473,19 @@ function strengthFromSituationCode(
 ) {
     if (!situationCode || situationCode.length < 4) return null;
 
-    const awaySkaters = Number(situationCode[1]);
-    const homeSkaters = Number(situationCode[2]);
-
-    if (!Number.isFinite(awaySkaters) || !Number.isFinite(homeSkaters)) {
-        return null;
-    }
-
-    const teamSkaters = isHomeTeamEvent ? homeSkaters : awaySkaters;
-    const opponentSkaters = isHomeTeamEvent ? awaySkaters : homeSkaters;
-
-    if (teamSkaters > opponentSkaters) return "Power play";
-    if (teamSkaters < opponentSkaters) return "Shorthanded";
+    if (!/^[01][3-6][3-6][01]$/.test(situationCode)) return null;
+    // Count the skater replacing a pulled goalie as a goalie-equivalent slot:
+    // 6-on-5 with an empty net is not itself a power play.
+    const awayStrength = Number(situationCode[1]) + Number(situationCode[0]);
+    const homeStrength = Number(situationCode[2]) + Number(situationCode[3]);
+    const difference = isHomeTeamEvent ? homeStrength - awayStrength : awayStrength - homeStrength;
+    if (difference > 0) return "Power play";
+    if (difference < 0) return "Shorthanded";
     return "Even strength";
 }
 
-function isPowerPlayForTeam(
-    situationCode: string,
-    isHomeTeamEvent: boolean
-) {
-    if (!situationCode || situationCode.length < 4) return false;
-
-    const awaySkaters = Number(situationCode[1]);
-    const homeSkaters = Number(situationCode[2]);
-
-    if (!Number.isFinite(awaySkaters) || !Number.isFinite(homeSkaters)) {
-        return false;
-    }
-
-    return isHomeTeamEvent
-        ? homeSkaters > awaySkaters
-        : awaySkaters > homeSkaters;
+function isPowerPlayForTeam(situationCode: string, isHomeTeamEvent: boolean) {
+    return strengthFromSituationCode(situationCode, isHomeTeamEvent) === "Power play";
 }
 
 function inferTeamIdFromPlay(
@@ -680,7 +663,7 @@ function buildChartAndStats(
                 ? playerNameById.get(playerId) ?? `Player ${playerId}`
                 : `Player ${playerId ?? ""}`.trim();
         const strength = strengthFromSituationCode(
-            asString(play.details?.situationCode),
+            asString(play.situationCode),
             isHomeTeamEvent
         );
         const shotType = asString(play.details?.shotType) || null;
@@ -696,7 +679,7 @@ function buildChartAndStats(
 
             if (
                 isPowerPlayForTeam(
-                    asString(play.details?.situationCode),
+                    asString(play.situationCode),
                     isHomeTeamEvent
                 )
             ) {
@@ -789,13 +772,16 @@ export async function GET(
             return NextResponse.json({ error: "Invalid game id" }, { status: 400 });
         }
 
-        const [box, pbp] = await Promise.all([
+        const [box, pbp, rail] = await Promise.all([
             fetchJsonWithRetry<ApiBoxscore>(
                 `https://api-web.nhle.com/v1/gamecenter/${numericGameId}/boxscore`
             ),
             fetchJsonWithRetry<ApiPlayByPlay>(
                 `https://api-web.nhle.com/v1/gamecenter/${numericGameId}/play-by-play`
             ),
+            fetchJsonWithRetry<{ teamGameStats?: { category: string; homeValue?: unknown; awayValue?: unknown }[] }>(
+                `https://api-web.nhle.com/v1/gamecenter/${numericGameId}/right-rail`
+            ).catch(() => null),
         ]);
 
         const homeTeam = toTeamPayload(box.homeTeam);
@@ -865,6 +851,8 @@ export async function GET(
 
         const teamStats = baseTeamStats;
 
+        const pp = rail?.teamGameStats?.find(row => row.category === "powerPlay");
+        const ppValue = (value: unknown) => typeof value === "string" && /^\d+\/\d+$/.test(value) ? value : null;
         const payload: HistoricalGameDetailResponse = {
             gameId,
             gameDate: normaliseDate(asString(box.gameDate)),
@@ -887,6 +875,7 @@ export async function GET(
                     goalies: awayGoalies,
                 },
             },
+            powerPlays: { home: ppValue(pp?.homeValue), away: ppValue(pp?.awayValue) },
             chartEvents,
             scoringEvents,
             teamStats,

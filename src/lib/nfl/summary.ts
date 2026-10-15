@@ -29,7 +29,15 @@ export const SECTIONS: { title: string; rows: Metric[] }[] = [
         { key: "wrRecAllowed", label: "WR receiving yards allowed / game" }, { key: "teRecAllowed", label: "TE receiving yards allowed / game" },
         { key: "rbRushAllowed", label: "RB rushing yards allowed / game" }, { key: "rbRecAllowed", label: "RB receiving yards allowed / game" },
     ] },
+    { title: "Touchdowns allowed by position", rows: [
+        { key: "qbRushTdAllowed", label: "QB rushing TDs allowed / game" },
+        { key: "rbRushTdAllowed", label: "RB rushing TDs allowed / game" },
+        { key: "wrRecTdAllowed", label: "WR receiving TDs allowed / game" },
+        { key: "teRecTdAllowed", label: "TE receiving TDs allowed / game" },
+        { key: "rbRecTdAllowed", label: "RB receiving TDs allowed / game" },
+    ] },
 ];
+export const lowerIsBetter = (key: string) => key.endsWith("Allowed") || ["turnovers", "penalties", "penaltyYards"].includes(key);
 export const normalizeTeam = (team: string) => ({ LA: "LAR", JAC: "JAX", WSH: "WAS" }[team.toUpperCase()] ?? team.toUpperCase());
 export function summarize(snapshot: Snapshot, team: string, last: number | null = null) {
     const all = snapshot.games.filter(g => g.team === team).sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
@@ -60,12 +68,11 @@ export function rankLeague(summaries: TeamSummary[]): Record<string, RankedTeamS
         ...team, ranks: Object.fromEntries(Object.keys(team.metrics).map(key => [key, null])) as Record<string, number | null>,
     }]));
     for (const { rows } of SECTIONS) for (const { key } of rows) {
-        const lowerIsBetter = key.endsWith("Allowed") || ["turnovers", "penalties", "penaltyYards"].includes(key);
         const values = summaries.flatMap(team => {
             const value = team.metrics[key];
             // Ignore missing stats; normalize floating-point noise, not display precision.
             return value === null || !Number.isFinite(value) ? [] : [{ team: team.team, value: Math.round(value * 1e9) / 1e9 }];
-        }).sort((a, b) => lowerIsBetter ? a.value - b.value : b.value - a.value);
+        }).sort((a, b) => lowerIsBetter(key) ? a.value - b.value : b.value - a.value);
         let rank = 0;
         values.forEach((entry, index) => {
             if (index === 0 || entry.value !== values[index - 1].value) rank = index + 1;

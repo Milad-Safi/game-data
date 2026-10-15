@@ -1,10 +1,10 @@
 {
   "version": 1,
   "season": 2026,
-  "updatedAt": "2026-10-08T17:26:25.049Z",
-  "latestGameDate": "2026-10-05",
-  "scheduledCompletedGames": 64,
-  "includedGames": 64,
+  "updatedAt": "2026-10-13T22:36:00.921Z",
+  "latestGameDate": "2026-10-12",
+  "scheduledCompletedGames": 79,
+  "includedGames": 79,
   "excludedGames": [],
   "teams": [
     "ARI",
@@ -67,7 +67,12 @@
         "wrRec": 161,
         "teRec": 13,
         "rbRush": 84,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 10,
@@ -89,7 +94,12 @@
         "wrRec": 97,
         "teRec": 28,
         "rbRush": 62,
-        "rbRec": 53
+        "rbRec": 53,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -118,7 +128,12 @@
         "wrRec": 97,
         "teRec": 28,
         "rbRush": 62,
-        "rbRec": 53
+        "rbRec": 53,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 13,
@@ -140,7 +155,12 @@
         "wrRec": 161,
         "teRec": 13,
         "rbRush": 84,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -169,7 +189,12 @@
         "wrRec": 108,
         "teRec": 31,
         "rbRush": 114,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -191,7 +216,12 @@
         "wrRec": 147,
         "teRec": 31,
         "rbRush": 133,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -220,7 +250,12 @@
         "wrRec": 147,
         "teRec": 31,
         "rbRush": 133,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 7,
@@ -242,7 +277,12 @@
         "wrRec": 108,
         "teRec": 31,
         "rbRush": 114,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -271,7 +311,12 @@
         "wrRec": 213,
         "teRec": 62,
         "rbRush": 91,
-        "rbRec": 86
+        "rbRec": 86,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 59,
@@ -293,7 +338,12 @@
         "wrRec": 200,
         "teRec": 35,
         "rbRush": 224,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 2,
+        "rbRushTd": 4,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -322,7 +372,12 @@
         "wrRec": 200,
         "teRec": 35,
         "rbRush": 224,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 2,
+        "rbRushTd": 4,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 37,
@@ -344,7 +399,12 @@
         "wrRec": 213,
         "teRec": 62,
         "rbRush": 91,
-        "rbRec": 86
+        "rbRec": 86,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -373,7 +433,12 @@
         "wrRec": 101,
         "teRec": 101,
         "rbRush": 76,
-        "rbRec": 52
+        "rbRec": 52,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -395,7 +460,12 @@
         "wrRec": 139,
         "teRec": 26,
         "rbRush": 60,
-        "rbRec": 51
+        "rbRec": 51,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -424,7 +494,12 @@
         "wrRec": 139,
         "teRec": 26,
         "rbRush": 60,
-        "rbRec": 51
+        "rbRec": 51,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 33,
@@ -446,7 +521,12 @@
         "wrRec": 101,
         "teRec": 101,
         "rbRush": 76,
-        "rbRec": 52
+        "rbRec": 52,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -475,7 +555,12 @@
         "wrRec": 112,
         "teRec": 53,
         "rbRush": 163,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -497,7 +582,12 @@
         "wrRec": 293,
         "teRec": 87,
         "rbRush": 80,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -526,7 +616,12 @@
         "wrRec": 293,
         "teRec": 87,
         "rbRush": 80,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -548,7 +643,12 @@
         "wrRec": 112,
         "teRec": 53,
         "rbRush": 163,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -577,7 +677,12 @@
         "wrRec": 193,
         "teRec": 64,
         "rbRush": 102,
-        "rbRec": 17
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 36,
@@ -599,7 +704,12 @@
         "wrRec": 185,
         "teRec": 137,
         "rbRush": 63,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 2,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -628,7 +738,12 @@
         "wrRec": 185,
         "teRec": 137,
         "rbRush": 63,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 2,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -650,7 +765,12 @@
         "wrRec": 193,
         "teRec": 64,
         "rbRush": 102,
-        "rbRec": 17
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -679,7 +799,12 @@
         "wrRec": 130,
         "teRec": 13,
         "rbRush": 98,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 41,
@@ -701,7 +826,12 @@
         "wrRec": 229,
         "teRec": 66,
         "rbRush": 162,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 1,
+        "rbRushTd": 3,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -730,7 +860,12 @@
         "wrRec": 229,
         "teRec": 66,
         "rbRush": 162,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 1,
+        "rbRushTd": 3,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 23,
@@ -752,7 +887,12 @@
         "wrRec": 130,
         "teRec": 13,
         "rbRush": 98,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -781,7 +921,12 @@
         "wrRec": 183,
         "teRec": 32,
         "rbRush": 121,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 10,
@@ -803,7 +948,12 @@
         "wrRec": 128,
         "teRec": 35,
         "rbRush": 34,
-        "rbRec": 42
+        "rbRec": 42,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -832,7 +982,12 @@
         "wrRec": 128,
         "teRec": 35,
         "rbRush": 34,
-        "rbRec": 42
+        "rbRec": 42,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 34,
@@ -854,7 +1009,12 @@
         "wrRec": 183,
         "teRec": 32,
         "rbRush": 121,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -883,7 +1043,12 @@
         "wrRec": 124,
         "teRec": 64,
         "rbRush": 61,
-        "rbRec": 33
+        "rbRec": 33,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 13,
@@ -905,7 +1070,12 @@
         "wrRec": 53,
         "teRec": 0,
         "rbRush": 114,
-        "rbRec": 90
+        "rbRec": 90,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -934,7 +1104,12 @@
         "wrRec": 53,
         "teRec": 0,
         "rbRush": 114,
-        "rbRec": 90
+        "rbRec": 90,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 20,
@@ -956,7 +1131,12 @@
         "wrRec": 124,
         "teRec": 64,
         "rbRush": 61,
-        "rbRec": 33
+        "rbRec": 33,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -985,7 +1165,12 @@
         "wrRec": 94,
         "teRec": 35,
         "rbRush": 47,
-        "rbRec": 11
+        "rbRec": 11,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 23,
@@ -1007,7 +1192,12 @@
         "wrRec": 176,
         "teRec": 23,
         "rbRush": 142,
-        "rbRec": 16
+        "rbRec": 16,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1036,7 +1226,12 @@
         "wrRec": 176,
         "teRec": 23,
         "rbRush": 142,
-        "rbRec": 16
+        "rbRec": 16,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 10,
@@ -1058,7 +1253,12 @@
         "wrRec": 94,
         "teRec": 35,
         "rbRush": 47,
-        "rbRec": 11
+        "rbRec": 11,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1087,7 +1287,12 @@
         "wrRec": 119,
         "teRec": 90,
         "rbRush": 52,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 26,
@@ -1109,7 +1314,12 @@
         "wrRec": 164,
         "teRec": 95,
         "rbRush": 102,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -1138,7 +1348,12 @@
         "wrRec": 164,
         "teRec": 95,
         "rbRush": 102,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 14,
@@ -1160,7 +1375,12 @@
         "wrRec": 119,
         "teRec": 90,
         "rbRush": 52,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1189,7 +1409,12 @@
         "wrRec": 83,
         "teRec": 32,
         "rbRush": 144,
-        "rbRec": 45
+        "rbRec": 45,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 2
       },
       "against": {
         "points": 13,
@@ -1211,7 +1436,12 @@
         "wrRec": 172,
         "teRec": 18,
         "rbRush": 35,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1240,7 +1470,12 @@
         "wrRec": 172,
         "teRec": 18,
         "rbRush": 35,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -1262,7 +1497,12 @@
         "wrRec": 83,
         "teRec": 32,
         "rbRush": 144,
-        "rbRec": 45
+        "rbRec": 45,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 2
       }
     },
     {
@@ -1291,7 +1531,12 @@
         "wrRec": 92,
         "teRec": 58,
         "rbRush": 99,
-        "rbRec": 1
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 22,
@@ -1313,7 +1558,12 @@
         "wrRec": 272,
         "teRec": 115,
         "rbRush": 66,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1342,7 +1592,12 @@
         "wrRec": 272,
         "teRec": 115,
         "rbRush": 66,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 39,
@@ -1364,7 +1619,12 @@
         "wrRec": 92,
         "teRec": 58,
         "rbRush": 99,
-        "rbRec": 1
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -1393,7 +1653,12 @@
         "wrRec": 121,
         "teRec": 77,
         "rbRush": 90,
-        "rbRec": 5
+        "rbRec": 5,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 22,
@@ -1415,7 +1680,12 @@
         "wrRec": 137,
         "teRec": 29,
         "rbRush": 101,
-        "rbRec": -2
+        "rbRec": -2,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1444,7 +1714,12 @@
         "wrRec": 137,
         "teRec": 29,
         "rbRush": 101,
-        "rbRec": -2
+        "rbRec": -2,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -1466,7 +1741,12 @@
         "wrRec": 121,
         "teRec": 77,
         "rbRush": 90,
-        "rbRec": 5
+        "rbRec": 5,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -1495,7 +1775,12 @@
         "wrRec": 121,
         "teRec": 87,
         "rbRush": 111,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
       },
       "against": {
         "points": 20,
@@ -1517,7 +1802,12 @@
         "wrRec": 112,
         "teRec": 32,
         "rbRush": 55,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -1546,7 +1836,12 @@
         "wrRec": 112,
         "teRec": 32,
         "rbRush": 55,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 28,
@@ -1568,7 +1863,12 @@
         "wrRec": 121,
         "teRec": 87,
         "rbRush": 111,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
       }
     },
     {
@@ -1597,7 +1897,12 @@
         "wrRec": 37,
         "teRec": 85,
         "rbRush": 197,
-        "rbRec": 62
+        "rbRec": 62,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 10,
@@ -1619,7 +1924,12 @@
         "wrRec": 55,
         "teRec": 53,
         "rbRush": 54,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -1648,7 +1958,12 @@
         "wrRec": 55,
         "teRec": 53,
         "rbRush": 54,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -1670,7 +1985,12 @@
         "wrRec": 37,
         "teRec": 85,
         "rbRush": 197,
-        "rbRec": 62
+        "rbRec": 62,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -1699,7 +2019,12 @@
         "wrRec": 144,
         "teRec": 100,
         "rbRush": 135,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -1721,7 +2046,12 @@
         "wrRec": 201,
         "teRec": 52,
         "rbRush": 59,
-        "rbRec": 74
+        "rbRec": 74,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 1
       }
     },
     {
@@ -1750,7 +2080,12 @@
         "wrRec": 201,
         "teRec": 52,
         "rbRush": 59,
-        "rbRec": 74
+        "rbRec": 74,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 1
       },
       "against": {
         "points": 41,
@@ -1772,7 +2107,12 @@
         "wrRec": 144,
         "teRec": 100,
         "rbRush": 135,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -1801,7 +2141,12 @@
         "wrRec": 85,
         "teRec": 35,
         "rbRush": 123,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 34,
@@ -1823,7 +2168,12 @@
         "wrRec": 231,
         "teRec": 50,
         "rbRush": 66,
-        "rbRec": 6
+        "rbRec": 6,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
       }
     },
     {
@@ -1852,7 +2202,12 @@
         "wrRec": 231,
         "teRec": 50,
         "rbRush": 66,
-        "rbRec": 6
+        "rbRec": 6,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
       },
       "against": {
         "points": 3,
@@ -1874,7 +2229,12 @@
         "wrRec": 85,
         "teRec": 35,
         "rbRush": 123,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1903,7 +2263,12 @@
         "wrRec": 155,
         "teRec": 49,
         "rbRush": 74,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -1925,7 +2290,12 @@
         "wrRec": 165,
         "teRec": 74,
         "rbRush": 42,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -1954,7 +2324,12 @@
         "wrRec": 165,
         "teRec": 74,
         "rbRush": 42,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 17,
@@ -1976,7 +2351,12 @@
         "wrRec": 155,
         "teRec": 49,
         "rbRush": 74,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2005,7 +2385,12 @@
         "wrRec": 115,
         "teRec": 12,
         "rbRush": 92,
-        "rbRec": 65
+        "rbRec": 65,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 9,
@@ -2027,7 +2412,12 @@
         "wrRec": 76,
         "teRec": 53,
         "rbRush": 113,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2056,7 +2446,12 @@
         "wrRec": 76,
         "teRec": 53,
         "rbRush": 113,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 3,
@@ -2078,7 +2473,12 @@
         "wrRec": 115,
         "teRec": 12,
         "rbRush": 92,
-        "rbRec": 65
+        "rbRec": 65,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2107,7 +2507,12 @@
         "wrRec": 138,
         "teRec": 174,
         "rbRush": 18,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2129,7 +2534,12 @@
         "wrRec": 184,
         "teRec": 5,
         "rbRush": 86,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2158,7 +2568,12 @@
         "wrRec": 184,
         "teRec": 5,
         "rbRush": 86,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 6,
@@ -2180,7 +2595,12 @@
         "wrRec": 138,
         "teRec": 174,
         "rbRush": 18,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2209,7 +2629,12 @@
         "wrRec": 131,
         "teRec": 70,
         "rbRush": 119,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 3,
@@ -2231,7 +2656,12 @@
         "wrRec": 92,
         "teRec": 39,
         "rbRush": 81,
-        "rbRec": 56
+        "rbRec": 56,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2260,7 +2690,12 @@
         "wrRec": 92,
         "teRec": 39,
         "rbRush": 81,
-        "rbRec": 56
+        "rbRec": 56,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2282,7 +2717,12 @@
         "wrRec": 131,
         "teRec": 70,
         "rbRush": 119,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2311,7 +2751,12 @@
         "wrRec": 154,
         "teRec": 22,
         "rbRush": 36,
-        "rbRec": 71
+        "rbRec": 71,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2333,7 +2778,12 @@
         "wrRec": 109,
         "teRec": 15,
         "rbRush": 63,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -2362,7 +2812,12 @@
         "wrRec": 109,
         "teRec": 15,
         "rbRush": 63,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 17,
@@ -2384,7 +2839,12 @@
         "wrRec": 154,
         "teRec": 22,
         "rbRush": 36,
-        "rbRec": 71
+        "rbRec": 71,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2413,7 +2873,12 @@
         "wrRec": 138,
         "teRec": 38,
         "rbRush": 99,
-        "rbRec": 6
+        "rbRec": 6,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 23,
@@ -2435,7 +2900,12 @@
         "wrRec": 133,
         "teRec": 71,
         "rbRush": 28,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -2464,7 +2934,12 @@
         "wrRec": 133,
         "teRec": 71,
         "rbRush": 28,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 19,
@@ -2486,7 +2961,12 @@
         "wrRec": 138,
         "teRec": 38,
         "rbRush": 99,
-        "rbRec": 6
+        "rbRec": 6,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2515,7 +2995,12 @@
         "wrRec": 140,
         "teRec": 13,
         "rbRush": 115,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 2,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -2537,7 +3022,12 @@
         "wrRec": 231,
         "teRec": 12,
         "rbRush": 66,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2566,7 +3056,12 @@
         "wrRec": 231,
         "teRec": 12,
         "rbRush": 66,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2588,7 +3083,12 @@
         "wrRec": 140,
         "teRec": 13,
         "rbRush": 115,
-        "rbRec": 30
+        "rbRec": 30,
+        "qbRushTd": 2,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2617,7 +3117,12 @@
         "wrRec": 190,
         "teRec": 49,
         "rbRush": 76,
-        "rbRec": 49
+        "rbRec": 49,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 13,
@@ -2639,7 +3144,12 @@
         "wrRec": 166,
         "teRec": 24,
         "rbRush": 89,
-        "rbRec": -1
+        "rbRec": -1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2668,7 +3178,12 @@
         "wrRec": 166,
         "teRec": 24,
         "rbRush": 89,
-        "rbRec": -1
+        "rbRec": -1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2690,7 +3205,12 @@
         "wrRec": 190,
         "teRec": 49,
         "rbRush": 76,
-        "rbRec": 49
+        "rbRec": 49,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -2719,7 +3239,12 @@
         "wrRec": 108,
         "teRec": 48,
         "rbRush": 118,
-        "rbRec": 36
+        "rbRec": 36,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 26,
@@ -2741,7 +3266,12 @@
         "wrRec": 204,
         "teRec": 34,
         "rbRush": 56,
-        "rbRec": 15
+        "rbRec": 15,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2770,7 +3300,12 @@
         "wrRec": 204,
         "teRec": 34,
         "rbRush": 56,
-        "rbRec": 15
+        "rbRec": 15,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 14,
@@ -2792,7 +3327,12 @@
         "wrRec": 108,
         "teRec": 48,
         "rbRush": 118,
-        "rbRec": 36
+        "rbRec": 36,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -2821,7 +3361,12 @@
         "wrRec": 29,
         "teRec": 41,
         "rbRush": 63,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -2843,7 +3388,12 @@
         "wrRec": 210,
         "teRec": 15,
         "rbRush": 157,
-        "rbRec": 10
+        "rbRec": 10,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2872,7 +3422,12 @@
         "wrRec": 210,
         "teRec": 15,
         "rbRush": 157,
-        "rbRec": 10
+        "rbRec": 10,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 7,
@@ -2894,7 +3449,12 @@
         "wrRec": 29,
         "teRec": 41,
         "rbRush": 63,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -2923,7 +3483,12 @@
         "wrRec": 216,
         "teRec": 43,
         "rbRush": 39,
-        "rbRec": 20
+        "rbRec": 20,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -2945,7 +3510,12 @@
         "wrRec": 142,
         "teRec": 20,
         "rbRush": 110,
-        "rbRec": 45
+        "rbRec": 45,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -2974,7 +3544,12 @@
         "wrRec": 142,
         "teRec": 20,
         "rbRush": 110,
-        "rbRec": 45
+        "rbRec": 45,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 37,
@@ -2996,7 +3571,12 @@
         "wrRec": 216,
         "teRec": 43,
         "rbRush": 39,
-        "rbRec": 20
+        "rbRec": 20,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -3025,7 +3605,12 @@
         "wrRec": 137,
         "teRec": 80,
         "rbRush": 63,
-        "rbRec": 70
+        "rbRec": 70,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 1
       },
       "against": {
         "points": 13,
@@ -3047,7 +3632,12 @@
         "wrRec": 139,
         "teRec": 21,
         "rbRush": 92,
-        "rbRec": 37
+        "rbRec": 37,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3076,7 +3666,12 @@
         "wrRec": 139,
         "teRec": 21,
         "rbRush": 92,
-        "rbRec": 37
+        "rbRec": 37,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 35,
@@ -3098,7 +3693,12 @@
         "wrRec": 137,
         "teRec": 80,
         "rbRush": 63,
-        "rbRec": 70
+        "rbRec": 70,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 1
       }
     },
     {
@@ -3127,7 +3727,12 @@
         "wrRec": 200,
         "teRec": 101,
         "rbRush": 132,
-        "rbRec": 81
+        "rbRec": 81,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -3149,7 +3754,12 @@
         "wrRec": 149,
         "teRec": 21,
         "rbRush": 92,
-        "rbRec": 40
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -3178,7 +3788,12 @@
         "wrRec": 149,
         "teRec": 21,
         "rbRush": 92,
-        "rbRec": 40
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 33,
@@ -3200,7 +3815,12 @@
         "wrRec": 200,
         "teRec": 101,
         "rbRush": 132,
-        "rbRec": 81
+        "rbRec": 81,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -3229,7 +3849,12 @@
         "wrRec": 226,
         "teRec": 76,
         "rbRush": 164,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 1
       },
       "against": {
         "points": 6,
@@ -3251,7 +3876,12 @@
         "wrRec": 79,
         "teRec": 33,
         "rbRush": 51,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3280,7 +3910,12 @@
         "wrRec": 79,
         "teRec": 33,
         "rbRush": 51,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 28,
@@ -3302,7 +3937,12 @@
         "wrRec": 226,
         "teRec": 76,
         "rbRush": 164,
-        "rbRec": 25
+        "rbRec": 25,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 1
       }
     },
     {
@@ -3331,7 +3971,12 @@
         "wrRec": 249,
         "teRec": 42,
         "rbRush": 17,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 35,
@@ -3353,7 +3998,12 @@
         "wrRec": 221,
         "teRec": 16,
         "rbRush": 244,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 3,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -3382,7 +4032,12 @@
         "wrRec": 221,
         "teRec": 16,
         "rbRush": 244,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 3,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 14,
@@ -3404,7 +4059,12 @@
         "wrRec": 249,
         "teRec": 42,
         "rbRush": 17,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3433,7 +4093,12 @@
         "wrRec": 110,
         "teRec": 43,
         "rbRush": 154,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 16,
@@ -3455,7 +4120,12 @@
         "wrRec": 182,
         "teRec": 0,
         "rbRush": 114,
-        "rbRec": 44
+        "rbRec": 44,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -3484,7 +4154,12 @@
         "wrRec": 182,
         "teRec": 0,
         "rbRush": 114,
-        "rbRec": 44
+        "rbRec": 44,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 24,
@@ -3506,7 +4181,12 @@
         "wrRec": 110,
         "teRec": 43,
         "rbRush": 154,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3535,7 +4215,12 @@
         "wrRec": 50,
         "teRec": 51,
         "rbRush": 87,
-        "rbRec": 43
+        "rbRec": 43,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 18,
@@ -3557,7 +4242,12 @@
         "wrRec": 137,
         "teRec": 128,
         "rbRush": 98,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3586,7 +4276,12 @@
         "wrRec": 137,
         "teRec": 128,
         "rbRush": 98,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 21,
@@ -3608,7 +4303,12 @@
         "wrRec": 50,
         "teRec": 51,
         "rbRush": 87,
-        "rbRec": 43
+        "rbRec": 43,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -3637,7 +4337,12 @@
         "wrRec": 142,
         "teRec": 51,
         "rbRush": 125,
-        "rbRec": 76
+        "rbRec": 76,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 24,
@@ -3659,7 +4364,12 @@
         "wrRec": 131,
         "teRec": 164,
         "rbRush": 46,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -3688,7 +4398,12 @@
         "wrRec": 131,
         "teRec": 164,
         "rbRush": 46,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -3710,7 +4425,12 @@
         "wrRec": 142,
         "teRec": 51,
         "rbRush": 125,
-        "rbRec": 76
+        "rbRec": 76,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -3739,7 +4459,12 @@
         "wrRec": 160,
         "teRec": 71,
         "rbRush": 82,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 17,
@@ -3761,7 +4486,12 @@
         "wrRec": 109,
         "teRec": 37,
         "rbRush": 48,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -3790,7 +4520,12 @@
         "wrRec": 109,
         "teRec": 37,
         "rbRush": 48,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 19,
@@ -3812,7 +4547,12 @@
         "wrRec": 160,
         "teRec": 71,
         "rbRush": 82,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3841,7 +4581,12 @@
         "wrRec": 124,
         "teRec": 32,
         "rbRush": 112,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 6,
@@ -3863,7 +4608,12 @@
         "wrRec": 209,
         "teRec": 5,
         "rbRush": 63,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3892,7 +4642,12 @@
         "wrRec": 209,
         "teRec": 5,
         "rbRush": 63,
-        "rbRec": 31
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 35,
@@ -3914,7 +4669,12 @@
         "wrRec": 124,
         "teRec": 32,
         "rbRush": 112,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -3943,7 +4703,12 @@
         "wrRec": 141,
         "teRec": 55,
         "rbRush": 58,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -3965,7 +4730,12 @@
         "wrRec": 141,
         "teRec": 98,
         "rbRush": 87,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 1
       }
     },
     {
@@ -3994,7 +4764,12 @@
         "wrRec": 141,
         "teRec": 98,
         "rbRush": 87,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 1
       },
       "against": {
         "points": 10,
@@ -4016,7 +4791,12 @@
         "wrRec": 141,
         "teRec": 55,
         "rbRush": 58,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4045,7 +4825,12 @@
         "wrRec": 65,
         "teRec": 13,
         "rbRush": 115,
-        "rbRec": 40
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 7,
@@ -4067,7 +4852,12 @@
         "wrRec": 129,
         "teRec": 30,
         "rbRush": 79,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4096,7 +4886,12 @@
         "wrRec": 129,
         "teRec": 30,
         "rbRush": 79,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 12,
@@ -4118,7 +4913,12 @@
         "wrRec": 65,
         "teRec": 13,
         "rbRush": 115,
-        "rbRec": 40
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4147,7 +4947,12 @@
         "wrRec": 144,
         "teRec": 99,
         "rbRush": 127,
-        "rbRec": 49
+        "rbRec": 49,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -4169,7 +4974,12 @@
         "wrRec": 219,
         "teRec": 50,
         "rbRush": 70,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4198,7 +5008,12 @@
         "wrRec": 219,
         "teRec": 50,
         "rbRush": 70,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -4220,7 +5035,12 @@
         "wrRec": 144,
         "teRec": 99,
         "rbRush": 127,
-        "rbRec": 49
+        "rbRec": 49,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4249,7 +5069,12 @@
         "wrRec": 159,
         "teRec": 11,
         "rbRush": 71,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 31,
@@ -4271,7 +5096,12 @@
         "wrRec": 236,
         "teRec": 82,
         "rbRush": 39,
-        "rbRec": 75
+        "rbRec": 75,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4300,7 +5130,12 @@
         "wrRec": 236,
         "teRec": 82,
         "rbRush": 39,
-        "rbRec": 75
+        "rbRec": 75,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 33,
@@ -4322,7 +5157,12 @@
         "wrRec": 159,
         "teRec": 11,
         "rbRush": 71,
-        "rbRec": 13
+        "rbRec": 13,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -4351,7 +5191,12 @@
         "wrRec": 174,
         "teRec": 82,
         "rbRush": 92,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -4373,7 +5218,12 @@
         "wrRec": 151,
         "teRec": 100,
         "rbRush": 89,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -4402,7 +5252,12 @@
         "wrRec": 151,
         "teRec": 100,
         "rbRush": 89,
-        "rbRec": 29
+        "rbRec": 29,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 36,
@@ -4424,7 +5279,12 @@
         "wrRec": 174,
         "teRec": 82,
         "rbRush": 92,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -4453,7 +5313,12 @@
         "wrRec": 135,
         "teRec": 56,
         "rbRush": 42,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 23,
@@ -4475,7 +5340,12 @@
         "wrRec": 123,
         "teRec": 11,
         "rbRush": 61,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4504,7 +5374,12 @@
         "wrRec": 123,
         "teRec": 11,
         "rbRush": 61,
-        "rbRec": 34
+        "rbRec": 34,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 16,
@@ -4526,7 +5401,12 @@
         "wrRec": 135,
         "teRec": 56,
         "rbRush": 42,
-        "rbRec": 26
+        "rbRec": 26,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4555,7 +5435,12 @@
         "wrRec": 225,
         "teRec": 51,
         "rbRush": 120,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 34,
@@ -4577,7 +5462,12 @@
         "wrRec": 125,
         "teRec": 61,
         "rbRush": 122,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4606,7 +5496,12 @@
         "wrRec": 125,
         "teRec": 61,
         "rbRush": 122,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 31,
@@ -4628,7 +5523,12 @@
         "wrRec": 225,
         "teRec": 51,
         "rbRush": 120,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4657,7 +5557,12 @@
         "wrRec": 146,
         "teRec": 86,
         "rbRush": 112,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 4,
+        "rbRecTd": 0
       },
       "against": {
         "points": 35,
@@ -4679,7 +5584,12 @@
         "wrRec": 63,
         "teRec": 148,
         "rbRush": 110,
-        "rbRec": 37
+        "rbRec": 37,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -4708,7 +5618,12 @@
         "wrRec": 63,
         "teRec": 148,
         "rbRush": 110,
-        "rbRec": 37
+        "rbRec": 37,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -4730,7 +5645,12 @@
         "wrRec": 146,
         "teRec": 86,
         "rbRush": 112,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 4,
+        "rbRecTd": 0
       }
     },
     {
@@ -4759,7 +5679,12 @@
         "wrRec": 121,
         "teRec": 8,
         "rbRush": 57,
-        "rbRec": 57
+        "rbRec": 57,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 26,
@@ -4781,7 +5706,12 @@
         "wrRec": 230,
         "teRec": 90,
         "rbRush": 103,
-        "rbRec": 70
+        "rbRec": 70,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4810,7 +5740,12 @@
         "wrRec": 230,
         "teRec": 90,
         "rbRush": 103,
-        "rbRec": 70
+        "rbRec": 70,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -4832,7 +5767,12 @@
         "wrRec": 121,
         "teRec": 8,
         "rbRush": 57,
-        "rbRec": 57
+        "rbRec": 57,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -4861,7 +5801,12 @@
         "wrRec": 196,
         "teRec": 47,
         "rbRush": 115,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 7,
@@ -4883,7 +5828,12 @@
         "wrRec": 126,
         "teRec": 13,
         "rbRush": 82,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4912,7 +5862,12 @@
         "wrRec": 126,
         "teRec": 13,
         "rbRush": 82,
-        "rbRec": 14
+        "rbRec": 14,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -4934,7 +5889,12 @@
         "wrRec": 196,
         "teRec": 47,
         "rbRush": 115,
-        "rbRec": 4
+        "rbRec": 4,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -4963,7 +5923,12 @@
         "wrRec": 191,
         "teRec": 27,
         "rbRush": 90,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -4985,7 +5950,12 @@
         "wrRec": 222,
         "teRec": 44,
         "rbRush": 92,
-        "rbRec": 33
+        "rbRec": 33,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -5014,7 +5984,12 @@
         "wrRec": 222,
         "teRec": 44,
         "rbRush": 92,
-        "rbRec": 33
+        "rbRec": 33,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -5036,7 +6011,12 @@
         "wrRec": 191,
         "teRec": 27,
         "rbRush": 90,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5065,7 +6045,12 @@
         "wrRec": 168,
         "teRec": 5,
         "rbRush": 49,
-        "rbRec": 46
+        "rbRec": 46,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -5087,7 +6072,12 @@
         "wrRec": 93,
         "teRec": 41,
         "rbRush": 126,
-        "rbRec": 9
+        "rbRec": 9,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5116,7 +6106,12 @@
         "wrRec": 93,
         "teRec": 41,
         "rbRush": 126,
-        "rbRec": 9
+        "rbRec": 9,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 13,
@@ -5138,7 +6133,12 @@
         "wrRec": 168,
         "teRec": 5,
         "rbRush": 49,
-        "rbRec": 46
+        "rbRec": 46,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5167,7 +6167,12 @@
         "wrRec": 196,
         "teRec": 61,
         "rbRush": 76,
-        "rbRec": 28
+        "rbRec": 28,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 18,
@@ -5189,7 +6194,12 @@
         "wrRec": 214,
         "teRec": 7,
         "rbRush": 57,
-        "rbRec": 1
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5218,7 +6228,12 @@
         "wrRec": 214,
         "teRec": 7,
         "rbRush": 57,
-        "rbRec": 1
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -5240,7 +6255,12 @@
         "wrRec": 196,
         "teRec": 61,
         "rbRush": 76,
-        "rbRec": 28
+        "rbRec": 28,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5269,7 +6289,12 @@
         "wrRec": 212,
         "teRec": 20,
         "rbRush": 81,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 29,
@@ -5291,7 +6316,12 @@
         "wrRec": 168,
         "teRec": 74,
         "rbRush": 89,
-        "rbRec": 27
+        "rbRec": 27,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5320,7 +6350,12 @@
         "wrRec": 168,
         "teRec": 74,
         "rbRush": 89,
-        "rbRec": 27
+        "rbRec": 27,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 26,
@@ -5342,7 +6377,12 @@
         "wrRec": 212,
         "teRec": 20,
         "rbRush": 81,
-        "rbRec": 21
+        "rbRec": 21,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5371,7 +6411,12 @@
         "wrRec": 163,
         "teRec": 78,
         "rbRush": 220,
-        "rbRec": 27
+        "rbRec": 27,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 12,
@@ -5393,7 +6438,12 @@
         "wrRec": 100,
         "teRec": 11,
         "rbRush": 59,
-        "rbRec": 8
+        "rbRec": 8,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5422,7 +6472,12 @@
         "wrRec": 100,
         "teRec": 11,
         "rbRush": 59,
-        "rbRec": 8
+        "rbRec": 8,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 23,
@@ -5444,7 +6499,12 @@
         "wrRec": 163,
         "teRec": 78,
         "rbRush": 220,
-        "rbRec": 27
+        "rbRec": 27,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5473,7 +6533,12 @@
         "wrRec": 315,
         "teRec": 42,
         "rbRush": 17,
-        "rbRec": 71
+        "rbRec": 71,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 22,
@@ -5495,7 +6560,12 @@
         "wrRec": 99,
         "teRec": 110,
         "rbRush": 108,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5524,7 +6594,12 @@
         "wrRec": 99,
         "teRec": 110,
         "rbRush": 108,
-        "rbRec": 18
+        "rbRec": 18,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 17,
@@ -5546,7 +6621,12 @@
         "wrRec": 315,
         "teRec": 42,
         "rbRush": 17,
-        "rbRec": 71
+        "rbRec": 71,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5575,7 +6655,12 @@
         "wrRec": 285,
         "teRec": 43,
         "rbRush": 46,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 34,
@@ -5597,7 +6682,12 @@
         "wrRec": 301,
         "teRec": 11,
         "rbRush": 74,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 3,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5626,7 +6716,12 @@
         "wrRec": 301,
         "teRec": 11,
         "rbRush": 74,
-        "rbRec": 23
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 3,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -5648,7 +6743,12 @@
         "wrRec": 285,
         "teRec": 43,
         "rbRush": 46,
-        "rbRec": 19
+        "rbRec": 19,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5677,7 +6777,12 @@
         "wrRec": 164,
         "teRec": 77,
         "rbRush": 87,
-        "rbRec": 9
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -5699,7 +6804,12 @@
         "wrRec": 107,
         "teRec": 60,
         "rbRush": 105,
-        "rbRec": -1
+        "rbRec": -1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5728,7 +6838,12 @@
         "wrRec": 107,
         "teRec": 60,
         "rbRush": 105,
-        "rbRec": -1
+        "rbRec": -1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 36,
@@ -5750,7 +6865,12 @@
         "wrRec": 164,
         "teRec": 77,
         "rbRush": 87,
-        "rbRec": 9
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5779,7 +6899,12 @@
         "wrRec": 78,
         "teRec": 13,
         "rbRush": 86,
-        "rbRec": 2
+        "rbRec": 2,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -5801,7 +6926,12 @@
         "wrRec": 176,
         "teRec": 67,
         "rbRush": 94,
-        "rbRec": 74
+        "rbRec": 74,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5830,7 +6960,12 @@
         "wrRec": 176,
         "teRec": 67,
         "rbRush": 94,
-        "rbRec": 74
+        "rbRec": 74,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 20,
@@ -5852,7 +6987,12 @@
         "wrRec": 78,
         "teRec": 13,
         "rbRush": 86,
-        "rbRec": 2
+        "rbRec": 2,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -5881,7 +7021,12 @@
         "wrRec": 89,
         "teRec": 37,
         "rbRush": 76,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 17,
@@ -5903,7 +7048,12 @@
         "wrRec": 66,
         "teRec": 90,
         "rbRush": 85,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -5932,7 +7082,12 @@
         "wrRec": 66,
         "teRec": 90,
         "rbRush": 85,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 14,
@@ -5954,7 +7109,12 @@
         "wrRec": 89,
         "teRec": 37,
         "rbRush": 76,
-        "rbRec": 22
+        "rbRec": 22,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -5983,7 +7143,12 @@
         "wrRec": 80,
         "teRec": 123,
         "rbRush": 106,
-        "rbRec": 44
+        "rbRec": 44,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 10,
@@ -6005,7 +7170,12 @@
         "wrRec": 70,
         "teRec": 15,
         "rbRush": 107,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6034,7 +7204,12 @@
         "wrRec": 70,
         "teRec": 15,
         "rbRush": 107,
-        "rbRec": 0
+        "rbRec": 0,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 15,
@@ -6056,7 +7231,12 @@
         "wrRec": 80,
         "teRec": 123,
         "rbRush": 106,
-        "rbRec": 44
+        "rbRec": 44,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6085,7 +7265,12 @@
         "wrRec": 89,
         "teRec": 200,
         "rbRush": 72,
-        "rbRec": 76
+        "rbRec": 76,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 0
       },
       "against": {
         "points": 30,
@@ -6107,7 +7292,12 @@
         "wrRec": 181,
         "teRec": 32,
         "rbRush": 177,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6136,7 +7326,12 @@
         "wrRec": 181,
         "teRec": 32,
         "rbRush": 177,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 27,
@@ -6158,7 +7353,12 @@
         "wrRec": 89,
         "teRec": 200,
         "rbRush": 72,
-        "rbRec": 76
+        "rbRec": 76,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 0
       }
     },
     {
@@ -6187,7 +7387,12 @@
         "wrRec": 115,
         "teRec": 12,
         "rbRush": 99,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 23,
@@ -6209,7 +7414,12 @@
         "wrRec": 110,
         "teRec": 36,
         "rbRush": 109,
-        "rbRec": 43
+        "rbRec": 43,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -6238,7 +7448,12 @@
         "wrRec": 110,
         "teRec": 36,
         "rbRush": 109,
-        "rbRec": 43
+        "rbRec": 43,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
       },
       "against": {
         "points": 30,
@@ -6260,7 +7475,12 @@
         "wrRec": 115,
         "teRec": 12,
         "rbRush": 99,
-        "rbRec": 41
+        "rbRec": 41,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
       }
     },
     {
@@ -6289,7 +7509,12 @@
         "wrRec": 102,
         "teRec": 70,
         "rbRush": 65,
-        "rbRec": 46
+        "rbRec": 46,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 14,
@@ -6311,7 +7536,12 @@
         "wrRec": 96,
         "teRec": 6,
         "rbRush": 72,
-        "rbRec": 112
+        "rbRec": 112,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6340,7 +7570,12 @@
         "wrRec": 96,
         "teRec": 6,
         "rbRush": 72,
-        "rbRec": 112
+        "rbRec": 112,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -6362,7 +7597,12 @@
         "wrRec": 102,
         "teRec": 70,
         "rbRush": 65,
-        "rbRec": 46
+        "rbRec": 46,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -6391,7 +7631,12 @@
         "wrRec": 261,
         "teRec": 56,
         "rbRush": 124,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 26,
@@ -6413,7 +7658,12 @@
         "wrRec": 272,
         "teRec": 92,
         "rbRush": 46,
-        "rbRec": 48
+        "rbRec": 48,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       }
     },
     {
@@ -6442,7 +7692,12 @@
         "wrRec": 272,
         "teRec": 92,
         "rbRush": 46,
-        "rbRec": 48
+        "rbRec": 48,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
       },
       "against": {
         "points": 32,
@@ -6464,7 +7719,12 @@
         "wrRec": 261,
         "teRec": 56,
         "rbRush": 124,
-        "rbRec": 12
+        "rbRec": 12,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6493,7 +7753,12 @@
         "wrRec": 177,
         "teRec": 59,
         "rbRush": 50,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 45,
@@ -6515,7 +7780,12 @@
         "wrRec": 160,
         "teRec": 56,
         "rbRush": 207,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 5,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     },
     {
@@ -6544,7 +7814,12 @@
         "wrRec": 160,
         "teRec": 56,
         "rbRush": 207,
-        "rbRec": 7
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 5,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
       },
       "against": {
         "points": 24,
@@ -6566,7 +7841,1842 @@
         "wrRec": 177,
         "teRec": 59,
         "rbRush": 50,
-        "rbRec": 50
+        "rbRec": 50,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_TB_DAL",
+      "date": "2026-10-08",
+      "week": 5,
+      "team": "DAL",
+      "opponent": "TB",
+      "own": {
+        "points": 16,
+        "passYards": 316,
+        "rushYards": 50,
+        "yards": 366,
+        "turnovers": 3,
+        "penalties": 7,
+        "penaltyYards": 57,
+        "firstDowns": 20,
+        "thirdMade": 4,
+        "thirdAttempts": 10,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 2,
+        "qbPass": 316,
+        "qbRush": 0,
+        "wrRec": 271,
+        "teRec": 28,
+        "rbRush": 50,
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 24,
+        "passYards": 178,
+        "rushYards": 241,
+        "yards": 419,
+        "turnovers": 0,
+        "penalties": 14,
+        "penaltyYards": 92,
+        "firstDowns": 24,
+        "thirdMade": 7,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 3,
+        "redZoneAttempts": 5,
+        "qbPass": 189,
+        "qbRush": 23,
+        "wrRec": 139,
+        "teRec": 30,
+        "rbRush": 201,
+        "rbRec": 20,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
+      }
+    },
+    {
+      "id": "2026_05_TB_DAL",
+      "date": "2026-10-08",
+      "week": 5,
+      "team": "TB",
+      "opponent": "DAL",
+      "own": {
+        "points": 24,
+        "passYards": 178,
+        "rushYards": 241,
+        "yards": 419,
+        "turnovers": 0,
+        "penalties": 14,
+        "penaltyYards": 92,
+        "firstDowns": 24,
+        "thirdMade": 7,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 3,
+        "redZoneAttempts": 5,
+        "qbPass": 189,
+        "qbRush": 23,
+        "wrRec": 139,
+        "teRec": 30,
+        "rbRush": 201,
+        "rbRec": 20,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 1
+      },
+      "against": {
+        "points": 16,
+        "passYards": 316,
+        "rushYards": 50,
+        "yards": 366,
+        "turnovers": 3,
+        "penalties": 7,
+        "penaltyYards": 57,
+        "firstDowns": 20,
+        "thirdMade": 4,
+        "thirdAttempts": 10,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 2,
+        "qbPass": 316,
+        "qbRush": 0,
+        "wrRec": 271,
+        "teRec": 28,
+        "rbRush": 50,
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_PHI_JAX",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "JAX",
+      "opponent": "PHI",
+      "own": {
+        "points": 19,
+        "passYards": 306,
+        "rushYards": 102,
+        "yards": 408,
+        "turnovers": 1,
+        "penalties": 13,
+        "penaltyYards": 100,
+        "firstDowns": 18,
+        "thirdMade": 5,
+        "thirdAttempts": 16,
+        "fourthMade": 2,
+        "fourthAttempts": 4,
+        "redZoneMade": 0,
+        "redZoneAttempts": 3,
+        "qbPass": 331,
+        "qbRush": 25,
+        "wrRec": 204,
+        "teRec": 88,
+        "rbRush": 77,
+        "rbRec": 30,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 17,
+        "passYards": 210,
+        "rushYards": 22,
+        "yards": 232,
+        "turnovers": 0,
+        "penalties": 7,
+        "penaltyYards": 43,
+        "firstDowns": 13,
+        "thirdMade": 6,
+        "thirdAttempts": 15,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 220,
+        "qbRush": 2,
+        "wrRec": 177,
+        "teRec": 38,
+        "rbRush": 20,
+        "rbRec": 5,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_PHI_JAX",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "PHI",
+      "opponent": "JAX",
+      "own": {
+        "points": 17,
+        "passYards": 210,
+        "rushYards": 22,
+        "yards": 232,
+        "turnovers": 0,
+        "penalties": 7,
+        "penaltyYards": 43,
+        "firstDowns": 13,
+        "thirdMade": 6,
+        "thirdAttempts": 15,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 220,
+        "qbRush": 2,
+        "wrRec": 177,
+        "teRec": 38,
+        "rbRush": 20,
+        "rbRec": 5,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 19,
+        "passYards": 306,
+        "rushYards": 102,
+        "yards": 408,
+        "turnovers": 1,
+        "penalties": 13,
+        "penaltyYards": 100,
+        "firstDowns": 18,
+        "thirdMade": 5,
+        "thirdAttempts": 16,
+        "fourthMade": 2,
+        "fourthAttempts": 4,
+        "redZoneMade": 0,
+        "redZoneAttempts": 3,
+        "qbPass": 331,
+        "qbRush": 25,
+        "wrRec": 204,
+        "teRec": 88,
+        "rbRush": 77,
+        "rbRec": 30,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_CHI_GB",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "GB",
+      "opponent": "CHI",
+      "own": {
+        "points": 31,
+        "passYards": 358,
+        "rushYards": 70,
+        "yards": 428,
+        "turnovers": 0,
+        "penalties": 4,
+        "penaltyYards": 25,
+        "firstDowns": 18,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 367,
+        "qbRush": 4,
+        "wrRec": 286,
+        "teRec": 64,
+        "rbRush": 64,
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 7,
+        "passYards": 165,
+        "rushYards": 81,
+        "yards": 246,
+        "turnovers": 5,
+        "penalties": 3,
+        "penaltyYards": 20,
+        "firstDowns": 17,
+        "thirdMade": 4,
+        "thirdAttempts": 14,
+        "fourthMade": 2,
+        "fourthAttempts": 5,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 195,
+        "qbRush": 21,
+        "wrRec": 104,
+        "teRec": 27,
+        "rbRush": 49,
+        "rbRec": 64,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_CHI_GB",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "CHI",
+      "opponent": "GB",
+      "own": {
+        "points": 7,
+        "passYards": 165,
+        "rushYards": 81,
+        "yards": 246,
+        "turnovers": 5,
+        "penalties": 3,
+        "penaltyYards": 20,
+        "firstDowns": 17,
+        "thirdMade": 4,
+        "thirdAttempts": 14,
+        "fourthMade": 2,
+        "fourthAttempts": 5,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 195,
+        "qbRush": 21,
+        "wrRec": 104,
+        "teRec": 27,
+        "rbRush": 49,
+        "rbRec": 64,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 31,
+        "passYards": 358,
+        "rushYards": 70,
+        "yards": 428,
+        "turnovers": 0,
+        "penalties": 4,
+        "penaltyYards": 25,
+        "firstDowns": 18,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 367,
+        "qbRush": 4,
+        "wrRec": 286,
+        "teRec": 64,
+        "rbRush": 64,
+        "rbRec": 17,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_CIN_MIA",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "MIA",
+      "opponent": "CIN",
+      "own": {
+        "points": 24,
+        "passYards": 114,
+        "rushYards": 217,
+        "yards": 331,
+        "turnovers": 3,
+        "penalties": 7,
+        "penaltyYards": 30,
+        "firstDowns": 23,
+        "thirdMade": 7,
+        "thirdAttempts": 13,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 137,
+        "qbRush": 74,
+        "wrRec": 95,
+        "teRec": 42,
+        "rbRush": 99,
+        "rbRec": 0,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 31,
+        "passYards": 190,
+        "rushYards": 117,
+        "yards": 307,
+        "turnovers": 1,
+        "penalties": 4,
+        "penaltyYards": 39,
+        "firstDowns": 22,
+        "thirdMade": 9,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 5,
+        "qbPass": 190,
+        "qbRush": 10,
+        "wrRec": 111,
+        "teRec": 48,
+        "rbRush": 107,
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 1
+      }
+    },
+    {
+      "id": "2026_05_CIN_MIA",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "CIN",
+      "opponent": "MIA",
+      "own": {
+        "points": 31,
+        "passYards": 190,
+        "rushYards": 117,
+        "yards": 307,
+        "turnovers": 1,
+        "penalties": 4,
+        "penaltyYards": 39,
+        "firstDowns": 22,
+        "thirdMade": 9,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 5,
+        "qbPass": 190,
+        "qbRush": 10,
+        "wrRec": 111,
+        "teRec": 48,
+        "rbRush": 107,
+        "rbRec": 31,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 1
+      },
+      "against": {
+        "points": 24,
+        "passYards": 114,
+        "rushYards": 217,
+        "yards": 331,
+        "turnovers": 3,
+        "penalties": 7,
+        "penaltyYards": 30,
+        "firstDowns": 23,
+        "thirdMade": 7,
+        "thirdAttempts": 13,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 137,
+        "qbRush": 74,
+        "wrRec": 95,
+        "teRec": 42,
+        "rbRush": 99,
+        "rbRec": 0,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_LV_NE",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "NE",
+      "opponent": "LV",
+      "own": {
+        "points": 45,
+        "passYards": 371,
+        "rushYards": 165,
+        "yards": 536,
+        "turnovers": 1,
+        "penalties": 12,
+        "penaltyYards": 116,
+        "firstDowns": 29,
+        "thirdMade": 6,
+        "thirdAttempts": 12,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 4,
+        "redZoneAttempts": 5,
+        "qbPass": 374,
+        "qbRush": 25,
+        "wrRec": 229,
+        "teRec": 101,
+        "rbRush": 138,
+        "rbRec": 44,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 17,
+        "passYards": 268,
+        "rushYards": 38,
+        "yards": 306,
+        "turnovers": 1,
+        "penalties": 8,
+        "penaltyYards": 101,
+        "firstDowns": 16,
+        "thirdMade": 5,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 291,
+        "qbRush": 3,
+        "wrRec": 99,
+        "teRec": 121,
+        "rbRush": 41,
+        "rbRec": 71,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_LV_NE",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "LV",
+      "opponent": "NE",
+      "own": {
+        "points": 17,
+        "passYards": 268,
+        "rushYards": 38,
+        "yards": 306,
+        "turnovers": 1,
+        "penalties": 8,
+        "penaltyYards": 101,
+        "firstDowns": 16,
+        "thirdMade": 5,
+        "thirdAttempts": 13,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 291,
+        "qbRush": 3,
+        "wrRec": 99,
+        "teRec": 121,
+        "rbRush": 41,
+        "rbRec": 71,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 45,
+        "passYards": 371,
+        "rushYards": 165,
+        "yards": 536,
+        "turnovers": 1,
+        "penalties": 12,
+        "penaltyYards": 116,
+        "firstDowns": 29,
+        "thirdMade": 6,
+        "thirdAttempts": 12,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 4,
+        "redZoneAttempts": 5,
+        "qbPass": 374,
+        "qbRush": 25,
+        "wrRec": 229,
+        "teRec": 101,
+        "rbRush": 138,
+        "rbRec": 44,
+        "qbRushTd": 1,
+        "rbRushTd": 1,
+        "wrRecTd": 3,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_MIN_NO",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "NO",
+      "opponent": "MIN",
+      "own": {
+        "points": 13,
+        "passYards": 87,
+        "rushYards": 55,
+        "yards": 142,
+        "turnovers": 3,
+        "penalties": 6,
+        "penaltyYards": 41,
+        "firstDowns": 9,
+        "thirdMade": 2,
+        "thirdAttempts": 10,
+        "fourthMade": 2,
+        "fourthAttempts": 3,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 96,
+        "qbRush": 0,
+        "wrRec": 72,
+        "teRec": 23,
+        "rbRush": 55,
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 23,
+        "passYards": 211,
+        "rushYards": 153,
+        "yards": 364,
+        "turnovers": 2,
+        "penalties": 4,
+        "penaltyYards": 30,
+        "firstDowns": 18,
+        "thirdMade": 9,
+        "thirdAttempts": 18,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 2,
+        "redZoneAttempts": 4,
+        "qbPass": 229,
+        "qbRush": 51,
+        "wrRec": 158,
+        "teRec": 50,
+        "rbRush": 113,
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_MIN_NO",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "MIN",
+      "opponent": "NO",
+      "own": {
+        "points": 23,
+        "passYards": 211,
+        "rushYards": 153,
+        "yards": 364,
+        "turnovers": 2,
+        "penalties": 4,
+        "penaltyYards": 30,
+        "firstDowns": 18,
+        "thirdMade": 9,
+        "thirdAttempts": 18,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 2,
+        "redZoneAttempts": 4,
+        "qbPass": 229,
+        "qbRush": 51,
+        "wrRec": 158,
+        "teRec": 50,
+        "rbRush": 113,
+        "rbRec": 21,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 13,
+        "passYards": 87,
+        "rushYards": 55,
+        "yards": 142,
+        "turnovers": 3,
+        "penalties": 6,
+        "penaltyYards": 41,
+        "firstDowns": 9,
+        "thirdMade": 2,
+        "thirdAttempts": 10,
+        "fourthMade": 2,
+        "fourthAttempts": 3,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 96,
+        "qbRush": 0,
+        "wrRec": 72,
+        "teRec": 23,
+        "rbRush": 55,
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_CLE_NYJ",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "NYJ",
+      "opponent": "CLE",
+      "own": {
+        "points": 17,
+        "passYards": 142,
+        "rushYards": 134,
+        "yards": 276,
+        "turnovers": 2,
+        "penalties": 10,
+        "penaltyYards": 102,
+        "firstDowns": 14,
+        "thirdMade": 8,
+        "thirdAttempts": 17,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 0,
+        "redZoneAttempts": 2,
+        "qbPass": 182,
+        "qbRush": 7,
+        "wrRec": 146,
+        "teRec": 27,
+        "rbRush": 124,
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 12,
+        "passYards": 101,
+        "rushYards": 96,
+        "yards": 197,
+        "turnovers": 2,
+        "penalties": 6,
+        "penaltyYards": 30,
+        "firstDowns": 13,
+        "thirdMade": 4,
+        "thirdAttempts": 16,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 155,
+        "qbRush": 40,
+        "wrRec": 144,
+        "teRec": 4,
+        "rbRush": 56,
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_CLE_NYJ",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "CLE",
+      "opponent": "NYJ",
+      "own": {
+        "points": 12,
+        "passYards": 101,
+        "rushYards": 96,
+        "yards": 197,
+        "turnovers": 2,
+        "penalties": 6,
+        "penaltyYards": 30,
+        "firstDowns": 13,
+        "thirdMade": 4,
+        "thirdAttempts": 16,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 155,
+        "qbRush": 40,
+        "wrRec": 144,
+        "teRec": 4,
+        "rbRush": 56,
+        "rbRec": 7,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 17,
+        "passYards": 142,
+        "rushYards": 134,
+        "yards": 276,
+        "turnovers": 2,
+        "penalties": 10,
+        "penaltyYards": 102,
+        "firstDowns": 14,
+        "thirdMade": 8,
+        "thirdAttempts": 17,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 0,
+        "redZoneAttempts": 2,
+        "qbPass": 182,
+        "qbRush": 7,
+        "wrRec": 146,
+        "teRec": 27,
+        "rbRush": 124,
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_IND_PIT",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "PIT",
+      "opponent": "IND",
+      "own": {
+        "points": 34,
+        "passYards": 225,
+        "rushYards": 127,
+        "yards": 352,
+        "turnovers": 0,
+        "penalties": 6,
+        "penaltyYards": 50,
+        "firstDowns": 16,
+        "thirdMade": 4,
+        "thirdAttempts": 11,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 2,
+        "redZoneAttempts": 2,
+        "qbPass": 235,
+        "qbRush": 4,
+        "wrRec": 92,
+        "teRec": 56,
+        "rbRush": 107,
+        "rbRec": 87,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
+      },
+      "against": {
+        "points": 22,
+        "passYards": 266,
+        "rushYards": 66,
+        "yards": 332,
+        "turnovers": 0,
+        "penalties": 9,
+        "penaltyYards": 59,
+        "firstDowns": 19,
+        "thirdMade": 4,
+        "thirdAttempts": 15,
+        "fourthMade": 3,
+        "fourthAttempts": 5,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 267,
+        "qbRush": 4,
+        "wrRec": 126,
+        "teRec": 101,
+        "rbRush": 61,
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_IND_PIT",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "IND",
+      "opponent": "PIT",
+      "own": {
+        "points": 22,
+        "passYards": 266,
+        "rushYards": 66,
+        "yards": 332,
+        "turnovers": 0,
+        "penalties": 9,
+        "penaltyYards": 59,
+        "firstDowns": 19,
+        "thirdMade": 4,
+        "thirdAttempts": 15,
+        "fourthMade": 3,
+        "fourthAttempts": 5,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 267,
+        "qbRush": 4,
+        "wrRec": 126,
+        "teRec": 101,
+        "rbRush": 61,
+        "rbRec": 40,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 34,
+        "passYards": 225,
+        "rushYards": 127,
+        "yards": 352,
+        "turnovers": 0,
+        "penalties": 6,
+        "penaltyYards": 50,
+        "firstDowns": 16,
+        "thirdMade": 4,
+        "thirdAttempts": 11,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 2,
+        "redZoneAttempts": 2,
+        "qbPass": 235,
+        "qbRush": 4,
+        "wrRec": 92,
+        "teRec": 56,
+        "rbRush": 107,
+        "rbRec": 87,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 2,
+        "rbRecTd": 1
+      }
+    },
+    {
+      "id": "2026_05_HOU_TEN",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "TEN",
+      "opponent": "HOU",
+      "own": {
+        "points": 3,
+        "passYards": 130,
+        "rushYards": 57,
+        "yards": 187,
+        "turnovers": 2,
+        "penalties": 7,
+        "penaltyYards": 83,
+        "firstDowns": 15,
+        "thirdMade": 4,
+        "thirdAttempts": 11,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 170,
+        "qbRush": 2,
+        "wrRec": 137,
+        "teRec": 5,
+        "rbRush": 55,
+        "rbRec": 28,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 26,
+        "passYards": 250,
+        "rushYards": 79,
+        "yards": 329,
+        "turnovers": 0,
+        "penalties": 11,
+        "penaltyYards": 95,
+        "firstDowns": 20,
+        "thirdMade": 6,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 2,
+        "redZoneAttempts": 4,
+        "qbPass": 261,
+        "qbRush": 5,
+        "wrRec": 200,
+        "teRec": 38,
+        "rbRush": 73,
+        "rbRec": 23,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_HOU_TEN",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "HOU",
+      "opponent": "TEN",
+      "own": {
+        "points": 26,
+        "passYards": 250,
+        "rushYards": 79,
+        "yards": 329,
+        "turnovers": 0,
+        "penalties": 11,
+        "penaltyYards": 95,
+        "firstDowns": 20,
+        "thirdMade": 6,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 2,
+        "redZoneAttempts": 4,
+        "qbPass": 261,
+        "qbRush": 5,
+        "wrRec": 200,
+        "teRec": 38,
+        "rbRush": 73,
+        "rbRec": 23,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 3,
+        "passYards": 130,
+        "rushYards": 57,
+        "yards": 187,
+        "turnovers": 2,
+        "penalties": 7,
+        "penaltyYards": 83,
+        "firstDowns": 15,
+        "thirdMade": 4,
+        "thirdAttempts": 11,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 170,
+        "qbRush": 2,
+        "wrRec": 137,
+        "teRec": 5,
+        "rbRush": 55,
+        "rbRec": 28,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_NYG_WAS",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "WAS",
+      "opponent": "NYG",
+      "own": {
+        "points": 27,
+        "passYards": 176,
+        "rushYards": 202,
+        "yards": 378,
+        "turnovers": 0,
+        "penalties": 9,
+        "penaltyYards": 69,
+        "firstDowns": 20,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 199,
+        "qbRush": 103,
+        "wrRec": 121,
+        "teRec": 61,
+        "rbRush": 99,
+        "rbRec": 17,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 27,
+        "passYards": 305,
+        "rushYards": 103,
+        "yards": 408,
+        "turnovers": 2,
+        "penalties": 7,
+        "penaltyYards": 35,
+        "firstDowns": 29,
+        "thirdMade": 8,
+        "thirdAttempts": 17,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 3,
+        "redZoneAttempts": 3,
+        "qbPass": 326,
+        "qbRush": 29,
+        "wrRec": 155,
+        "teRec": 129,
+        "rbRush": 74,
+        "rbRec": 42,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_NYG_WAS",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "NYG",
+      "opponent": "WAS",
+      "own": {
+        "points": 27,
+        "passYards": 305,
+        "rushYards": 103,
+        "yards": 408,
+        "turnovers": 2,
+        "penalties": 7,
+        "penaltyYards": 35,
+        "firstDowns": 29,
+        "thirdMade": 8,
+        "thirdAttempts": 17,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 3,
+        "redZoneAttempts": 3,
+        "qbPass": 326,
+        "qbRush": 29,
+        "wrRec": 155,
+        "teRec": 129,
+        "rbRush": 74,
+        "rbRec": 42,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 2,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 27,
+        "passYards": 176,
+        "rushYards": 202,
+        "yards": 378,
+        "turnovers": 0,
+        "penalties": 9,
+        "penaltyYards": 69,
+        "firstDowns": 20,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 0,
+        "redZoneAttempts": 1,
+        "qbPass": 199,
+        "qbRush": 103,
+        "wrRec": 121,
+        "teRec": 61,
+        "rbRush": 99,
+        "rbRec": 17,
+        "qbRushTd": 2,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_DEN_LAC",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "LAC",
+      "opponent": "DEN",
+      "own": {
+        "points": 17,
+        "passYards": 82,
+        "rushYards": 155,
+        "yards": 237,
+        "turnovers": 3,
+        "penalties": 9,
+        "penaltyYards": 93,
+        "firstDowns": 14,
+        "thirdMade": 5,
+        "thirdAttempts": 14,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 121,
+        "qbRush": 54,
+        "wrRec": 54,
+        "teRec": 44,
+        "rbRush": 101,
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 23,
+        "passYards": 118,
+        "rushYards": 106,
+        "yards": 224,
+        "turnovers": 1,
+        "penalties": 7,
+        "penaltyYards": 40,
+        "firstDowns": 18,
+        "thirdMade": 1,
+        "thirdAttempts": 12,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 5,
+        "qbPass": 123,
+        "qbRush": 10,
+        "wrRec": 67,
+        "teRec": 55,
+        "rbRush": 84,
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_DEN_LAC",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "DEN",
+      "opponent": "LAC",
+      "own": {
+        "points": 23,
+        "passYards": 118,
+        "rushYards": 106,
+        "yards": 224,
+        "turnovers": 1,
+        "penalties": 7,
+        "penaltyYards": 40,
+        "firstDowns": 18,
+        "thirdMade": 1,
+        "thirdAttempts": 12,
+        "fourthMade": 1,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 5,
+        "qbPass": 123,
+        "qbRush": 10,
+        "wrRec": 67,
+        "teRec": 55,
+        "rbRush": 84,
+        "rbRec": 1,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 17,
+        "passYards": 82,
+        "rushYards": 155,
+        "yards": 237,
+        "turnovers": 3,
+        "penalties": 9,
+        "penaltyYards": 93,
+        "firstDowns": 14,
+        "thirdMade": 5,
+        "thirdAttempts": 14,
+        "fourthMade": 0,
+        "fourthAttempts": 2,
+        "redZoneMade": 1,
+        "redZoneAttempts": 1,
+        "qbPass": 121,
+        "qbRush": 54,
+        "wrRec": 54,
+        "teRec": 44,
+        "rbRush": 101,
+        "rbRec": 23,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_DET_ARI",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "ARI",
+      "opponent": "DET",
+      "own": {
+        "points": 21,
+        "passYards": 271,
+        "rushYards": 56,
+        "yards": 327,
+        "turnovers": 1,
+        "penalties": 5,
+        "penaltyYards": 45,
+        "firstDowns": 20,
+        "thirdMade": 8,
+        "thirdAttempts": 18,
+        "fourthMade": 2,
+        "fourthAttempts": 3,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 292,
+        "qbRush": 19,
+        "wrRec": 145,
+        "teRec": 138,
+        "rbRush": 37,
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 3,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 45,
+        "passYards": 249,
+        "rushYards": 163,
+        "yards": 412,
+        "turnovers": 0,
+        "penalties": 4,
+        "penaltyYards": 31,
+        "firstDowns": 24,
+        "thirdMade": 4,
+        "thirdAttempts": 13,
+        "fourthMade": 4,
+        "fourthAttempts": 4,
+        "redZoneMade": 4,
+        "redZoneAttempts": 4,
+        "qbPass": 271,
+        "qbRush": 1,
+        "wrRec": 116,
+        "teRec": 99,
+        "rbRush": 162,
+        "rbRec": 56,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_DET_ARI",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "DET",
+      "opponent": "ARI",
+      "own": {
+        "points": 45,
+        "passYards": 249,
+        "rushYards": 163,
+        "yards": 412,
+        "turnovers": 0,
+        "penalties": 4,
+        "penaltyYards": 31,
+        "firstDowns": 24,
+        "thirdMade": 4,
+        "thirdAttempts": 13,
+        "fourthMade": 4,
+        "fourthAttempts": 4,
+        "redZoneMade": 4,
+        "redZoneAttempts": 4,
+        "qbPass": 271,
+        "qbRush": 1,
+        "wrRec": 116,
+        "teRec": 99,
+        "rbRush": 162,
+        "rbRec": 56,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 2,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 21,
+        "passYards": 271,
+        "rushYards": 56,
+        "yards": 327,
+        "turnovers": 1,
+        "penalties": 5,
+        "penaltyYards": 45,
+        "firstDowns": 20,
+        "thirdMade": 8,
+        "thirdAttempts": 18,
+        "fourthMade": 2,
+        "fourthAttempts": 3,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 292,
+        "qbRush": 19,
+        "wrRec": 145,
+        "teRec": 138,
+        "rbRush": 37,
+        "rbRec": 9,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 3,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_SF_SEA",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "SEA",
+      "opponent": "SF",
+      "own": {
+        "points": 29,
+        "passYards": 162,
+        "rushYards": 89,
+        "yards": 251,
+        "turnovers": 4,
+        "penalties": 5,
+        "penaltyYards": 46,
+        "firstDowns": 14,
+        "thirdMade": 3,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 195,
+        "qbRush": 5,
+        "wrRec": 140,
+        "teRec": 20,
+        "rbRush": 68,
+        "rbRec": 35,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 32,
+        "passYards": 175,
+        "rushYards": 94,
+        "yards": 269,
+        "turnovers": 3,
+        "penalties": 8,
+        "penaltyYards": 70,
+        "firstDowns": 14,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 3,
+        "qbPass": 189,
+        "qbRush": 6,
+        "wrRec": 150,
+        "teRec": 24,
+        "rbRush": 84,
+        "rbRec": 15,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_SF_SEA",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "SF",
+      "opponent": "SEA",
+      "own": {
+        "points": 32,
+        "passYards": 175,
+        "rushYards": 94,
+        "yards": 269,
+        "turnovers": 3,
+        "penalties": 8,
+        "penaltyYards": 70,
+        "firstDowns": 14,
+        "thirdMade": 4,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 3,
+        "qbPass": 189,
+        "qbRush": 6,
+        "wrRec": 150,
+        "teRec": 24,
+        "rbRush": 84,
+        "rbRec": 15,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 2,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 29,
+        "passYards": 162,
+        "rushYards": 89,
+        "yards": 251,
+        "turnovers": 4,
+        "penalties": 5,
+        "penaltyYards": 46,
+        "firstDowns": 14,
+        "thirdMade": 3,
+        "thirdAttempts": 12,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 2,
+        "redZoneAttempts": 3,
+        "qbPass": 195,
+        "qbRush": 5,
+        "wrRec": 140,
+        "teRec": 20,
+        "rbRush": 68,
+        "rbRec": 35,
+        "qbRushTd": 0,
+        "rbRushTd": 1,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_BAL_ATL",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "ATL",
+      "opponent": "BAL",
+      "own": {
+        "points": 23,
+        "passYards": 257,
+        "rushYards": 110,
+        "yards": 367,
+        "turnovers": 1,
+        "penalties": 7,
+        "penaltyYards": 67,
+        "firstDowns": 17,
+        "thirdMade": 9,
+        "thirdAttempts": 17,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 274,
+        "qbRush": 8,
+        "wrRec": 187,
+        "teRec": 55,
+        "rbRush": 102,
+        "rbRec": 32,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 30,
+        "passYards": 183,
+        "rushYards": 208,
+        "yards": 391,
+        "turnovers": 1,
+        "penalties": 5,
+        "penaltyYards": 40,
+        "firstDowns": 24,
+        "thirdMade": 8,
+        "thirdAttempts": 15,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 201,
+        "qbRush": 20,
+        "wrRec": 124,
+        "teRec": 54,
+        "rbRush": 175,
+        "rbRec": 23,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
+      }
+    },
+    {
+      "id": "2026_05_BAL_ATL",
+      "date": "2026-10-11",
+      "week": 5,
+      "team": "BAL",
+      "opponent": "ATL",
+      "own": {
+        "points": 30,
+        "passYards": 183,
+        "rushYards": 208,
+        "yards": 391,
+        "turnovers": 1,
+        "penalties": 5,
+        "penaltyYards": 40,
+        "firstDowns": 24,
+        "thirdMade": 8,
+        "thirdAttempts": 15,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 3,
+        "redZoneAttempts": 4,
+        "qbPass": 201,
+        "qbRush": 20,
+        "wrRec": 124,
+        "teRec": 54,
+        "rbRush": 175,
+        "rbRec": 23,
+        "qbRushTd": 1,
+        "rbRushTd": 0,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 1
+      },
+      "against": {
+        "points": 23,
+        "passYards": 257,
+        "rushYards": 110,
+        "yards": 367,
+        "turnovers": 1,
+        "penalties": 7,
+        "penaltyYards": 67,
+        "firstDowns": 17,
+        "thirdMade": 9,
+        "thirdAttempts": 17,
+        "fourthMade": 0,
+        "fourthAttempts": 1,
+        "redZoneMade": 1,
+        "redZoneAttempts": 3,
+        "qbPass": 274,
+        "qbRush": 8,
+        "wrRec": 187,
+        "teRec": 55,
+        "rbRush": 102,
+        "rbRec": 32,
+        "qbRushTd": 0,
+        "rbRushTd": 0,
+        "wrRecTd": 0,
+        "teRecTd": 1,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_BUF_LA",
+      "date": "2026-10-12",
+      "week": 5,
+      "team": "LAR",
+      "opponent": "BUF",
+      "own": {
+        "points": 34,
+        "passYards": 377,
+        "rushYards": 77,
+        "yards": 454,
+        "turnovers": 0,
+        "penalties": 11,
+        "penaltyYards": 84,
+        "firstDowns": 33,
+        "thirdMade": 7,
+        "thirdAttempts": 14,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 5,
+        "redZoneAttempts": 5,
+        "qbPass": 383,
+        "qbRush": 0,
+        "wrRec": 193,
+        "teRec": 110,
+        "rbRush": 68,
+        "rbRec": 80,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 37,
+        "passYards": 202,
+        "rushYards": 234,
+        "yards": 436,
+        "turnovers": 2,
+        "penalties": 13,
+        "penaltyYards": 112,
+        "firstDowns": 25,
+        "thirdMade": 2,
+        "thirdAttempts": 7,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 4,
+        "redZoneAttempts": 5,
+        "qbPass": 210,
+        "qbRush": 121,
+        "wrRec": 87,
+        "teRec": 13,
+        "rbRush": 113,
+        "rbRec": 110,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      }
+    },
+    {
+      "id": "2026_05_BUF_LA",
+      "date": "2026-10-12",
+      "week": 5,
+      "team": "BUF",
+      "opponent": "LAR",
+      "own": {
+        "points": 37,
+        "passYards": 202,
+        "rushYards": 234,
+        "yards": 436,
+        "turnovers": 2,
+        "penalties": 13,
+        "penaltyYards": 112,
+        "firstDowns": 25,
+        "thirdMade": 2,
+        "thirdAttempts": 7,
+        "fourthMade": 0,
+        "fourthAttempts": 0,
+        "redZoneMade": 4,
+        "redZoneAttempts": 5,
+        "qbPass": 210,
+        "qbRush": 121,
+        "wrRec": 87,
+        "teRec": 13,
+        "rbRush": 113,
+        "rbRec": 110,
+        "qbRushTd": 1,
+        "rbRushTd": 2,
+        "wrRecTd": 1,
+        "teRecTd": 0,
+        "rbRecTd": 0
+      },
+      "against": {
+        "points": 34,
+        "passYards": 377,
+        "rushYards": 77,
+        "yards": 454,
+        "turnovers": 0,
+        "penalties": 11,
+        "penaltyYards": 84,
+        "firstDowns": 33,
+        "thirdMade": 7,
+        "thirdAttempts": 14,
+        "fourthMade": 2,
+        "fourthAttempts": 2,
+        "redZoneMade": 5,
+        "redZoneAttempts": 5,
+        "qbPass": 383,
+        "qbRush": 0,
+        "wrRec": 193,
+        "teRec": 110,
+        "rbRush": 68,
+        "rbRec": 80,
+        "qbRushTd": 0,
+        "rbRushTd": 2,
+        "wrRecTd": 3,
+        "teRecTd": 0,
+        "rbRecTd": 0
       }
     }
   ],

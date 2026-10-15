@@ -81,3 +81,7 @@ html {
         scroll-margin-top: 98px;
     }
 }
+
+/* Keep wheel, touch and keyboard scrolling without visible page scrollbars. */
+html, body { scrollbar-width: none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }

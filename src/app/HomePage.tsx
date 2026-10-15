@@ -84,7 +84,7 @@ export default function HomePage({ sport = "NHL" }: { sport?: "NHL" | "NFL" }) {
                         </h2>
 
                         <p className="featuresIntroText">
-                            {isNFL ? "Explore the NFL team comparison preview. Live football statistics are not connected yet." : <>Each page focuses on a different part of the game,
+                            {isNFL ? "Compare team performance and explore touchdown picks backed by current-season opportunities." : <>Each page focuses on a different part of the game,
                             from team comparisons to game breakdowns, league
                             metrics and team trends.</>}
                         </p>
@@ -92,8 +92,12 @@ export default function HomePage({ sport = "NHL" }: { sport?: "NHL" | "NFL" }) {
 
                     {isNFL && <div className="bentoGrid" data-reveal>
                         <Link href="/nfl/compare" className="bentoCard"><div className="cardBody">
-                            <span className="cardTag">NFL · UI preview</span><h3 className="cardTitle">Compare Teams</h3>
-                            <p className="cardText">Select two NFL teams and preview the comparison layout with placeholder statistics.</p>
+                            <span className="cardTag">NFL · Team stats</span><h3 className="cardTitle">Compare Teams</h3>
+                            <p className="cardText">Compare offence, defence and positional production across NFL teams.</p>
+                        </div></Link>
+                        <Link href="/nfl/td-predictor" className="bentoCard"><div className="cardBody">
+                            <span className="cardTag">NFL · Scoring opportunities</span><h3 className="cardTitle">TD Predictor</h3>
+                            <p className="cardText">Explore main and sneaky touchdown picks for each matchup, with the usage behind every selection.</p>
                         </div></Link>
                     </div>}
                     {!isNFL && <div className="bentoGrid" data-reveal>

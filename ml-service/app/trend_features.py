@@ -53,10 +53,8 @@ def window_features(
     # provider signature: provider(opponent_team, as_of_date_iso) -> dict with:
     # gf_pg, ga_pg, sf_pg, sa_pg, pp_pct, pk_pct, games_used (int), optional fallback tag
     opp_baseline_provider: Optional[Callable[[str, str], Dict[str, Any]]] = None,
-    # Minimum opponent prior games before trusting that opponent baseline
+    # Prior-game count used to scale opponent context strength
     min_opp_games: int = 5,
-    # League averages can be used as neutral fallback when opponent baseline is unstable
-    league_baseline: Optional[Dict[str, Any]] = None,
 ) -> Tuple[Dict[str, float], Dict[str, Any]]:
     """
     rows_desc is last-N rows in DESC order (newest first)
@@ -142,9 +140,6 @@ def window_features(
     }
 
     if opp_baseline_provider is not None:
-        # League baseline is optional, used only when opponent baseline is unstable
-        lf = league_baseline or {}
-
         # Per-game deltas get averaged at the end
         rel_gf_vals: List[float] = []
         rel_ga_vals: List[float] = []
@@ -169,17 +164,8 @@ def window_features(
                 _clamp(games_used / float(max(1, min_opp_games)), 0.0, 1.0)
             )
 
-            # If opponent has too few prior games, fall back to league averages when available
+            # The provider supplies any fallback strictly as of this game.
             use = b
-            if games_used < min_opp_games and lf:
-                use = {
-                    "gf_pg": lf.get("gf_pg"),
-                    "ga_pg": lf.get("ga_pg"),
-                    "sf_pg": lf.get("sf_pg"),
-                    "sa_pg": lf.get("sa_pg"),
-                    "pp_pct": lf.get("pp_pct"),
-                    "pk_pct": lf.get("pk_pct"),
-                }
 
             # Expectations mapping
             # Opponent ga_pg and sa_pg are what the opponent usually allows
@@ -225,18 +211,18 @@ def window_features(
             g_pp_pct = _safe_div(g_pp_goals, g_pp_opps)
             g_pk_pct = (1.0 - _safe_div(g_pk_ga, g_pk_opps)) if g_pk_opps > 0 else None
 
-            # Opponent PK% is the expected resistance against this PP
-            # Opponent PP% is the expected threat against this PK
+            # Compare scoring with scoring, and killing with expected killing.
+            # Opponent PK 80% implies PP allowance 20%; PP 20% implies PK 80%.
             opp_pk = use.get("pk_pct")
             opp_pp = use.get("pp_pct")
 
             rel_pp_delta_vals.append(
-                (float(g_pp_pct) - float(opp_pk))
+                (float(g_pp_pct) - (1.0 - float(opp_pk)))
                 if (g_pp_pct is not None and opp_pk is not None)
                 else 0.0
             )
             rel_pk_delta_vals.append(
-                (float(g_pk_pct) - float(opp_pp))
+                (float(g_pk_pct) - (1.0 - float(opp_pp)))
                 if (g_pk_pct is not None and opp_pp is not None)
                 else 0.0
             )
